@@ -1,5 +1,13 @@
+import Navbar from "./components/Navbar/Navbar";
+import OfferProject from "./components/OfferProject/OfferProject";
+
 const App = () => {
-  return <h1>Hello World!</h1>;
+  return (
+    <>
+      <Navbar />
+      <OfferProject />
+    </>
+  );
 };
 
 export default App;

@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@font-face {
+  font-family: "Museo For Dell"; /*Can be any text*/
+  src: local("Museo For Dell"),
+    url("../fonts/Museo\ For\ Dell\ Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Trebuchet"; /*Can be any text*/
+  src: local("Trebuchet "),
+    url("../fonts/trebuc.ttf") format("truetype");
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --blue: #3274c8;
+  --red: #b91515;
+
+  --light-gray: #6e767d;
+  --dark-gray: #15181c;
+
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Museo For Dell";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Trebuchet";
+}
+
+body {
+  background: var(--black);
+}
+
+button {
+  cursor: pointer;
+}
