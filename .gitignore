@@ -4,6 +4,7 @@ npm-debug.log*
 
 # dependencies
 node_modules/
+dist/
 
 # compiled output
 /build
