@@ -10,7 +10,7 @@ import { AppModule } from "./app.module";
 
   /**
    * wire up global validation pipe with empty validation rules
-   * whitelist: true -> security condition to strip out non-essential arguments
+   * whitelist : security condition to strip out non-essential arguments
    */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 

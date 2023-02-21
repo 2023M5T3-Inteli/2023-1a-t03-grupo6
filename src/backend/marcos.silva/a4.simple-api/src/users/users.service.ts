@@ -1,13 +1,40 @@
-import { Injectable } from "@nestjs/common";
-
-interface _body {
-  email: string;
-  password: string;
-}
+import { Repository } from "typeorm";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { User } from "./users.entity";
 
 @Injectable()
 export class UsersService {
-  createOne(body: _body) {
-    return `${body.email} | ${body.password}`;
+  constructor(@InjectRepository(User) private repository: Repository<User>) {}
+
+  async create(_body: { email: string; password: string }) {
+    const _user = this.repository.create({
+      email: _body.email,
+      password: _body.password,
+    });
+
+    await this.repository.save(_user);
+  }
+
+  async update(id: number, attrs: Partial<User>) {
+    const _user = await this.findOne(id);
+    if (!_user) throw new NotFoundException("User NOT found");
+
+    return await this.repository.save(Object.assign(_user, attrs));
+  }
+
+  async remove(id: number) {
+    const _user = await this.findOne(id);
+    if (!_user) throw new NotFoundException("User NOT found");
+
+    await this.repository.remove(_user);
+  }
+
+  async findOne(id: number) {
+    return await this.repository.findOne({ where: { id } });
+  }
+
+  async find(email: string) {
+    return await this.repository.find({ where: { email } });
   }
 }
