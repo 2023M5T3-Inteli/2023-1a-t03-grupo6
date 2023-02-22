@@ -22,7 +22,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { OutboundUserDto } from "./dto/outbound-user.dto";
 import {
-  SerializeInterceptor,
+  Serialize,
   SerializeInterceptor2,
 } from "src/interceptors/serialize.interceptor";
 //////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ export class UsersController {
     return this.service.remove(parseInt(id));
   }
 
-  @UseInterceptors(new SerializeInterceptor(OutboundUserDto))
+  @Serialize(OutboundUserDto)
   @UseInterceptors(new SerializeInterceptor2(OutboundUserDto))
   @Get()
   async findAllUsers(@Query("email") email: string) {
