@@ -3,23 +3,6 @@
  *   class decorators - apply to entire class ie @Controller
  *   method decorators - apply to specific HTTP requests ie @Get @Post
  *   argument decorators - put into argument list ie @Body @Param
- *
- * data transfer object [dto] :
- *  act as interceptor and apply validation rules to request/response handler
- *  use class-transformer to turn request or response data into instance of dto class
- *  use class-validator to validate instance
- *
- * interceptors [middlewares] :
- *   can be applied to single handler, all handlers in controller or globally
- *   standard : use with class-transformer serializers eg Exclude
- *              use in place of dto, but less flexible
- *   custom : more flexible, used by adapting dto architecture
- *
- *   naming convention : class <Name>Interceptor
- *   method convention : intercept(context: ExecutionContext, next: CallHandler)
- *     'intercept' method is called automatically by Nest
- *     'context' provides information on incoming request or outgoing response
- *     'next' provides reference to handler in controller
  */
 import {
   Controller,
@@ -37,7 +20,14 @@ import {
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { OutboundUserDto } from "./dto/outbound-user.dto";
+import {
+  SerializeInterceptor,
+  SerializeInterceptor2,
+} from "src/interceptors/serialize.interceptor";
+//////////////////////////////////////////////////////////////////////////////////////
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller("auth")
 export class UsersController {
   constructor(private service: UsersService) {}
@@ -57,12 +47,14 @@ export class UsersController {
     return this.service.remove(parseInt(id));
   }
 
+  @UseInterceptors(new SerializeInterceptor(OutboundUserDto))
+  @UseInterceptors(new SerializeInterceptor2(OutboundUserDto))
   @Get()
-  findAllUsers(@Query("email") email: string) {
-    return this.service.find(email);
+  async findAllUsers(@Query("email") email: string) {
+    console.log("handler is running");
+    return await this.service.find(email);
   }
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Get(":id")
   findUser(@Param("id") id: string) {
     const _user = this.service.findOne(parseInt(id));
