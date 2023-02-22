@@ -1,5 +1,5 @@
 .SideContent{
-  border-left: 1px solid #2F3336;
+  // border-left: 1px solid #2F3336;
   height: 100%;
   width: 326px;
   top: 0px;
@@ -59,43 +59,214 @@
   .IntKeyWords{
     position: relative;
     width: 292px;
-    height: 160px;
+    height: 130px;
     left: 25px;
     top: 13px;
 
     background: #15181C;
     border-radius: 10px;
-
-    .SugKeyWords{
-      box-sizing: border-box;
-
-      position: absolute;
-      width: 71px;
-      height: 21px;
-      // left: 46px;
-      // top: 111px;
-
-      border: 1px solid #6E767D;
-      border-radius: 10px;
-
-      p{
-        color: #6E767D;
-        position: relative;
-        // height: 18px;
-        // left: 56px;
-        // right: 287px;
-        // top: calc(50% - 18px/2 - 87.5px);
-      }
-    }
-
+    
     p{
       color: white;
-      width: 320px;
-      height: 18px;
+      width: 292px;
+      height: 40px;
       font-family: 'Museo For Dell';
       font-size: 15px;
       line-height: 18px;
       padding: 11px 0px 0px 15px;
     }
+  }
+}
+
+.AllKeyWords{
+  display: inline-flex;
+  flex-wrap: wrap;
+
+
+  .SugKeyWords{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0px 10px 0px 10px;
+    height: 21px;
+    color: #6E767D;
+    border: 1px solid #6E767D;
+    border-radius: 10px;
+    left: 15px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    
+  }
+}
+
+.Ranking{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: relative;
+  width: 292px;
+  height: 250px;
+  top: 25px;
+
+  background: #15181C;
+  border-radius: 10px;
+  left: 25px;
+
+
+  .RankingIntro{
+    width: 292px;
+    height: 55px;
+    border-bottom: 1px solid #2F3336;
+
+    .RankingTittle{
+      position: relative;
+      width: 292px;
+      height: 18px;
+      top: 10px;
+      padding-left: 15px;
+      font-family: 'Museo For Dell';
+      font-style: normal;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+
+      .InfoIcon{
+        position: absolute;
+        right: 15px;
+        color: #6E767D;
+      }
+    }
+
+    .RankingSubTittle{
+      position: relative;
+      width: 292px;
+      height: 16px;
+      color: #6E767D;
+      padding-left: 15px;
+      top: 10px;
+    }
+
+    .timeRanking{
+      color: #6E767D;
+      font-family: 'Trebuchet MS';
+      font-style: normal;
+      font-size: 11px;
+      position: relative;
+      left: 15px;
+    }
+
+    .CircleIcon{
+      position: relative;
+      left: 10px;
+      color: #6E767D;
+    }
+  }
+
+  .RankingContent{
+    display: flex;
+    flex-direction: column;
+    height: 259px;
+    width: 292px;
+
+    .MoreRanking{
+      width: 292px;
+      display: flex;
+      justify-content: center;
+      color: #6E767D;
+    }
+
+    .NoRanking{
+      color: white;
+    }
+
+    .RankingPlace{
+      padding: 5px 0px 0px 8px; 
+      width: 292px;
+      height: 45px;
+      display: flex;
+
+
+      .SpanPlaceImg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+      }
+
+      .SpanProfileImg{
+        width: 35px;
+        height: 35px;
+        border-radius: 40px;
+        overflow: hidden;
+        margin-right: 5px;
+      }
+
+      .SpanPlaceImg img, .SpanProfileImg img{
+        width: 100%;
+        height: 100%;
+      }
+
+      .InfoProfile{
+        display: flex;
+        flex-direction: column;
+
+        .ProfileName{
+          position: relative;
+          display: flex;
+          height: 50%;
+          width: 209px;
+          align-items: end;
+          color: white
+        }
+
+        .ProfilePoints{
+          position: absolute;
+          font-family: 'Trebuchet MS';
+          font-style: normal;
+          color: #6E767D;
+          right: 12px;
+        }
+
+        .DoneProjects{
+          position: relative;
+          height: 50%;
+          width: 209px;
+          font-family: 'Trebuchet MS';
+          font-style: normal;
+          color: #6E767D;
+        }
+      }
+    }
+  }
+}
+
+
+.Footer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 292px;
+  height: 60px;
+  left: 25px;
+  top: 35px;
+
+  .FooterTags{
+    font-family: 'Museo For Dell';
+    font-size: 12px;
+    color: #6E767D;
+  }
+
+
+  .FooterCopyright{
+    position: relative;
+    top: 15px;
+    font-family: 'Museo For Dell';
+    font-size: 12px;
+    color: #6E767D;
   }
 }
