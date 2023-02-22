@@ -4,9 +4,22 @@
  *   method decorators - apply to specific HTTP requests ie @Get @Post
  *   argument decorators - put into argument list ie @Body @Param
  *
- * data transfer object [dto] : apply validation rules to request handler
- *  use class-transformer to turn req.body into instance of dto class
+ * data transfer object [dto] :
+ *  act as interceptor and apply validation rules to request/response handler
+ *  use class-transformer to turn request or response data into instance of dto class
  *  use class-validator to validate instance
+ *
+ * interceptors [middlewares] :
+ *   can be applied to single handler, all handlers in controller or globally
+ *   standard : use with class-transformer serializers eg Exclude
+ *              use in place of dto, but less flexible
+ *   custom : more flexible, used by adapting dto architecture
+ *
+ *   naming convention : class <Name>Interceptor
+ *   method convention : intercept(context: ExecutionContext, next: CallHandler)
+ *     'intercept' method is called automatically by Nest
+ *     'context' provides information on incoming request or outgoing response
+ *     'next' provides reference to handler in controller
  */
 import {
   Controller,
@@ -18,6 +31,8 @@ import {
   Query,
   Param,
   NotFoundException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -29,17 +44,17 @@ export class UsersController {
 
   @Post()
   createUser(@Body() body: CreateUserDto) {
-    this.service.create(body);
+    return this.service.create(body);
   }
 
   @Patch(":id")
-  async updateUser(@Param("id") id: string, @Body() body: UpdateUserDto) {
-    return await this.service.update(parseInt(id), body);
+  updateUser(@Param("id") id: string, @Body() body: UpdateUserDto) {
+    return this.service.update(parseInt(id), body);
   }
 
   @Delete(":id")
-  async removeUser(@Param("id") id: string) {
-    await this.service.remove(parseInt(id));
+  removeUser(@Param("id") id: string) {
+    return this.service.remove(parseInt(id));
   }
 
   @Get()
@@ -47,9 +62,10 @@ export class UsersController {
     return this.service.find(email);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(":id")
-  async findUser(@Param("id") id: string) {
-    const _user = await this.service.findOne(parseInt(id));
+  findUser(@Param("id") id: string) {
+    const _user = this.service.findOne(parseInt(id));
     if (!_user) throw new NotFoundException("User NOT found");
     return _user;
   }

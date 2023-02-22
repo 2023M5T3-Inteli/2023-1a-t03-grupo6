@@ -9,11 +9,12 @@
 import {
   AfterInsert,
   AfterUpdate,
-  AfterRemove,
+  BeforeRemove,
   Entity,
   Column,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class User {
@@ -24,6 +25,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @AfterInsert()
@@ -36,7 +38,7 @@ export class User {
     console.log("@HOOK = Updated user with id", this.id);
   }
 
-  @AfterRemove()
+  @BeforeRemove()
   logRemove() {
     console.log("@HOOK = Removed user with id", this.id);
   }

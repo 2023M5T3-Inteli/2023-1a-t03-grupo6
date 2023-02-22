@@ -13,7 +13,7 @@ export class UsersService {
       password: _body.password,
     });
 
-    await this.repository.save(_user);
+    return await this.repository.save(_user);
   }
 
   async update(id: number, attrs: Partial<User>) {
@@ -26,8 +26,8 @@ export class UsersService {
   async remove(id: number) {
     const _user = await this.findOne(id);
     if (!_user) throw new NotFoundException("User NOT found");
-
     await this.repository.remove(_user);
+    return `User ${id} removed`;
   }
 
   async findOne(id: number) {
