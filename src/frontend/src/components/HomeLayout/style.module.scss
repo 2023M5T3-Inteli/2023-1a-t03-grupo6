@@ -1,0 +1,13 @@
+.Container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  // background: red;
+  top: 48px;
+  bottom: 0px;
+  width: 1059px;
+  left: calc(50% - 1035px/2 + 5.5px);
+  border-left: 1px solid #2F3336;
+  border-right: 1px solid #2F3336;
+}
+

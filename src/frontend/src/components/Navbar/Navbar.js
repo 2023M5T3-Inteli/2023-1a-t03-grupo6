@@ -1,6 +1,8 @@
 import { AiFillHome, AiFillPlusCircle, AiFillHeart } from "react-icons/ai";
 import { FaQuestionCircle } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
+import React, {useCallback} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 import styles from "./Navbar.module.scss";
 
@@ -10,6 +12,8 @@ import ModalCtx from "../../context/modal-ctx";
 
 const Navbar = () => {
     const modalCtx = useContext(ModalCtx)
+    const navigate = useNavigate();
+    const handleOnClickProfile = useCallback(() => navigate('/profile', {replace: true}), [navigate]);
 
   return (
     <div className={styles.navbarContainer}>
@@ -41,7 +45,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a>
+            <a onClick={handleOnClickProfile}>
               <BsPersonCircle size={20}/>
               <p>My profile</p>
             </a>
