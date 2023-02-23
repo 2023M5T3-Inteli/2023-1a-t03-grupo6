@@ -27,6 +27,33 @@ export class Project {
   @Column()
   department: string;
 
+  @Column()
+  description: string;
+
+  @Column()
+  keywords: string;
+
+  @Column()
+  team: string;
+
+  @Column()
+  status: string;
+
+  @Column()
+  applicationDeadline: string;
+
+  @Column()
+  startDate: string;
+
+  @Column()
+  endDate: string;
+
+  @Column()
+  headCount: number;
+
+  @Column()
+  headCountDescription: string;
+
   @AfterInsert()
   logInsert() {
     console.log("@HOOK = Inserted project with id", this.id);

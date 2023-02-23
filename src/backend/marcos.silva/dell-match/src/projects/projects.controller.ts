@@ -11,9 +11,7 @@ import {
   Patch,
   Delete,
   Body,
-  Query,
   Param,
-  NotFoundException,
 } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
 import { CreateProjectDto } from "./dto/create-project.dto";
