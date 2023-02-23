@@ -17,9 +17,11 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from "@nestjs/common";
+import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { SignupUserDto } from "./dto/signup-user.dto";
 import { OutboundUserDto } from "./dto/outbound-user.dto";
 import {
   Serialize,
@@ -28,23 +30,31 @@ import {
 //////////////////////////////////////////////////////////////////////////////////////
 
 @UseInterceptors(ClassSerializerInterceptor)
-@Controller("auth")
+@Controller("user")
 export class UsersController {
-  constructor(private service: UsersService) {}
+  constructor(
+    private UsersService: UsersService,
+    private AuthService: AuthService
+  ) {}
 
   @Post()
   createUser(@Body() body: CreateUserDto) {
-    return this.service.create(body);
+    return this.UsersService.create(body);
+  }
+
+  @Post("signup")
+  signupUser(@Body() body: SignupUserDto) {
+    return this.AuthService.signup(body);
   }
 
   @Patch(":id")
   updateUser(@Param("id") id: string, @Body() body: UpdateUserDto) {
-    return this.service.update(parseInt(id), body);
+    return this.UsersService.update(parseInt(id), body);
   }
 
   @Delete(":id")
   removeUser(@Param("id") id: string) {
-    return this.service.remove(parseInt(id));
+    return this.UsersService.remove(parseInt(id));
   }
 
   @Serialize(OutboundUserDto)
@@ -52,12 +62,12 @@ export class UsersController {
   @Get()
   async findAllUsers(@Query("email") email: string) {
     console.log("handler is running");
-    return await this.service.find(email);
+    return await this.UsersService.find(email);
   }
 
   @Get(":id")
   findUser(@Param("id") id: string) {
-    const _user = this.service.findOne(parseInt(id));
+    const _user = this.UsersService.findOne(parseInt(id));
     if (!_user) throw new NotFoundException("User NOT found");
     return _user;
   }
