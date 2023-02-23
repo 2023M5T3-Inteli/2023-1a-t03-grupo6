@@ -1,24 +1,24 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { UsersService } from "./users.service";
+import { ProjectsService } from "./projects.service";
 
 describe("UsersService", () => {
-  const _usersService = {
+  const _projectsService = {
     find: (email: string) => Promise.resolve([]),
     create: (email: string, password: string) =>
       Promise.resolve({ id: 1, email, password }),
   };
 
-  let service: UsersService;
+  let service: ProjectsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UsersService,
-        { provide: UsersService, useValue: _usersService },
+        ProjectsService,
+        { provide: ProjectsService, useValue: _projectsService },
       ],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    service = module.get<ProjectsService>(ProjectsService);
   });
 
   it("should be defined", () => {
@@ -26,7 +26,7 @@ describe("UsersService", () => {
   });
 
   it("can create an instance of User", async () => {
-    expect(service.create({ email: "test@example.com", password: "test1234" }))
+    expect(service.create({ title: "Test Project", department: "design" }))
       .resolves;
   });
 });
