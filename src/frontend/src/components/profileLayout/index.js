@@ -1,17 +1,15 @@
-// import React from 'react';
-// import { Container, Wrapper } from './styles';
-// import Main from '../Main';
+import React from 'react';
+import styles from "./style.module.scss";
+import ProfileMain from '../ProfileMain/index';
+import ProfileSideInfo from '../ProfileSideInfo/index';
 
-// const Layout = () => {
-//   return (
-//     <Container>
-//         <Wrapper>
-//             {/* <MenuBar /> */}
-//             <Main />
-//             {/* <SideBar /> */}
-//         </ Wrapper>
-//     </ Container>
-//   );
-// }
+const ProfileLayout = () => {
+  return (
+    <div className={styles.Container}>
+      <ProfileSideInfo />
+      <ProfileMain />
+    </div>
+  );
+}
 
-// export default Layout;
+export default ProfileLayout;

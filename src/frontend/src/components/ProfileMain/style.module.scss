@@ -1,0 +1,107 @@
+.ProfileMain{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  width: 903px;
+  height: 100%;
+  border-right: 1px solid #2F3336;
+}
+
+.ProfileInfo{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left: 15px;
+  right: 15px;
+  top: 14px;
+  width: 873px;
+  height: 170px;
+  
+  background-color: #15181C;
+  border-radius: 10px;
+
+  .TittleInfo{
+    position: relative;
+    top: 20px;
+    left: 30px;
+    font-family: 'Museo For Dell';
+    font-style: normal;
+    color: white;
+    font-size: 17px;
+    display: flex;
+    flex-direction: row;
+    width: 873px;
+  }
+
+  .PersonalInfo{
+    font-family: 'Trebuchet MS';
+    font-style: normal;
+    font-size: 17px;
+    align-items: center;
+    position: relative;
+    left: 10px;
+
+    color: #6E767D;
+  }
+
+  .EditButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    right: 60px;
+    width: 90px;
+    height: 33px;
+    border-radius: 10px;
+
+    .EditIcon{
+      position: relative;
+      left: 10px;
+      color: white;
+    }
+
+    p{
+      position: relative;
+      left: 20px;
+      color: white;
+    }
+  }
+
+  .TeamsButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    width: 160px;
+    height: 33px;
+    left: 30px;
+    top: 35px;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    background-color: transparent;
+
+    .TeamsIcon{
+      color: white;
+      position: relative;
+      left: 10px;
+    }
+
+    p{
+      color: white;
+      position: relative;
+      left: 20px;
+    }
+  }
+
+}
+
+.ProfileStats{
+
+}
+
+.ProfileProjects{
+
+}

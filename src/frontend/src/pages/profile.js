@@ -1,14 +1,11 @@
 import Navbar from "../components/Navbar/Navbar";
-// import GlobalStyles from './styles/GlobalStyles' 
-// import Layout from './components/Layout'
+import ProfileLayout from '../components/ProfileLayout/index';
 
 export function Profile () {
   return (
     <>
       <Navbar />
-      {/* <Layout />
-
-      <GlobalStyles /> */}
+      <ProfileLayout />
     </>
   );
 }

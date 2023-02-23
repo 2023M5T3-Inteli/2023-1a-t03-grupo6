@@ -55,7 +55,7 @@ const HomeSideContent = () => {
             <div className={styles.SpanProfileImg}><img src={FirstProfile}></img></div>
             <div className={styles.InfoProfile}>
               <span className={styles.ProfileName}>João Silva <span className={styles.ProfilePoints}>1000 Dell Points</span></span>
-              <span className={styles.DoneProjects}>12 projects done</span>
+              <span className={styles.DoneProjects}>12 done projects</span>
             </div>
           </div>
           <div className={styles.RankingPlace}>
