@@ -3,6 +3,12 @@ import styles from "./style.module.scss";
 
 import { SiMicrosoftteams } from "react-icons/si";
 import { FiEdit } from "react-icons/fi";
+import { BsInfoCircleFill } from "react-icons/bs";
+import { AiOutlineRight } from "react-icons/ai";
+
+
+import tempChart from '../../assets/tempChart.png';
+import exampleImgProject from '../../assets/exampleImgProject.jpg';
 
 
 const ProfileMain = () => {
@@ -19,10 +25,50 @@ const ProfileMain = () => {
         </button>
       </div>
       <div className={styles.ProfileStats}>
-        <div className={styles.Technologies}></div>
-        <div className={styles.DellMatchStats}></div>
+        <div className={styles.Technologies}>
+          <span className={styles.TittleTech}>Technologies <button className={styles.EditTech}><FiEdit className={styles.EditIcon} size={14} /><p>Editar</p></button></span>
+          <div className={styles.ContentTech}>
+            <div className={styles.GraphTech}>
+              <img src={tempChart}></img>
+            </div>
+            <div className={styles.SpecGraph}>
+              <div className={styles.TechList}><div className={styles.TechOne}></div><p>Python</p></div>
+              <div className={styles.TechList}><div className={styles.TechTwo}></div><p>C++</p></div>
+              <div className={styles.TechList}><div className={styles.TechThree}></div><p>JavaScript</p></div>
+              <div className={styles.TechList}><div className={styles.TechFour}></div><p>PHP</p></div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.DellMatchStats}>
+          <span className={styles.TittleStats}>DellMatch Stats <BsInfoCircleFill className={styles.InfoIcon} size={18} /></span>
+          <div className={styles.InfoStats}>
+            <span className={styles.SpanStats}>10<span className={styles.SpanMidStats}>Projects</span><span className={styles.SpanBotStats}>Total Contributions</span></span>
+            <span className={styles.SpanStats}>750<span className={styles.SpanMidStats}>Pts</span><span className={styles.SpanBotStats}>Total Dell Points</span></span>
+          </div>
+        </div>
       </div>
-      <div className={styles.ProfileProjects}></div>
+      <div className={styles.ProfileProjects}>
+        <span className={styles.TittleProjects}>Projects<span className={styles.SpanProjects}>View all projects<AiOutlineRight className={styles.IconProjects} size={16} /></span></span>
+        <div className={styles.ProjectsList}>
+          <div className={styles.Projects}>
+            <div className={styles.ProjectImage}><img src={exampleImgProject}></img></div>
+            <span>Project name</span>
+          </div>
+          <div className={styles.Projects}>
+            <div className={styles.ProjectImage}><img src={exampleImgProject}></img></div>
+            <span>Project name</span>
+          </div>
+          <div className={styles.Projects}>
+            <div className={styles.ProjectImage}><img src={exampleImgProject}></img></div>
+            <span>Project name</span>
+          </div>
+          <div className={styles.Projects}>
+            <div className={styles.ProjectImage}><img src={exampleImgProject}></img></div>
+            <span>Project name</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }

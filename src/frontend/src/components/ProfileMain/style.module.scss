@@ -5,7 +5,6 @@
   right: 0;
   width: 903px;
   height: 100%;
-  border-right: 1px solid #2F3336;
 }
 
 .ProfileInfo{
@@ -16,7 +15,7 @@
   right: 15px;
   top: 14px;
   width: 873px;
-  height: 170px;
+  height: 150px;
   
   background-color: #15181C;
   border-radius: 10px;
@@ -28,7 +27,7 @@
     font-family: 'Museo For Dell';
     font-style: normal;
     color: white;
-    font-size: 17px;
+    font-size: 15px;
     display: flex;
     flex-direction: row;
     width: 873px;
@@ -37,7 +36,7 @@
   .PersonalInfo{
     font-family: 'Trebuchet MS';
     font-style: normal;
-    font-size: 17px;
+    font-size: 15px;
     align-items: center;
     position: relative;
     left: 10px;
@@ -78,10 +77,11 @@
     width: 160px;
     height: 33px;
     left: 30px;
-    top: 35px;
+    top: 30px;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
     background-color: transparent;
+    // background-color: #5B5FC7;
 
     .TeamsIcon{
       color: white;
@@ -99,9 +99,272 @@
 }
 
 .ProfileStats{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 25px;
+  left: 15px;
+  right: 15px;
+  width: 873px;
+
+  .Technologies{
+    position: relative;
+    left: 0;
+    width: 420px;
+    height: 190px;
+    background-color: #15181C;
+    border-radius: 10px;
+
+    .TittleTech{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: 10px;
+      color: white;
+      font-family: 'Museo For Dell';
+      font-style: normal;
+      font-size: 20px;
+
+      .EditTech{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        background-color: transparent;
+        border: 1px solid #FFFFFF;
+        right: 10px;
+        width: 70px;
+        height: 24px;
+        border-radius: 5px;
+    
+        .EditIcon{
+          position: relative;
+          left: 5px;
+          color: white;
+        }
+    
+        p{
+          position: relative;
+          font-size: 14px;
+          left: 10px;
+          color: white;
+        }
+      }
+    }
+
+    .ContentTech{
+      display: flex;
+      flex-direction: row;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 155px;
+
+
+      .GraphTech{
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        position: relative;
+        left: 0;
+
+        img {
+          width: 155px;
+          height: 155px;
+          position: absolute;
+          right: 0;
+        
+        }
+      }
+
+
+
+      .SpecGraph{
+        width: 50%;
+        height: 100%;
+        position: relative;
+        top: 20px;
+        left: 30px;
+        display: flex;
+        flex-direction: column;
+
+        .TechList{
+          display: flex;
+          flex-direction: row;
+          color: white;
+          margin-top: 10px;
+
+          p{
+            align-items: center;
+            position: relative;
+            top: 2px;
+            left: 5px;
+          }
+        }
+
+        .TechOne{
+          width: 16px;
+          height: 16px;
+          background: #C82267;
+          border-radius: 100px;
+        }
+
+        .TechTwo{
+          width: 16px;
+          height: 16px;
+          background: #662D8E;
+          border-radius: 100px;
+        }
+        .TechThree{
+          width: 16px;
+          height: 16px;
+          background: #F0593E;
+          border-radius: 100px;
+        }
+        .TechFour{
+          width: 16px;
+          height: 16px;
+          background: #FCB818;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+
+  .DellMatchStats{
+    position: absolute;
+    right: 0;
+    width: 420px;
+    height: 190px;
+    background-color: #15181C;
+    border-radius: 10px;
+
+    .TittleStats{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: 10px;
+      color: white;
+      font-family: 'Museo For Dell';
+      font-style: normal;
+      font-size: 20px;
+      
+      .InfoIcon{
+        position: absolute;
+        right: 30px;
+        color: white;
+        color: #6E767D;
+      }
+
+    }
+
+    .InfoStats{
+      display: flex;
+      flex-direction: row;
+      color: white;
+      width: 100%;
+      height: 100%;
+
+
+      .SpanStats{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        top: 35px;
+        width: 50%;
+        font-size: 42px;
+
+        .SpanMidStats{
+          font-size: 10px;
+
+        }
+
+        .SpanBotStats{
+          font-size: 14px;
+          position: absolute;
+          bottom: 100px;
+        }
+      }
+    }
+  }
 
 }
 
 .ProfileProjects{
+  width: 873px;
+  height: 150px;
+  background-color: #F0593E;
+  position: relative;
+  left: 15px;
+  right: 15px;
+  top: 35px;
 
+  background-color: #15181C;
+  border-radius: 10px;
+
+  .TittleProjects{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 10px;
+    color: white;
+    font-family: 'Museo For Dell';
+    font-style: normal;
+    font-size: 20px;
+
+    .SpanProjects{
+      position: absolute;
+      right: 30px;
+      font-size: 16px;
+    }
+
+    .IconProjects{
+      position: relative;
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .ProjectsList{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .Projects{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 20px;
+      left: 30px;
+      right: 30px;
+      margin-right: 20px;
+
+      .ProjectImage{
+        display: flex;
+        width: 164px;
+        height: 80px;
+        border-radius: 10px;
+      }
+
+      .ProjectImage img{
+        width: 0px;
+        flex-grow: 1;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      span{
+        color: white;
+        display: flex;
+        justify-content: center;
+        font-family: 'Museo For Dell';
+        font-style: normal;
+        position: relative;
+        top: 5px;
+        font-size: 16px;
+      }
+    }
+  }
 }
