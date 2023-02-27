@@ -1,4 +1,4 @@
-/** remember to refer to README.me */
+/** please refer to README.me */
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { plainToInstance } from "class-transformer";

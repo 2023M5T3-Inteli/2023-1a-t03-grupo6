@@ -2,7 +2,7 @@
 
 - interceptors are akin to Express middlewares :
   can be applied to single handler, all handlers in controller or globally
-  - standard : use with class-transformer serializers eg Exclude
+  - standard : use with class-transformer serializers eg Exclude in User entity
     use in place of dto, but less flexible
   - custom : more flexible, used by adapting dto architecture
 
