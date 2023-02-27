@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 
-const ModalCtx = createContext({
+const InfoModalCtx = createContext({
   showModal: false,
   showModalHandler: () => {},
 });
 
-export const ModalCtxProvider = (props) => {
+export const InfoModalCtxProvider = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const showModalHandler = () => {
@@ -13,15 +13,15 @@ export const ModalCtxProvider = (props) => {
   };
 
   return (
-    <ModalCtx.Provider
+    <InfoModalCtx.Provider
       value={{
         showModal: showModal,
         showModalHandler: showModalHandler,
       }}
     >
       {props.children}
-    </ModalCtx.Provider>
+    </InfoModalCtx.Provider>
   );
 };
 
-export default ModalCtx
+export default InfoModalCtx
