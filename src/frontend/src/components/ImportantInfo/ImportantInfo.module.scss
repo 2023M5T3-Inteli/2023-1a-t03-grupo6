@@ -29,7 +29,7 @@
 
 .modalWrapper {
   overflow-y: scroll;
-  height: calc(100vh - 10rem);
+  height: fit-content;
 
   &::-webkit-scrollbar {
     width: 0.7rem;
