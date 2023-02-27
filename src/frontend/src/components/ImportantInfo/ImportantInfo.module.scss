@@ -26,7 +26,7 @@
   justify-content: center;
   color: var(--white);
 }
-  
+
 .modalWrapper {
   overflow-y: scroll;
   height: calc(100vh - 10rem);
@@ -78,14 +78,14 @@
   }
 }
 
-.formWrapper {
+.infosWrapper {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.formContainer {
+.infosContainer {
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -94,111 +94,110 @@
 
 .field {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 1rem;
-  width: 100%;
-  width: 100%;
-
-  label {
-    font-weight: lighter;
-    font-size: 1.6rem;
-    margin-bottom: 0.4rem;
-  }
-
-  input,
-  textarea {
-    background: var(--dark-gray);
-    border: 1px solid var(--light-gray);
-    border-radius: 0.6rem;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    color: var(--white);
-  }
-
-  textarea {
-    min-height: 8rem;
-  }
-}
-
-.embedFile {
-  background: var(--dark-gray);
-  border: 1px solid var(--light-gray);
-  border-radius: 0.6rem;
-  padding: 1rem;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  input {
-    display: none;
-  }
-
-  p {
-    margin-left: 1rem;
-    font-size: 1.3rem;
-  }
-}
-
-.statusField {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 1rem;
-  width: 100%;
-  width: 100%;
-
-  label {
-    font-weight: lighter;
-    font-size: 1.6rem;
-    margin-bottom: 0.4rem;
-  }
-}
-
-.radioInputContainer {
-  display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: flex-start;
-  align-items: center;
+  margin: 1rem;
   width: 100%;
-}
+  width: 100%;
 
-.radioInput {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  input {
-    accent-color: var(--light-gray);
+  label {
+    font-weight: lighter;
+    font-size: 1.6rem;
     margin-right: 1rem;
-    scale: 1.2;
   }
 
   p {
-    font-size: 1.2rem;
-    margin-right: 4rem;
+    color: var(--light-gray);
+    font-size: 1.4rem;
+    align-self: end;
+  }
+
+  a {
+    padding: 1rem 3rem 1rem 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 1rem;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+
+    .keyWords {
+      margin-right: 1rem;
+      padding: 0.1rem 0.8rem;
+      border: 1px solid var(--white);
+      border-radius: 1rem;
+    }
+
+    .teamLi {
+      display: flex;
+      align-items: center;
+      padding: 0.1rem 0.8rem;
+      margin-right: 1rem;
+      border-radius: 1rem;
+      background: var(--black);
+
+      img {
+        width: 1.5rem;
+        margin: 0.3rem 0.4rem 0.3rem 0;
+        border-radius: 50%;
+        background: var(--light-gray);
+      }
+    }
   }
 }
 
-.dateContainer {
+.descriptionField {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 1rem;
   width: 100%;
+  width: 100%;
+
+  label {
+    font-weight: lighter;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--light-gray);
+    font-size: 1.4rem;
+  }
 }
 
-.numberInput {
-  width: 5rem;
+.statusP {
+  color: var(--yellow) !important;
+  border: 1px solid var(--yellow);
+  padding: 0.1rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
 }
 
-.occupationBx {
-  display: flex;
+.deadlineP {
+  color: var(--white) !important;
+  letter-spacing: 1px;
 }
 
-.submtiContainer {
+.occupationContainer {
   display: flex;
   width: 100%;
+  justify-content: space-between;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
   justify-content: center;
 
   button {
@@ -207,24 +206,14 @@
     font-size: 1.6rem;
     font-weight: 600;
     transition: 200ms;
+    background-color: var(--blue);
+    color: var(--white);
+    border: 1px solid var(--blue);
+    margin: 1rem;
 
     &:hover {
       scale: 1.04;
       opacity: 0.95;
     }
   }
-}
-
-.cancelBtn {
-  background-color: var(--dark-gray);
-  color: var(--blue);
-  border: 1px solid var(--blue);
-  margin: 1rem;
-}
-
-.submitBtn {
-  background-color: var(--blue);
-  color: var(--white);
-  border: 1px solid var(--blue);
-  margin: 1rem;
 }

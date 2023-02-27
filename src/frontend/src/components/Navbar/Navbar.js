@@ -8,16 +8,18 @@ import styles from "./Navbar.module.scss";
 
 import logo from "../../assets/logo.svg";
 import { useContext } from "react";
-import ModalCtx from "../../context/modal-ctx";
+import ProjectModalCtx from "../../context/project-modal-ctx";
+import InfoModalCtx from "../../context/info-modal-ctx";
 
 const Navbar = () => {
-    const modalCtx = useContext(ModalCtx)
+    const modalCtx = useContext(ProjectModalCtx)
+    const infoModalCtx = useContext(InfoModalCtx)
     const navigate = useNavigate();
     const handleOnClickProfile = useCallback(() => navigate('/profile', {replace: true}), [navigate]);
 
   return (
     <div className={styles.navbarContainer}>
-      <img src={logo} />
+      <img src={logo} onClick={infoModalCtx.showModalHandler}/>
       <nav className={styles.navContent}>
         <ul>
           <li>
