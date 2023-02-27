@@ -6,7 +6,7 @@ const ModalCtx = createContext({
 });
 
 export const ModalCtxProvider = (props) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const showModalHandler = () => {
     setShowModal(!showModal);
