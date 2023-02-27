@@ -1,0 +1,172 @@
+.modalBackdrop {
+  z-index: 1000;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modalContentWrapper {
+  z-index: 1001;
+  position: fixed;
+  width: 800px;
+  height: fit-content;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: var(--dark-gray);
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  transition: 400ms;
+  justify-content: center;
+  color: var(--white);
+}
+
+.modalWrapper {
+  overflow-y: scroll;
+  height: fit-content;
+
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--light-gray);
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--light-gray);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-bottom: 1px solid var(--light-gray);
+
+  h1 {
+    font-weight: lighter;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  svg {
+    right: 0;
+    transition: 200ms ease;
+    cursor: pointer;
+
+    &:hover {
+      scale: 1.1;
+    }
+
+    path {
+      stroke: white;
+    }
+  }
+}
+
+.applyWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.applyContainer {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem 1rem 0;
+  width: 100%;
+  width: 100%;
+
+  label {
+    font-weight: lighter;
+    font-size: 1.6rem;
+    margin-right: 1rem;
+  }
+
+  p {
+    color: var(--light-gray);
+    font-size: 1.4rem;
+    align-self: end;
+  }
+
+  div{
+    width: max-content;
+  }
+}
+
+.essayField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 1rem;
+  width: 100%;
+  width: 100%;
+
+  label {
+    font-weight: lighter;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--light-gray);
+    font-size: 1.4rem;
+  }
+
+  textarea {
+    background: var(--dark-gray);
+    border: 1px solid var(--light-gray);
+    border-radius: 0.6rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+  }
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  button {
+    border-radius: 2.5rem;
+    padding: 0.7rem 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    transition: 200ms;
+    background-color: var(--blue);
+    color: var(--white);
+    border: 1px solid var(--blue);
+    margin: 1rem;
+
+    &:hover {
+      scale: 1.04;
+      opacity: 0.95;
+    }
+  }
+}

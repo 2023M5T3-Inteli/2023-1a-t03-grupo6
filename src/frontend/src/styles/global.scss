@@ -30,6 +30,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Museo For Dell";
+
+  &:focus{
+    outline: none;
+  }
 }
 
 h1,

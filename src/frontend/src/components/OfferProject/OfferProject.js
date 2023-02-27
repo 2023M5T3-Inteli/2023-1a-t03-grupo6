@@ -3,7 +3,6 @@ import { GrClose } from "react-icons/gr";
 import { BsFileEarmarkArrowUp } from "react-icons/bs";
 
 import ProjectModalCtx from "../../context/project-modal-ctx";
-// import Modal from "../Modal/Modal";
 
 import styles from "./OfferProject.module.scss";
 import ReactSelect from "../ReactSelect/ReactSelect";

@@ -7,7 +7,7 @@ import InfoModalCtx from "../../context/info-modal-ctx";
 
 import styles from "./ImportantInfo.module.scss";
 
-const OfferProject = () => {
+const ImportantInfo = () => {
   const modalCtx = useContext(InfoModalCtx);
 
   return (
@@ -193,4 +193,4 @@ const OfferProject = () => {
   );
 };
 
-export default OfferProject;
+export default ImportantInfo;
