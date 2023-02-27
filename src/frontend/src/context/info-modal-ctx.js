@@ -6,7 +6,7 @@ const InfoModalCtx = createContext({
 });
 
 export const InfoModalCtxProvider = (props) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const showModalHandler = () => {
     setShowModal(!showModal);
