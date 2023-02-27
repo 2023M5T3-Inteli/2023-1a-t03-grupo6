@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppService } from "./app.service";
 import { User } from "./users/users.entity";
@@ -19,6 +20,7 @@ import { ReportsModule } from "./reports/reports.module";
       entities: [User, Report],
       synchronize: true,
     }),
+    ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],
   providers: [AppService],

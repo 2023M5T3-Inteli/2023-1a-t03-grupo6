@@ -1,6 +1,8 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
 import { AppModule } from "./app.module";
+
+const CookieSession = require("cookie-session");
 //////////////////////////////////////////////////////////////////////////////////////
 
 /** bootstrap project */
@@ -13,6 +15,9 @@ import { AppModule } from "./app.module";
    * whitelist : security condition to strip out non-essential arguments
    */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+
+  /** express middleware */
+  app.use(CookieSession({ keys: [process.env.COOKIE_SECRET] }));
 
   /** start server listener */
   await app.listen(3000, () => console.log("Server running on port 3000."));

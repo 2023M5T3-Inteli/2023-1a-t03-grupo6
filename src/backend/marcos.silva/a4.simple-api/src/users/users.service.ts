@@ -1,6 +1,12 @@
+/**
+ * IMPORTANT ODDITY ABOUT SQL QUERIES
+ * find*(arg) methdos : if arg = null | undefined returns first element in table
+ */
+
 import { Repository } from "typeorm";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { randomBytes, pbkdf2Sync } from "crypto";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { User } from "./users.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +32,18 @@ export class UsersService {
     const _user = await this.findOne(id);
     if (!_user) throw new NotFoundException("User NOT found");
 
+    if (attrs.password) {
+      const _salt = randomBytes(16).toString("hex");
+      const _hash = pbkdf2Sync(
+        attrs.password,
+        _salt,
+        8848,
+        64,
+        "sha512"
+      ).toString("hex");
+      attrs.password = `${_salt}.${_hash}`;
+    }
+
     return await this.repository.save(Object.assign(_user, attrs));
   }
 
@@ -33,11 +51,11 @@ export class UsersService {
     const _user = await this.findOne(id);
     if (!_user) throw new NotFoundException("User NOT found");
     await this.repository.remove(_user);
-    return `User ${id} removed`;
+    return "User removed";
   }
 
   async findOne(id: number) {
-    return await this.repository.findOne({ where: { id } });
+    return !id ? null : await this.repository.findOne({ where: { id } });
   }
 
   async find(email: string) {
