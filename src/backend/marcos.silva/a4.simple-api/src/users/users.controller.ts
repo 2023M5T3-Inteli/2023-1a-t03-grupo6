@@ -13,15 +13,18 @@ import {
   Param,
   Delete,
   Session,
+  UseGuards,
   Controller,
   UseInterceptors,
   NotFoundException,
   ClassSerializerInterceptor,
 } from "@nestjs/common";
+
 import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 import { SignupUserDto } from "./dtos/signup-user.dto";
+import { AuthGuard } from "src/guards/auth.guard";
 import { SigninUserDto } from "./dtos/signin-user.dto";
 import { OutboundUserDto } from "./dtos/outbound-user.dto";
 import { CurrentUser } from "./decorators/current-user.decorator";
@@ -33,13 +36,13 @@ import {
 } from "src/interceptors/serialize.interceptor";
 //////////////////////////////////////////////////////////////////////////////////////
 
-@UseInterceptors(ClassSerializerInterceptor)
-@UseInterceptors(CurrentUserInterceptor)
 @Controller("user")
+@UseInterceptors(CurrentUserInterceptor)
+@UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
   constructor(
-    private UsersService: UsersService,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private UsersService: UsersService
   ) {}
 
   @Post("signup")
@@ -59,58 +62,55 @@ export class UsersController {
   }
 
   @Get("signout")
+  @UseGuards(AuthGuard)
   async signoutUser(@CurrentUser() user: User, @Session() session: any) {
-    if (!user) throw new NotFoundException("User NOT logged in");
-
     session.userId = undefined;
     return "User signed out";
   }
 
   @Get("getMe")
+  @UseGuards(AuthGuard)
   getCurrentUser(@CurrentUser() user: User) {
-    if (!user) throw new NotFoundException("User NOT logged in");
     return user;
   }
 
   @Patch("updateMe")
+  @UseGuards(AuthGuard)
   @Serialize(OutboundUserDto)
   async updateUser(
     @CurrentUser() user: User,
     @Body() body: UpdateUserDto,
     @Session() session: any
   ) {
-    if (!user) throw new NotFoundException("User NOT logged in");
     return await this.UsersService.update(session.userId, body);
   }
 
   @Delete("deleteMe")
+  @UseGuards(AuthGuard)
   async removeUser(@CurrentUser() user: User, @Session() session: any) {
-    if (!user) throw new NotFoundException("User NOT logged in");
     return this.UsersService.remove(session.userId);
   }
 
+  @Get()
+  @UseGuards(AuthGuard)
   @Serialize(OutboundUserDto)
   @UseInterceptors(new SerializeInterceptor2(OutboundUserDto))
-  @Get()
   async findAllUsers(
     @Query("email") email: string,
     @Session() session: any,
     @CurrentUser() user: User
   ) {
-    if (!user) throw new NotFoundException("User NOT logged in");
-
     console.log("handler is running");
     return await this.UsersService.find(email);
   }
 
   @Get(":id")
+  @UseGuards(AuthGuard)
   async findUser(
     @Param("id") id: string,
     @Session() session: any,
     @CurrentUser() user: User
   ) {
-    if (!user) throw new NotFoundException("User NOT logged in");
-
     const _user = await this.UsersService.findOne(parseInt(id));
     if (!_user) throw new NotFoundException("User NOT found");
     return _user;
