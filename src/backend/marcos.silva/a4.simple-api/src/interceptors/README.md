@@ -12,8 +12,3 @@
   'intercept' method is called automatically by Nest
   'context' provides information on incoming request or outgoing response
   'next' provides reference to next handler in controller
-
-* How Interceptor works:
-  - receives an Entity Instance eg User
-  - process instance into specific DTO that describes how to serialize data for the particular route handler
-  - sends a processed DTO instance to client

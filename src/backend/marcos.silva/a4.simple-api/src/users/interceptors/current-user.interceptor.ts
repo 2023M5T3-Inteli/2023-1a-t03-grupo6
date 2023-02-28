@@ -1,4 +1,4 @@
-// /** please refer to README.me */
+// /** please refer to interceptors/README.me */
 import {
   NestInterceptor,
   ExecutionContext,
@@ -16,7 +16,6 @@ export class CurrentUserInterceptor implements NestInterceptor {
   async intercept(context: ExecutionContext, next: CallHandler) {
     const _req = context.switchToHttp().getRequest();
     _req.currentUser = await this.UsersService.findOne(_req.session.userId);
-
     return next.handle();
   }
 }
