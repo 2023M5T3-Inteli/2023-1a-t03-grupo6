@@ -7,11 +7,11 @@
  */
 
 import {
+  Entity,
+  Column,
   AfterInsert,
   AfterUpdate,
   BeforeRemove,
-  Entity,
-  Column,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";

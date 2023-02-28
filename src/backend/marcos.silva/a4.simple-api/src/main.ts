@@ -1,8 +1,7 @@
-import { NestFactory } from "@nestjs/core";
-import { ValidationPipe } from "@nestjs/common";
 import { AppModule } from "./app.module";
-
-const CookieSession = require("cookie-session");
+import { NestFactory } from "@nestjs/core";
+import CookieSession from "cookie-session";
+import { ValidationPipe } from "@nestjs/common";
 //////////////////////////////////////////////////////////////////////////////////////
 
 /** bootstrap project */

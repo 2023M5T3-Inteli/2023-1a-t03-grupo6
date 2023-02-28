@@ -20,16 +20,16 @@ import {
   ClassSerializerInterceptor,
 } from "@nestjs/common";
 
+import { User } from "./users.entity";
 import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
+import { AuthGuard } from "src/guards/auth.guard";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 import { SignupUserDto } from "./dtos/signup-user.dto";
-import { AuthGuard } from "src/guards/auth.guard";
 import { SigninUserDto } from "./dtos/signin-user.dto";
 import { OutboundUserDto } from "./dtos/outbound-user.dto";
 import { CurrentUser } from "./decorators/current-user.decorator";
 import { CurrentUserInterceptor } from "./interceptors/current-user.interceptor";
-import { User } from "./users.entity";
 import {
   Serialize,
   SerializeInterceptor2,
@@ -63,7 +63,7 @@ export class UsersController {
 
   @Get("signout")
   @UseGuards(AuthGuard)
-  async signoutUser(@CurrentUser() user: User, @Session() session: any) {
+  async signoutUser(@Session() session: any) {
     session.userId = undefined;
     return "User signed out";
   }
@@ -77,17 +77,13 @@ export class UsersController {
   @Patch("updateMe")
   @UseGuards(AuthGuard)
   @Serialize(OutboundUserDto)
-  async updateUser(
-    @CurrentUser() user: User,
-    @Body() body: UpdateUserDto,
-    @Session() session: any
-  ) {
+  async updateUser(@Body() body: UpdateUserDto, @Session() session: any) {
     return await this.UsersService.update(session.userId, body);
   }
 
   @Delete("deleteMe")
   @UseGuards(AuthGuard)
-  async removeUser(@CurrentUser() user: User, @Session() session: any) {
+  async removeUser(@Session() session: any) {
     return this.UsersService.remove(session.userId);
   }
 
@@ -95,22 +91,14 @@ export class UsersController {
   @UseGuards(AuthGuard)
   @Serialize(OutboundUserDto)
   @UseInterceptors(new SerializeInterceptor2(OutboundUserDto))
-  async findAllUsers(
-    @Query("email") email: string,
-    @Session() session: any,
-    @CurrentUser() user: User
-  ) {
+  async findAllUsers(@Query("email") email: string) {
     console.log("handler is running");
     return await this.UsersService.find(email);
   }
 
   @Get(":id")
   @UseGuards(AuthGuard)
-  async findUser(
-    @Param("id") id: string,
-    @Session() session: any,
-    @CurrentUser() user: User
-  ) {
+  async findUser(@Param("id") id: string) {
     const _user = await this.UsersService.findOne(parseInt(id));
     if (!_user) throw new NotFoundException("User NOT found");
     return _user;
