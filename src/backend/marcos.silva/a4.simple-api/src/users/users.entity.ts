@@ -9,9 +9,9 @@
 import {
   Entity,
   Column,
-  AfterInsert,
-  AfterUpdate,
-  BeforeRemove,
+  // AfterInsert,
+  // AfterUpdate,
+  // BeforeRemove,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
@@ -29,18 +29,18 @@ export class User {
   @Exclude({ toPlainOnly: true })
   password: string;
 
-  @AfterInsert()
-  logInsert() {
-    console.log("@HOOK = Inserted user with id", this.id);
-  }
+  // @AfterInsert()
+  // logInsert() {
+  //   console.log("@HOOK = Inserted user with id", this.id);
+  // }
 
-  @AfterUpdate()
-  logUpdate() {
-    console.log("@HOOK = Updated user with id", this.id);
-  }
+  // @AfterUpdate()
+  // logUpdate() {
+  //   console.log("@HOOK = Updated user with id", this.id);
+  // }
 
-  @BeforeRemove()
-  logRemove() {
-    console.log("@HOOK = Removed user with id", this.id);
-  }
+  // @BeforeRemove()
+  // logRemove() {
+  //   console.log("@HOOK = Removed user with id", this.id);
+  // }
 }
