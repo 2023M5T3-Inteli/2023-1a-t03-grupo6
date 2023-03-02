@@ -23,7 +23,7 @@ import {
 import { User } from "./users.entity";
 import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
-import { AuthGuard } from "src/guards/auth.guard";
+import { AuthGuard } from "./guards/auth.guard";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 import { SignupUserDto } from "./dtos/signup-user.dto";
 import { SigninUserDto } from "./dtos/signin-user.dto";
@@ -33,7 +33,7 @@ import { CurrentUserInterceptor } from "./interceptors/current-user.interceptor"
 import {
   Serialize,
   SerializeInterceptor2,
-} from "src/interceptors/serialize.interceptor";
+} from "./interceptors/serialize.interceptor";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Controller("user")
