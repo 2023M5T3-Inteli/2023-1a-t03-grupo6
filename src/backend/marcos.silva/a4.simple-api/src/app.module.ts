@@ -1,7 +1,9 @@
-import { Module } from "@nestjs/common";
+const cookieSession = require("cookie-session");
+
 import { ConfigModule } from "@nestjs/config";
-import { APP_INTERCEPTOR } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { Module, ValidationPipe, MiddlewareConsumer } from "@nestjs/common";
 
 import { AppService } from "./app.service";
 import { User } from "./users/users.entity";
@@ -12,7 +14,6 @@ import { ReportsModule } from "./reports/reports.module";
 import { GlobalInterceptor } from "./interceptors/global.interceptor";
 //////////////////////////////////////////////////////////////////////////////////////
 
-/** @dev DO NOT use synchronize: true in production */
 @Module({
   imports: [
     UsersModule,
@@ -21,6 +22,7 @@ import { GlobalInterceptor } from "./interceptors/global.interceptor";
       type: "sqlite",
       database: "db.sqlite",
       entities: [User, Report],
+      /** @dev DO NOT use synchronize: true in production */
       synchronize: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
@@ -29,6 +31,15 @@ import { GlobalInterceptor } from "./interceptors/global.interceptor";
   providers: [
     AppService,
     { provide: APP_INTERCEPTOR, useClass: GlobalInterceptor },
+    /** wire up validation pipe with empty validation rules */
+    { provide: APP_PIPE, useValue: new ValidationPipe({ whitelist: true }) },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  /** set cookieSession as global middleware */
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(cookieSession({ keys: [process.env.COOKIE_SECRET] }))
+      .forRoutes("*");
+  }
+}

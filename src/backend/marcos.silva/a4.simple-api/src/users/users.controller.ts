@@ -29,7 +29,6 @@ import { SignupUserDto } from "./dtos/signup-user.dto";
 import { SigninUserDto } from "./dtos/signin-user.dto";
 import { OutboundUserDto } from "./dtos/outbound-user.dto";
 import { CurrentUser } from "./decorators/current-user.decorator";
-import { CurrentUserInterceptor } from "./interceptors/current-user.interceptor";
 import {
   Serialize,
   SerializeInterceptor2,
@@ -37,7 +36,6 @@ import {
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Controller("user")
-@UseInterceptors(CurrentUserInterceptor)
 @UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
   constructor(
