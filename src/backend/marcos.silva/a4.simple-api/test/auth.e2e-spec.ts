@@ -36,4 +36,18 @@ describe("Authentication System (e2e)", () => {
         expect(email).toEqual(body.email);
       });
   });
+
+  it("can fetch currently logged in user GET /user/getMe", async () => {
+    const _res = await request(app.getHttpServer())
+      .post("/user/signup")
+      .send(body)
+      .expect(201);
+
+    const { body: _body } = await request(app.getHttpServer())
+      .get("/user/getMe")
+      .set("Cookie", _res.get("Set-Cookie"))
+      .expect(200);
+
+    expect(_body.email).toEqual(body.email);
+  });
 });
