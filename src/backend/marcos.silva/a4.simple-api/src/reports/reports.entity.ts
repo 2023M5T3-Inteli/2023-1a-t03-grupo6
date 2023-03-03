@@ -9,11 +9,13 @@
 import {
   Entity,
   Column,
+  ManyToOne,
   AfterInsert,
   AfterUpdate,
   BeforeRemove,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { User } from "src/users/users.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Entity()
@@ -41,6 +43,13 @@ export class Report {
 
   @Column()
   mileage: number;
+
+  /**
+   * () => User : solves circular dependency issue
+   * user => user.reports : critical to multiple relationships scenarios eg Reports, Users, Approvers
+   */
+  @ManyToOne(() => User, (user) => user.reports)
+  user: User;
 
   @AfterInsert()
   logInsert() {

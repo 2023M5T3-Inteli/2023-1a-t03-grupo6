@@ -9,12 +9,14 @@
 import {
   Entity,
   Column,
+  OneToMany,
   // AfterInsert,
   // AfterUpdate,
   // BeforeRemove,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
+import { Report } from "src/reports/reports.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Entity()
@@ -28,6 +30,13 @@ export class User {
   @Column()
   @Exclude({ toPlainOnly: true })
   password: string;
+
+  /**
+   * () => Report : solves circular dependency issue
+   * report => report.user : critical to multiple relationships scenarios eg Reports, Users, Approvers
+   */
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[];
 
   // @AfterInsert()
   // logInsert() {
