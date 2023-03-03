@@ -1,8 +1,8 @@
 const cookieSession = require("cookie-session");
 
-import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Module, ValidationPipe, MiddlewareConsumer } from "@nestjs/common";
 
 import { AppService } from "./app.service";
@@ -16,16 +16,24 @@ import { GlobalInterceptor } from "./interceptors/global.interceptor";
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
     UsersModule,
     ReportsModule,
-    TypeOrmModule.forRoot({
-      type: "sqlite",
-      database: "db.sqlite",
-      entities: [User, Report],
-      /** @dev DO NOT use synchronize: true in production */
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          type: "sqlite",
+          database: config.get<string>("DB_NAME"),
+          entities: [User, Report],
+          /** @dev DO NOT use synchronize: true in production */
+          synchronize: true,
+        };
+      },
     }),
-    ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],
   providers: [
