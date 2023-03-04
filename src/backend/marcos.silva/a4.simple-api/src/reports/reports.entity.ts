@@ -44,6 +44,9 @@ export class Report {
   @Column()
   mileage: number;
 
+  @Column({ default: false })
+  approved: boolean;
+
   /**
    * () => User : solves circular dependency issue
    * user => user.reports : critical to multiple relationships scenarios eg Reports, Users, Approvers
@@ -51,6 +54,7 @@ export class Report {
   @ManyToOne(() => User, (user) => user.reports)
   user: User;
 
+  /** HOOK DECORATORS */
   @AfterInsert()
   logInsert() {
     console.log("@HOOK = Inserted report with id ", this.id);
