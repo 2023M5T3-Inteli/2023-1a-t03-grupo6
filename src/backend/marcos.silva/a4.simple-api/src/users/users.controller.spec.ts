@@ -26,6 +26,8 @@ describe("UsersController", () => {
     id: _counter,
     email: `test${_counter}@example.com`,
     password: "test1234",
+    admin: true,
+    reports: [],
   };
 
   /** dummy dependency instances and module */

@@ -31,6 +31,9 @@ export class User {
   @Exclude({ toPlainOnly: true })
   password: string;
 
+  @Column({ default: true })
+  admin: boolean;
+
   /**
    * () => Report : solves circular dependency issue
    * report => report.user : critical to multiple relationships scenarios eg Reports, Users, Approvers
