@@ -5,10 +5,12 @@
  *   argument decorators - put into argument list ie @Body @Param @Session
  */
 import {
+  Get,
   Body,
   Post,
   Param,
   Patch,
+  Query,
   UseGuards,
   Controller,
 } from "@nestjs/common";
@@ -16,6 +18,7 @@ import {
 import { User } from "src/users/users.entity";
 import { ReportsService } from "./reports.service";
 import { AuthGuard } from "src/users/guards/auth.guard";
+import { GetEstimateDto } from "./dtos/get-estimate.dto";
 import { AdminGuard } from "src/users/guards/admin.guard";
 import { CreateReportDto } from "./dtos/create-report.dto";
 import { ApproveReportDto } from "./dtos/approve-report.dto";
@@ -45,5 +48,10 @@ export class ReportsController {
       parseInt(id),
       body.approved
     );
+  }
+
+  @Get("getEstimate")
+  getEstimate(@Query() query: GetEstimateDto) {
+    return this.ReportsService.createEstimate(query);
   }
 }
