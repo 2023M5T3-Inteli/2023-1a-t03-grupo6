@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./style.module.scss";
-import { AiOutlineSearch } from "react-icons/ai";
+import SearchBox from '../SearchBox/SearchBox';
+import Footer from '../Footer/Footer';
+
 import { BsInfoCircleFill } from "react-icons/bs";
 import { VscCircleFilled } from "react-icons/vsc";
 import { FiMoreHorizontal } from "react-icons/fi";
@@ -19,10 +21,7 @@ import YouProfile from '../../assets/youProfile.jfif';
 const HomeSideContent = () => {
   return (
     <div className={styles.SideContent}>
-      <form className={styles.SearchInput}>
-        <AiOutlineSearch className={styles.SearchIcon} size={24} />
-        <input type="search" placeholder="What do you want to learn today?" />
-      </form>
+      <SearchBox />
       <div className={styles.IntKeyWords}>
         <p>Key-words you may be interested</p>
         <div className={styles.AllKeyWords}>
@@ -85,10 +84,7 @@ const HomeSideContent = () => {
           </div>
         </div>
       </div>
-      <div className={styles.Footer}>
-        <span className={styles.FooterTags}>About <VscCircleFilled size={6} /> FAQ <VscCircleFilled size={6} /> Terms of Service <VscCircleFilled size={6} /> Privacy Policy <VscCircleFilled size={6} /> Cookie Policy <VscCircleFilled size={6} /> Accessibility</span>
-        <span className={styles.FooterCopyright}>© 2023 Dell Match from Dell Technologies</span>
-      </div>
+      <Footer />
     </div>
   );
 }

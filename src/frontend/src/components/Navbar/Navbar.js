@@ -17,6 +17,18 @@ const Navbar = () => {
     () => navigate("/profile", { replace: true }),
     [navigate]
   );
+  const handleOnClickHome = useCallback(
+    () => navigate("/", { replace: true }),
+    [navigate]
+  );
+  const handleOnClickProjects = useCallback(
+    () => navigate("/projects", { replace: true }),
+    [navigate]
+  );
+  const handleOnClickFAQ = useCallback(
+    () => navigate("/faq", { replace: true }),
+    [navigate]
+  );
 
   return (
     <div className={styles.navbarContainer}>
@@ -24,7 +36,7 @@ const Navbar = () => {
       <nav className={styles.navContent}>
         <ul>
           <li>
-            <a>
+            <a onClick={handleOnClickHome}>
               <AiFillHome size={20} />
               <p>Home</p>
             </a>
@@ -36,13 +48,13 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a onClick={() => console.log(modalCtx.showModal)}>
+            <a onClick={handleOnClickProjects}>
               <AiFillHeart size={20} />
               <p>Saved projects</p>
             </a>
           </li>
           <li>
-            <a>
+            <a onClick={handleOnClickFAQ}>
               <FaQuestionCircle size={20} />
               <p>FAQ</p>
             </a>
