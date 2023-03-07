@@ -13,7 +13,6 @@
   position: fixed;
   height: 100%;
   width: 50%;
-  // height: fit-content;
   top: 0;
   bottom: 0;
   left: 0;
@@ -25,7 +24,6 @@
   transition: 400ms;
   align-items: center;
   color: var(--white);
-  // justify-content: center;
 }
 
 .TopContent{
@@ -44,7 +42,7 @@
     }
 
     path {
-      stroke: white;
+      stroke: var(--white);
     }
   }
 }
@@ -187,5 +185,4 @@
     font-style: normal;
     font-size: 14px;
   }
- 
 }

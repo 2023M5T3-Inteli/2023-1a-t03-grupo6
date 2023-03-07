@@ -32,10 +32,10 @@ const ProfileMain = () => {
               <img src={tempChart}></img>
             </div>
             <div className={styles.SpecGraph}>
-              <div className={styles.TechList}><div className={styles.TechOne}></div><p>Python</p></div>
-              <div className={styles.TechList}><div className={styles.TechTwo}></div><p>C++</p></div>
-              <div className={styles.TechList}><div className={styles.TechThree}></div><p>JavaScript</p></div>
-              <div className={styles.TechList}><div className={styles.TechFour}></div><p>PHP</p></div>
+              <div className={styles.TechList}><div style={{background: 'var(--dell-berry)'}} className={styles.TechCircle}></div><p>Python</p></div>
+              <div className={styles.TechList}><div style={{background: 'var(--dell-purple)'}} className={styles.TechCircle}></div><p>C++</p></div>
+              <div className={styles.TechList}><div style={{background: 'var(--dell-red)'}} className={styles.TechCircle}></div><p>JavaScript</p></div>
+              <div className={styles.TechList}><div style={{background: 'var(--dell-yellow)'}} className={styles.TechCircle}></div><p>PHP</p></div>
             </div>
           </div>
         </div>

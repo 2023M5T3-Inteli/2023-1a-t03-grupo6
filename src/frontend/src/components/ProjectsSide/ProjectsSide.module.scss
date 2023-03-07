@@ -9,7 +9,7 @@
 .IntKeyWords{
   position: relative;
   width: 292px;
-  height: 130px;
+  height: 100px;
   left: 25px;
   top: 13px;
 
@@ -33,21 +33,22 @@
 }
 
 .SugKeyWords{
+  font-family: "Trebuchet";
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 0px 10px 0px 10px;
   height: 21px;
-  color: var(--light-gray);
-  border: 1px solid var(--light-gray);
+  border: 1px solid;
   border-radius: 10px;
   left: 15px;
   margin-right: 10px;
   margin-bottom: 5px;
 }
 
-.Ranking{
+.MostLanguages{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -55,7 +56,7 @@
 
   position: relative;
   width: 292px;
-  height: 250px;
+  height: 200px;
   top: 25px;
 
   background: var(--dark-gray);
@@ -63,13 +64,13 @@
   left: 25px;
 }
 
-.RankingIntro{
+.LanguagesIntro{
   width: 292px;
-  height: 55px;
+  height: 80px;
   border-bottom: 1px solid var(--dell-border);
 }
 
-.RankingTittle{
+.LanguagesTittle{
   position: relative;
   width: 292px;
   height: 18px;
@@ -81,116 +82,68 @@
   display: flex;
   align-items: center;
   color: var(--white);
-}   
-
-.InfoIcon{
-  position: absolute;
-  right: 15px;
-  color: var(--light-gray);
 }
 
-.RankingSubTittle{
+.LanguagesSubTittle{
   position: relative;
   width: 292px;
   height: 16px;
   color: var(--light-gray);
   padding-left: 15px;
   top: 10px;
-} 
-
-.timeRanking{
-  color: var(--light-gray);
-  font-family: 'Trebuchet';
-  font-style: normal;
-  font-size: 11px;
-  position: relative;
-  left: 15px;
 }
 
-.CircleIcon{
-  position: relative;
-  left: 10px;
-  color: var(--light-gray);
-}
-
-.RankingContent{
+.LanguagesContent{
   display: flex;
   flex-direction: column;
   height: 259px;
   width: 292px;
 }
 
-.MoreRanking{
-  width: 292px;
-  display: flex;
-  justify-content: center;
-  color: var(--light-gray);
-}
-
-.NoRanking{
-  color: var(--white);
-} 
-
-.RankingPlace{
-  padding: 5px 0px 0px 8px; 
-  width: 292px;
-  height: 45px;
-  display: flex;
-}
-
-.SpanPlaceImg{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
+.NumberLanguage{
+  padding: 5px 0px 0px 0px; 
+  width: 100%;
   height: 35px;
-
-  img{
-    width: 100%;
-    height: 100%;
-  }
+  display: flex;
 }
 
-.SpanProfileImg{
-  width: 35px;
-  height: 35px;
-  border-radius: 40px;
-  overflow: hidden;
-  margin-right: 5px;
-
-  img{
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.InfoProfile{
+.InfoLanguage{
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.ProfileName{
+.LanguageName{
   position: relative;
   display: flex;
   height: 50%;
-  width: 209px;
+  width: 292px;
   align-items: end;
   color: var(--white);
-} 
+  padding-left: 15px;
+}
 
-.ProfilePoints{
+.LangPercentage{
   position: absolute;
   font-family: 'Trebuchet';
   font-style: normal;
-  color: var(--light-gray);
-  right: 12px;
+  right: 15px;
+  align-items: center;
+}
+
+.IconPercentage{
+  position: relative;
+  top: 2px;
+  right: 2px;
+  color: var(--blue);
 }
 
 .DoneProjects{
   position: relative;
   height: 50%;
-  width: 209px;
+  width: 292px;
   font-family: 'Trebuchet';
   font-style: normal;
   color: var(--light-gray);
+  padding-left: 15px;
 }
