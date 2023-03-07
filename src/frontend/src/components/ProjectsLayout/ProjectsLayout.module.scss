@@ -49,7 +49,6 @@
   .AllKeyWords{
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: center;
   
     .SugKeyWords{
       font-family: "Trebuchet";
@@ -62,7 +61,7 @@
       height: 21px;
       border: 1px solid;
       border-radius: 10px;
-      // left: 15px;
+      left: 15px;
       margin-right: 10px;
       margin-bottom: 5px;
     }

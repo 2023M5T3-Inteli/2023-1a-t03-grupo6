@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import ProjectsSideContent from '../HomeSideContent/index';
 
 
-const ProjectsLayout = () => {
+const FAQLayout = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.MainContent}></div>
@@ -32,4 +32,4 @@ const ProjectsLayout = () => {
   );
 }
 
-export default ProjectsLayout;
+export default FAQLayout;
