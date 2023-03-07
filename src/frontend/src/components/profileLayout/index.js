@@ -5,10 +5,10 @@ import ProfileSideInfo from '../ProfileSideInfo/index';
 
 const ProfileLayout = () => {
   return (
-    <div className={styles.Container}>
+    <>
       <ProfileSideInfo />
-      <ProfileMain />
-    </div>
+      {/* <ProfileMain /> */}
+    </>
   );
 }
 
