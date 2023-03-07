@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@font-face {
+    font-family: "Museo For Dell";
+    /*Can be any text*/
+    src: local("Museo For Dell"),
+        url("./fonts/Museo\ For\ Dell\ Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Trebuchet";
+    /*Can be any text*/
+    src: local("Trebuchet "),
+        url("./fonts/trebuc.ttf") format("truetype");
+}
+
+
+body {
+    background-color: black;
+   
+}
+
+.app {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.cardlist {
+    width: 100%;
+}
+
+.classetitulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+        background-color: #3274c8;
+        border-radius: 30px;
+        font-family: "Trebuchet";
+        font-size: 0.8em;
+        color: white;
+        padding: 0.5rem  1em;
+
+
+    }
+    h1{
+        font-family:"Museo For Dell";
+        color: white;
+        font-weight: lighter;
+
+    }
+}
+
+.cardcontainer {
+    background-color: #15181C;
+    color: #fff;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+
+    h2 {
+        font-family: "Museo For Dell";
+        margin: 0px;
+        font-size: 1em;
+        font-weight: lighter;
+    }
+
+    p {
+        font-family: "Trebuchet";
+        color: #6E767D;
+        font-size: 1em;
+        
+
+    }
+
+    .tagscontainer {
+        margin-bottom: 0px;
+        .tag {
+            color: #fff;
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 0.1rem 0.8rem;
+            font-weight:lighter;
+            font-size: 0.8em;
+
+        }
+
+        color: #fff;
+        display: flex;
+        gap: 1rem;
+
+    }
+}
