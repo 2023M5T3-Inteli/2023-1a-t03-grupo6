@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar";
-import FAQLayout from '../components/FAQLayout/FAQLayout';
+import FAQLayout from '../components/FAQ/FAQLayout';
 
 export function FAQ () {
   return (

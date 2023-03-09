@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar";
-import ProfileLayout from '../components/ProfileLayout/index';
+import ProfileLayout from "../components/Profile/ProfileLayout";
 
 export function Profile () {
   return (
