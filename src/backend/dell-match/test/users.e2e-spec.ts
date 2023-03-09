@@ -1,26 +1,35 @@
 import * as request from "supertest";
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { AppModule } from "./../src/app.module";
+import { AppModule } from "../src/app.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "../src/users/entities/user.entity";
+import * as path from "path";
 //////////////////////////////////////////////////////////////////////////////////////
 
-describe("AppController (e2e)", () => {
+describe("Users component (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        AppModule,
+        TypeOrmModule.forRoot({
+          type: "sqlite",
+          database: path.join(__dirname, "./../db/test.sqlite"),
+          entities: [User],
+          synchronize: true,
+        }),
+        TypeOrmModule.forFeature([User]),
+      ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it("/ (GET)", () => {
-    return request(app.getHttpServer())
-      .get("/")
-      .expect(200)
-      .expect("Hello World!");
+  it("/users (GET)", () => {
+    return request(app.getHttpServer()).get("/users").expect(200).expect([]);
   });
 });
 

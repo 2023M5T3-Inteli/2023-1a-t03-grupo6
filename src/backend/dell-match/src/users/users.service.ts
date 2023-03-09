@@ -1,6 +1,6 @@
 /**
  * IMPORTANT ODDITY ABOUT SQL QUERIES
- * find*(arg) methdos : if arg = null | undefined returns first element in table
+ * find*(arg) methods : if arg = null | undefined returns first element in table
  */
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
@@ -19,7 +19,7 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const [_userExists] = await this.findAll(createUserDto.email);
     if (_userExists) throwError("BadRequestException", "User already exists");
 

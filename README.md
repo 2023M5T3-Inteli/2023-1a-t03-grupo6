@@ -1,4 +1,4 @@
-# Inteli - Instituto de Tecnologia e Liderança 
+# Inteli - Instituto de Tecnologia e Liderança
 
 <p align="center">
 <a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
@@ -6,9 +6,9 @@
 
 # DELL MATCH
 
-## DELLUSIONS 
+## DELLUSIONS
 
-## Integrantes: <a href="https://www.linkedin.com/in/ana-clara-loureiro-muller-zaidan/">Ana Clara Zaidan</a>, <a href="https://www.linkedin.com/in/arthur-fraige/">Arthur Fraige</a>,<a href="https://www.linkedin.com/in/bruno-omeira/">Bruno Meira</a>, <a href="https://www.linkedin.com/in/felipe-silberberg-111998230/">Felipe Silberberg</a>, <a href="https://www.linkedin.com/in/luiz-k-alencar/">Luiz Felipe Kama Alencar</a>,<a href="https://www.linkedin.com/in/marcos-florencio-ds/">Marcos Florencio</a>,  <a href="https://www.linkedin.com/in/sophia-de-oliveira-tosar-aba7ab23b/">Sophia de Oliveira Tosar</a>
+## Integrantes: <a href="https://www.linkedin.com/in/ana-clara-loureiro-muller-zaidan/">Ana Clara Zaidan</a>, <a href="https://www.linkedin.com/in/arthur-fraige/">Arthur Fraige</a>,<a href="https://www.linkedin.com/in/bruno-omeira/">Bruno Meira</a>, <a href="https://www.linkedin.com/in/felipe-silberberg-111998230/">Felipe Silberberg</a>, <a href="https://www.linkedin.com/in/luiz-k-alencar/">Luiz Felipe Kama Alencar</a>,<a href="https://www.linkedin.com/in/marcos-florencio-ds/">Marcos Florencio</a>, <a href="https://www.linkedin.com/in/sophia-de-oliveira-tosar-aba7ab23b/">Sophia de Oliveira Tosar</a>
 
 ## Descrição
 
@@ -16,11 +16,11 @@
 <br><br>
 Meu projeto é um exemplo de como utilizar o github.
 <br><br>
+
 <p align="center">
 <img src="https://pix4free.org/assets/library/2021-01-20/originals/game.jpg" alt="NOME DO JOGO" border="0">
   Game by <a href="http://www.nyphotographic.com/">Nick Youngson</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> <a href="http://pix4free.org/">Pix4free</a>
 </p>
-
 
 💡 De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
 <br><br>
@@ -35,12 +35,12 @@ May the force be with you!
 |<br>
 |-->docs<br>
 |-->documentos<br>
-  &emsp;|-->antigos<br>
-  &emsp;|GDD.docx ou Documentação.docx<br>
+&emsp;|-->antigos<br>
+&emsp;|GDD.docx ou Documentação.docx<br>
 |-->executáveis<br>
-  &emsp;|-->windows<br>
-  &emsp;|-->android<br>
-  &emsp;|-->HTML<br>
+&emsp;|-->windows<br>
+&emsp;|-->android<br>
+&emsp;|-->HTML<br>
 |-->imagens<br>
 |-->src<br>
 |readme.md<br>
@@ -91,18 +91,18 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 
 A cada atualização os detalhes devem ser lançados aqui.
 
-* 0.2.1 - 25/01/2022
-    * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
-* 0.2.0 - 15/01/2022
-    * MUDANÇA: Remove `setDefaultXYZ()`
-    * ADD: Adiciona `init()`
-* 0.1.1 - 11/01/2022
-    * CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
-* 0.1.0 - 10/01/2022
-    * O primeiro lançamento adequado
-    * MUDANÇA: Renomeia `foo()` para `bar()`
-* 0.0.1 - 01/01/2022
-    * Trabalho em andamento
+- 0.2.1 - 25/01/2022
+  - MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
+- 0.2.0 - 15/01/2022
+  - MUDANÇA: Remove `setDefaultXYZ()`
+  - ADD: Adiciona `init()`
+- 0.1.1 - 11/01/2022
+  - CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
+- 0.1.0 - 10/01/2022
+  - O primeiro lançamento adequado
+  - MUDANÇA: Renomeia `foo()` para `bar()`
+- 0.0.1 - 01/01/2022
+  - Trabalho em andamento
 
 ## 📋 Licença/License
 
