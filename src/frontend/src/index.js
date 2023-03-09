@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client";
 import { Profile } from "./pages/profile";
 import { Projects } from './pages/projects';
 import { FAQ } from './pages/faq';
+import { MyProjects } from './pages/myProjects';
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ProjectModalCtxProvider } from "./context/project-modal-ctx";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/faq",
     element: <FAQ />,
+  },
+  {
+    path: "/myProjects",
+    element: <MyProjects />,
   },
 ]);
 
