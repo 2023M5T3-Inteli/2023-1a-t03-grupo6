@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar";
-import MyProjectsLayout from '../components/MyProjectsLayout/MyProjectsLayout';
+import MyProjectsLayout from '../components/MyProjects/MyProjectsLayout';
 
 export function MyProjects () {
   return (

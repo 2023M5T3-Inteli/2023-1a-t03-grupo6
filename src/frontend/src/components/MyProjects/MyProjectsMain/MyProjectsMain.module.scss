@@ -1,9 +1,13 @@
-.MainContent{
-  border-right: 1px solid var(--dell-border);
-  width: calc(100% - 326px);
-  height: 100%;
-  top: 0px;
-  bottom: 0px;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.content{
+  border-left: 1px solid var(--light-gray);
+  border-right: 1px solid var(--light-gray);
+  width: 85%;
 }
 
 .ProjectsHeader{
