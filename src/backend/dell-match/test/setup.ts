@@ -5,6 +5,6 @@ import { join } from "path";
 //////////////////////////////////////////////////////////////////////////////////////
 
 /** Delete the test database */
-global.beforeEach(() => {
+global.beforeAll(() => {
   rmSync(join(__dirname, "../db/test.sqlite"), { force: true });
 });
