@@ -13,6 +13,11 @@ const keyWordsOptions = [
   { value: "ux_designer", label: "UX Designer" },
 ];
 
+const keyWordsRole = [
+  { value: "shadowing", label: "Shadowing" },
+  { value: "tecnical", label: "Tecnical" },
+];
+
 const ApplyProject = () => {
   const modalCtx = useContext(ApplyModalCtx);
 
@@ -87,13 +92,17 @@ const ApplyProject = () => {
                   <div className={styles.applyContainer}>
                     <div className={styles.field}>
                       <label>Project:</label>
-                      <p>
-                        Web Application for Sales Ocupation
-                      </p>
+                      <p>Web Application for Sales Ocupation</p>
                     </div>
-                    <div className={styles.field}>
-                      <label>Occupation</label>
-                      <ReactSelect options={keyWordsOptions}/>
+                    <div className={styles.occupationRoleBx}>
+                      <div className={styles.field}>
+                        <label>Occupation</label>
+                        <ReactSelect options={keyWordsOptions} />
+                      </div>
+                      <div className={styles.field}>
+                        <label>Role</label>
+                        <ReactSelect options={keyWordsRole} />
+                      </div>
                     </div>
                     <div className={styles.essayField}>
                       <label>Why would you like to apply for this job?</label>

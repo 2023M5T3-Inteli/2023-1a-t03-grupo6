@@ -15,6 +15,7 @@ const MyProjectsMain = (props) => {
             >
               Your Liked Projects
             </button>
+            <span> | </span>
             <button
               className={styles.yourProjectBtn}
               onClick={props.showLikedProjectsHandler}
@@ -23,7 +24,9 @@ const MyProjectsMain = (props) => {
             </button>
           </div>
         </div>
-        {props.showLikedProjects ? <LikedProject /> : <YourProjects />}
+        <div className={styles.feed}>
+          {props.showLikedProjects ? <LikedProject /> : <YourProjects />}
+        </div>
       </div>
     </div>
   );
