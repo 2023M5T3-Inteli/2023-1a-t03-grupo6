@@ -1,55 +1,35 @@
-<<<<<<< Updated upstream:src/frontend/src/components/MyProjectsMain/MyProjectsMain.module.scss
 .MainContent{
   border-right: 1px solid var(--dell-border);
   width: calc(100% - 326px);
   height: 100%;
   top: 0px;
   bottom: 0px;
-=======
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.content{
-  border-left: 1px solid var(--dell-border);
-  border-right: 1px solid var(--dell-border);
-  width: 85%;
->>>>>>> Stashed changes:src/frontend/src/components/MyProjects/MyProjectsMain/MyProjectsMain.module.scss
 }
 
 .ProjectsHeader{
   border-bottom: 1px solid var(--dell-border);
   position: relative;
   padding: 19px 0px 20px 30px;
-}
 
-.btnBx{
-  button{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: transparent;
+  p{
     font-family: 'Museo For Dell';
     font-style: normal;
+    color: var(--blue);
     font-size: 20px;
-    color: var(--white);
 
-    &:hover{
-      border-bottom: 1px solid var(--blue);
-      color: var(--blue);
+    span{
+      color: var(--white);
     }
-  
-    &:focus{
-      color: var(--blue);
-      border-bottom: 1px solid var(--blue);
-   }
-  }
 
-  span{
-    color: var(--white);
-    font-size: 20px;
+    a{
+      color: var(--white);
+
+      &:hover{
+        color: var(--blue);
+        border-bottom: 1px solid var(--blue);
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -69,6 +49,7 @@
 
     p{
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
       color: var(--white);
       font-family: 'Museo For Dell';
@@ -77,20 +58,14 @@
       padding: 15px 0px 0px 15px;
 
       div{
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        padding: 0px 10px 0px 10px;
-        height: 21px;
-        border: 1px solid;
-        border-radius: 10px;
-        margin-right: 10px;
-        margin-top: 0px;
         font-family: 'Trebuchet MS';
+        font-size: 14px;
         font-weight: bold;
-        font-size: 13px;
+        border: 1px solid;
+        width: fit-content;
+        padding: 1px 10px 1px 10px;
+        margin-top: 0;
+        margin-right: 15px;
       }
     }
 
@@ -118,9 +93,9 @@
       }
 
       p{
-        font-family: 'Trebuchet MS';
-        font-style: normal;
-        padding: 0px 0px 0px 0px;
+        position: relative;
+        padding-top: 0;
+        padding-left: 0;
       }
     }
 
