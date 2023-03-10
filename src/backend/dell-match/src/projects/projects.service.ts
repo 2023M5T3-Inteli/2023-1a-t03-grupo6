@@ -1,26 +1,53 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProjectDto } from './dto/create-project.dto';
-import { UpdateProjectDto } from './dto/update-project.dto';
+/**
+ * IMPORTANT ODDITY ABOUT SQL QUERIES
+ * find*(arg) methods : if arg = null | undefined returns first element in table
+ */
+import { Repository } from "typeorm";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+
+import { Project } from "./entities/project.entity";
+import { CreateProjectDto } from "./dto/create-project.dto";
+import { UpdateProjectDto } from "./dto/update-project.dto";
+
+import { throwError } from "../utils/throwError.util";
+//////////////////////////////////////////////////////////////////////////////////////
 
 @Injectable()
 export class ProjectsService {
-  create(createProjectDto: CreateProjectDto) {
-    return 'This action adds a new project';
+  constructor(
+    @InjectRepository(Project) private projectsRepository: Repository<Project>
+  ) {}
+
+  async create(createProjectDto: CreateProjectDto): Promise<Project> {
+    const _project = this.projectsRepository.create(createProjectDto);
+    return await this.projectsRepository.save(_project);
   }
 
-  findAll() {
-    return `This action returns all projects`;
+  findAll(name?: string): Promise<Project[]> {
+    return this.projectsRepository.find({ where: { name } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  async findOne(id: number): Promise<Project> {
+    const _project = await this.projectsRepository.findOne({ where: { id } });
+    if (!_project) throwError("NotFoundException", "Project not found");
+    return _project;
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(id: number, updateProjectDto: UpdateProjectDto) {
+    const _project = await this.findOne(id);
+    if (!_project) throwError("NotFoundException", "User not found");
+
+    return await this.projectsRepository.save(
+      Object.assign(_project, updateProjectDto)
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async remove(id: number) {
+    const _project = await this.findOne(id);
+    if (!_project) throwError("NotFoundException", "User not found");
+
+    await this.projectsRepository.remove(_project);
+    return;
   }
 }

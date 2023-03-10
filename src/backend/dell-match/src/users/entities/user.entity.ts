@@ -5,14 +5,8 @@
  * insert(), update(), delete() : hooks will NOT be executed
  * @AfterInsert, @AfterUpdate, ...: executed ONLY upon entity instances, NOT upon plain objects
  */
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  AfterInsert,
-  AfterUpdate,
-  AfterRemove,
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+//////////////////////////////////////////////////////////////////////////////////////
 
 @Entity()
 export class User {
@@ -33,19 +27,4 @@ export class User {
 
   @Column()
   country: string;
-
-  @AfterInsert()
-  logInsert() {
-    console.log("@HOOK = Inserted user with id", this.id);
-  }
-
-  @AfterUpdate()
-  logUpdate() {
-    console.log("@HOOK = Updated user with id", this.id);
-  }
-
-  @AfterRemove()
-  logRemove() {
-    console.log("@HOOK = Removed user with id", this.id);
-  }
 }
