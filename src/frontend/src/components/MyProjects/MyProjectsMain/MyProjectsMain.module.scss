@@ -5,8 +5,8 @@
 }
 
 .content{
-  border-left: 1px solid var(--light-gray);
-  border-right: 1px solid var(--light-gray);
+  border-left: 1px solid var(--dell-border);
+  border-right: 1px solid var(--dell-border);
   width: 85%;
 }
 
@@ -14,26 +14,6 @@
   border-bottom: 1px solid var(--dell-border);
   position: relative;
   padding: 19px 0px 20px 30px;
-
-  p{
-    font-family: 'Museo For Dell';
-    font-style: normal;
-    color: var(--blue);
-    font-size: 20px;
-
-    span{
-      color: var(--white);
-    }
-
-    a{
-      color: var(--white);
-
-      &:hover{
-        border-bottom: 1px solid var(--blue);
-        cursor: pointer;
-      }
-    }
-  }
 }
 
 .ProjectsList{
@@ -117,5 +97,33 @@
         text-align: justify
       }
     }
+  }
+}
+
+.btnBx{
+  button{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    font-family: 'Museo For Dell';
+    font-style: normal;
+    font-size: 20px;
+    color: var(--white);
+
+    &:hover{
+      border-bottom: 1px solid var(--blue);
+      color: var(--blue);
+    }
+  
+    &:focus{
+      color: var(--blue);
+      border-bottom: 1px solid var(--blue);
+   }
+  }
+
+  span{
+    color: var(--white);
+    font-size: 20px;
   }
 }

@@ -5,8 +5,8 @@
 }
 
 .content {
-  border-left: 1px solid var(--light-gray);
-  border-right: 1px solid var(--light-gray);
+  border-left: 1px solid var(--dell-border);
+  border-right: 1px solid var(--dell-border);
   width: 85%;
 }
 
@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 2rem;
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--dell-border);
 
   h1 {
     margin-right: 3rem;
