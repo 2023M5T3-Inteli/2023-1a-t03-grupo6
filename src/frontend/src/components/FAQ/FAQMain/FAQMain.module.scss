@@ -5,9 +5,9 @@
 }
 
 .content {
-  border-left: 1px solid var(--dell-border);
-  border-right: 1px solid var(--dell-border);
-  width: 85%;
+  border-left: 1px solid var(--light-gray);
+  border-right: 1px solid var(--light-gray);
+  width: 90%;
 }
 
 .contentHeader {
@@ -15,7 +15,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 2em;
   border-bottom: 1px solid var(--light-gray);
 
   h1 {
@@ -34,25 +34,6 @@
   }
 }
 
-.feed{
+.feed {
   padding: 2rem;
-  overflow-y: scroll;
-  height: calc(100vh - 115px);
-
-  &::-webkit-scrollbar {
-    width: 0.7rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--dark-gray);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--light-gray);
-    border-radius: 1rem;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: var(--light-gray);
-  }
 }

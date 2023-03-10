@@ -6,10 +6,6 @@ const CardList = (props) => {
       <div className={styles.cardlist}>
           <Card />
           <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
       </div>
     );
   };

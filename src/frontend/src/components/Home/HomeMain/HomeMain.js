@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import ProjectModalCtx from "../../../context/project-modal-ctx";
 import CardList from "../CardList/CardList";
-
 import styles from "./HomeMain.module.scss";
 
 const HomeMain = () => {

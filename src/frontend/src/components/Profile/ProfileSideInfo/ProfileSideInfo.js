@@ -73,14 +73,6 @@ const ProfileSideInfo = () => {
             <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
             <p>Badge Title</p>
           </li>
-          <li>
-            <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
-            <p>Badge Title</p>
-          </li>
-          <li>
-            <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
-            <p>Badge Title</p>
-          </li>
         </ul>
       </div>
     </div>

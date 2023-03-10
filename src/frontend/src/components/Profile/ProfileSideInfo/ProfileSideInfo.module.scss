@@ -1,5 +1,5 @@
 .container {
-  border-right: 1px solid var(--dell-border);
+  border-right: 1px solid var(--light-gray);
   display: flex;
   flex-direction: column;
   width: max-content;
@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem 2rem;
-  border-bottom: 1px solid var(--dell-border);
+  border-bottom: 1px solid var(--light-gray);
 }
 
 .pictureBx {
@@ -72,7 +72,7 @@
 .curriculumContainer {
   padding: 1rem;
   text-align: center;
-  border-bottom: 1px solid var(--dell-border);
+  border-bottom: 1px solid var(--light-gray);
 
   h2 {
     font-weight: lighter;
@@ -96,36 +96,16 @@
   flex-direction: column;
   align-items: center;
   padding: 0 1.5rem 1rem;
-  height: calc(100vh - 386px);
-  
+
   h2 {
     font-size: 2rem;
     font-weight: lighter;
     margin: 2rem 0;
   }
-  
+
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    overflow-y: scroll;
-    height: 100%;
-
-    &::-webkit-scrollbar {
-      width: 0.7rem;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: var(--dark-gray);
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background: var(--light-gray);
-      border-radius: 1rem;
-    }
-  
-    &::-webkit-scrollbar-thumb:hover {
-      background: var(--light-gray);
-    }
   }
 
   li {
