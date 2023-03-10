@@ -1,4 +1,4 @@
-// import { BsFiletypePdf } from "react-icons/bs";
+import { BsFiletypePdf } from "react-icons/bs";
 
 import styles from "./ProfileSideInfo.module.scss";
 
@@ -33,7 +33,7 @@ const ProfileSideInfo = () => {
       <div className={styles.curriculumContainer}>
         <h2>View Dell Curriculum</h2>
         <div>
-          {/* <BsFiletypePdf size={20} /> */}
+          <BsFiletypePdf size={20} />
           <a
             target="_blank"
             href="https://drive.google.com/file/d/1_UCDJRZZ0mmDDCLH4o_DbTcucD97OMsm/view?usp=share_link"
@@ -45,6 +45,18 @@ const ProfileSideInfo = () => {
       <div className={styles.achievementsContainer}>
         <h2>Achievements</h2>
         <ul>
+          <li>
+            <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
+            <p>Badge Title</p>
+          </li>
+          <li>
+            <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
+            <p>Badge Title</p>
+          </li>
+          <li>
+            <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
+            <p>Badge Title</p>
+          </li>
           <li>
             <img src="https://www.pngmart.com/files/14/Red-Badge-Transparent-PNG.png" />
             <p>Badge Title</p>

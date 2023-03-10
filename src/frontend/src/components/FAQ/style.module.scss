@@ -1,71 +1,63 @@
 .app {
-    width: 80vw;
-    margin: 0 auto;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .cardlist {
-    width: 100%;
+  width: 100%;
 }
 
 .classetitulo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    button {
-        background-color: #3274c8;
-        border-radius: 30px;
-        // font-family: "Trebuchet";
-        font-size: 0.8em;
-        color: white;
-        padding: 0.5rem  1em;
-
-
-    }
-    h1{
-        // font-family:"Museo For Dell";
-        color: white;
-        font-weight: lighter;
-
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    background-color: #3274c8;
+    border-radius: 30px;
+    // font-family: "Trebuchet";
+    font-size: 0.8em;
+    color: white;
+    padding: 0.5rem 1em;
+  }
+  h1 {
+    // font-family:"Museo For Dell";
+    color: white;
+    font-weight: lighter;
+    margin: 1rem 0;
+  }
 }
 
 .cardcontainer {
-    background-color: #15181C;
+  background-color: #15181c;
+  color: #fff;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+
+  h2 {
+    margin-bottom: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: lighter;
+  }
+
+  p {
+    color: #6e767d;
+    font-size: 1.4rem;
+  }
+}
+
+.tagscontainer {
+  p {
     color: #fff;
-    padding: 1rem;
-    margin: 1rem 0;
+    border: 1px solid white;
     border-radius: 10px;
+    padding: 0.1rem 0.8rem;
+    font-weight: lighter;
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
 
-    h2 {
-        // font-family: "Museo For Dell";
-        margin: 0px;
-        font-size: 1em;
-        font-weight: lighter;
-    }
-
-    p {
-        // font-family: "Trebuchet";
-        color: #6E767D;
-        font-size: 1em;
-        
-
-    }
-
-    .tagscontainer {
-        margin-bottom: 0px;
-        .tag {
-            color: #fff;
-            border: 1px solid white;
-            border-radius: 10px;
-            padding: 0.1rem 0.8rem;
-            font-weight:lighter;
-            font-size: 0.8em;
-
-        }
-
-        color: #fff;
-        display: flex;
-        gap: 1rem;
-
-    }
+  color: #fff;
+  display: flex;
+  gap: 1rem;
 }

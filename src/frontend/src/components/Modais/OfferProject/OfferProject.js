@@ -169,12 +169,16 @@ const OfferProject = () => {
                     <div className={styles.occupationContainer}>
                       <div className={styles.occupationBx}>
                         <div className={styles.field}>
-                          <label>1st Occupation Type</label>
+                          <label>1st Occupation </label>
                           <input placeholder="Occupation Type" />
                         </div>
                         <div className={styles.field}>
-                          <label>1st Occupation</label>
-                          <input placeholder="Occupation" />
+                          <label>1st Role</label>
+                          <input placeholder="Role" />
+                        </div>
+                        <div className={styles.field}>
+                          <label>1st Area</label>
+                          <input placeholder="Area" />
                         </div>
                       </div>
                       <div className={styles.occupationBx}>
@@ -183,8 +187,12 @@ const OfferProject = () => {
                           <input placeholder="Occupation Type" />
                         </div>
                         <div className={styles.field}>
-                          <label>2st Occupation</label>
-                          <input placeholder="Occupation" />
+                          <label>2st Role</label>
+                          <input placeholder="Role" />
+                        </div>
+                        <div className={styles.field}>
+                          <label>3st Area</label>
+                          <input placeholder="Area" />
                         </div>
                       </div>
                       <div className={styles.occupationBx}>
@@ -193,8 +201,12 @@ const OfferProject = () => {
                           <input placeholder="Occupation Type" />
                         </div>
                         <div className={styles.field}>
-                          <label>3st Occupation</label>
-                          <input placeholder="Occupation" />
+                          <label>3st Role</label>
+                          <input placeholder="Role" />
+                        </div>
+                        <div className={styles.field}>
+                          <label>3st Area</label>
+                          <input placeholder="Area" />
                         </div>
                       </div>
                     </div>
