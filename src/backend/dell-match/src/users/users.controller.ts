@@ -10,6 +10,7 @@ import {
 } from "@nestjs/common";
 
 import { User } from "./entities/user.entity";
+import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -18,8 +19,12 @@ import { throwError } from "./../utils/throwError.util";
 
 @Controller("users")
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService
+  ) {}
 
+  /** @dev basic CRUD - should be restricted by IP  */
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
@@ -56,4 +61,15 @@ export class UsersController {
 
     return this.usersService.remove(+id);
   }
+
+  /** @dev auth */
+  @Post("signup")
+  signup(@Body() createUserDto: CreateUserDto): any {
+    // signup(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.authService.create(createUserDto);
+  }
+
+  signin() {}
+
+  signout() {}
 }
