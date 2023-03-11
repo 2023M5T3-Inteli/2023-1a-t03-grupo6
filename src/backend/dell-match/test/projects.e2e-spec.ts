@@ -10,12 +10,18 @@ describe("Users component (e2e)", () => {
   let app: INestApplication;
 
   /** mock variables */
-  const _mockUser = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    jobTitle: "Software Engineer",
-    city: "New York",
-    country: "USA",
+  const _mockProject = {
+    name: "Project 1",
+    area: "it",
+    description: "Project 1 description",
+    keywords: ["keyword1", "keyword2"],
+    manager: "John Doe",
+    teamSize: 5,
+    teamMembers: ["John Doe", "Jane Doe"],
+    status: "open",
+    applicationDeadline: new Date("2023-03-31"),
+    startDate: new Date("2023-04-01"),
+    endDate: new Date("2023-04-30"),
   };
 
   /** dummy dependency instance and module */
@@ -29,120 +35,109 @@ describe("Users component (e2e)", () => {
   });
 
   /** test suite */
-  it("should create a new user @POST /users", async () => {
+  it("should create a new project @POST /projects", async () => {
     await request(app.getHttpServer())
-      .post("/users")
-      .send(_mockUser)
+      .post("/projects")
+      .send(_mockProject)
       .expect(201)
       .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual(_mockUser.name);
-        expect(email).toEqual(_mockUser.email);
+        const { id, name, area } = res.body;
+        expect([id, name, area]).toBeDefined();
+        expect(name).toEqual(_mockProject.name);
+        expect(area).toEqual(_mockProject.area);
       });
   });
 
-  it("should return a user @GET /users/:id", async () => {
+  it("should return a project @GET /projects/:id", async () => {
     await request(app.getHttpServer())
-      .get("/users/1")
+      .get("/projects/1")
       .expect(200)
       .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual(_mockUser.name);
-        expect(email).toEqual(_mockUser.email);
+        const { id, name, area } = res.body;
+        expect([id, name, area]).toBeDefined();
+        expect(name).toEqual(_mockProject.name);
+        expect(area).toEqual(_mockProject.area);
       });
   });
 
-  it("should return all users @GET /users", async () => {
+  it("should return all projects @GET /projects", async () => {
     await request(app.getHttpServer())
-      .get("/users")
+      .get("/projects")
       .expect(200)
       .then((res) => {
+        expect(res.body).toBeDefined();
         expect(res.body.length).toBeGreaterThan(0);
       });
   });
 
-  it("should update a user @PATCH /users/:id", async () => {
+  it("should update a project @PATCH /projects/:id", async () => {
     await request(app.getHttpServer())
-      .patch("/users/1")
-      .send({ name: "Jane Doe" })
+      .patch("/projects/1")
+      .send({ name: "Project 1 updated" })
       .expect(200)
       .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual("Jane Doe");
-        expect(email).toEqual(_mockUser.email);
+        const { id, name, area } = res.body;
+        expect([id, name, area]).toBeDefined();
+        expect(name).toEqual("Project 1 updated");
+        expect(area).toEqual(_mockProject.area);
       });
   });
 
-  it("should delete a user @DELETE /users/:id", async () => {
-    await request(app.getHttpServer()).delete("/users/1").expect(200);
+  it("should delete a project @DELETE /projects/:id", async () => {
+    await request(app.getHttpServer()).delete("/projects/1").expect(200);
   });
 
-  it("should return a 404 if user is not found @GET /users/:id", async () => {
-    await request(app.getHttpServer()).get("/users/999").expect(404);
+  it("should return a 404 if project is not found @GET /projects/:id", async () => {
+    await request(app.getHttpServer()).get("/projects/100").expect(404);
   });
 
-  it("should return a 404 if user is not found @PATCH /users/:id", async () => {
-    await request(app.getHttpServer()).patch("/users/999").expect(404);
-  });
-
-  it("should return a 404 if user is not found @DELETE /users/:id", async () => {
-    await request(app.getHttpServer()).delete("/users/999").expect(404);
-  });
-
-  it("should return a 400 if user id is not a number @GET /users/:id", async () => {
-    await request(app.getHttpServer()).get("/users/abc").expect(400);
-  });
-
-  it("should return a 400 if user id is not a number @PATCH /users/:id", async () => {
-    await request(app.getHttpServer()).patch("/users/abc").expect(400);
-  });
-
-  it("should return a 400 if user id is not a number @DELETE /users/:id", async () => {
-    await request(app.getHttpServer()).delete("/users/abc").expect(400);
-  });
-
-  it("should validate incoming data using data transfer object @POST /users", async () => {
+  it("should return a 404 if project is not found @PATCH /projects/:id", async () => {
     await request(app.getHttpServer())
-      .post("/users")
-      .send({ ..._mockUser, age: 30 })
-      .expect(201)
-      .then((res) => {
-        expect(res.body).not.toHaveProperty("age");
-      });
+      .patch("/projects/100")
+      .send({ name: "Project 1 updated" })
+      .expect(404);
   });
 
-  it("should revert if body does not contain all required information @POST /users", async () => {
+  it("should return a 404 if project is not found @DELETE /projects/:id", async () => {
+    await request(app.getHttpServer()).delete("/projects/100").expect(404);
+  });
+
+  it("should return a 400 if project id is not a number @GET /projects/:id", async () => {
+    await request(app.getHttpServer()).get("/projects/abc").expect(400);
+  });
+
+  it("should return a 400 if project id is not a number @PATCH /projects/:id", async () => {
     await request(app.getHttpServer())
-      .post("/users")
-      .send({ ..._mockUser, name: undefined })
+      .patch("/projects/abc")
+      .send({ name: "Project 1 updated" })
       .expect(400);
   });
 
-  it("should revert if information on request body is of incorrect type @POST /users", async () => {
+  it("should return a 400 if project id is not a number @DELETE /projects/:id", async () => {
+    await request(app.getHttpServer()).delete("/projects/abc").expect(400);
+  });
+
+  it("should validate incoming data using data transfer objects @POST /projects", async () => {
     await request(app.getHttpServer())
-      .post("/users")
-      .send({ ..._mockUser, name: 123 })
+      .post("/projects")
+      .send({ ..._mockProject, department: "accounting" })
+      .expect(201)
+      .then((res) => {
+        expect(res.body).not.toHaveProperty("department");
+      });
+  });
+
+  it("should revert if body does not contain all required fields @POST /projects", async () => {
+    await request(app.getHttpServer())
+      .post("/projects")
+      .send({ ..._mockProject, name: undefined })
+      .expect(400);
+  });
+
+  it("should revert if information on request body is of incorrect type @POST /projects", async () => {
+    await request(app.getHttpServer())
+      .post("/projects")
+      .send({ ..._mockProject, teamSize: "5" })
       .expect(400);
   });
 });
-
-// it("should throw a BadRequestException when creating a new project with invalid fields", async () => {
-//   const _invalidProject = {
-//     ..._mockProject,
-//     name: "",
-//   };
-//   await expect(service.create(_invalidProject)).rejects.toThrow(
-//     BadRequestException
-//   );
-// });
-
-// it("should throw a NotFoundException when updating a project that does not exist", async () => {
-
-// it("should throw a BadRequestException if the project update fields are invalid", async () => {
-//   await expect(
-//     service.update(1, { department: "accounting" })
-//   ).rejects.toThrow(new BadRequestException("Invalid project update fields"));
-// });

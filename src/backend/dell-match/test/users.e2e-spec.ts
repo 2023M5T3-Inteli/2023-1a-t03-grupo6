@@ -104,7 +104,7 @@ describe("Users component (e2e)", () => {
     await request(app.getHttpServer()).delete("/users/abc").expect(400);
   });
 
-  it("should validate incoming data using data transfer object @POST /users", async () => {
+  it("should validate incoming data using data transfer objects @POST /users", async () => {
     await request(app.getHttpServer())
       .post("/users")
       .send({ ..._mockUser, age: 30 })
@@ -114,7 +114,7 @@ describe("Users component (e2e)", () => {
       });
   });
 
-  it("should revert if body does not contain all required information @POST /users", async () => {
+  it("should revert if body does not contain all required fields @POST /users", async () => {
     await request(app.getHttpServer())
       .post("/users")
       .send({ ..._mockUser, name: undefined })
