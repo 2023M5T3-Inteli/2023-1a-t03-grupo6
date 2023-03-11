@@ -74,47 +74,39 @@ describe("UsersController", () => {
 
   it("should create new user @POST /users", async () => {
     const _user = await controller.create(_mockUser);
-    expect(_user).toBeDefined();
-    expect(_user).toMatchObject({ id: 1, ..._mockUser });
+    expect(_user).toEqual({ id: 1, ..._mockUser });
   });
 
-  it("should find users @GET /users", async () => {
-    const _user = await controller.create(_mockUser);
+  it("should return all users @GET /users", async () => {
+    await controller.create(_mockUser);
     const _users = await controller.findAll();
-    expect(_users).toBeDefined();
-    expect(_users).toHaveLength(1);
-    expect(_users).toMatchObject([_user]);
+    expect(_users).toEqual([{ id: 1, ..._mockUser }]);
   });
 
-  it("should find single user by email @GET /users?email=:email", async () => {
-    const _user = await controller.create(_mockUser);
-    const _foundUser = await controller.findAll(_user.email);
-    expect(_foundUser).toBeDefined();
-    expect(_foundUser).toHaveLength(1);
-    expect(_foundUser).toMatchObject([_user]);
+  it("should return all users by email @GET /users?email=john.doe@example.com", async () => {
+    await controller.create(_mockUser);
+    const _user = await controller.findAll("john.doe@example.com");
+    expect(_user).toEqual([{ id: 1, ..._mockUser }]);
   });
 
-  it("should find single user @GET /users/:id", async () => {
-    const _user = await controller.create(_mockUser);
-    const _foundUser = await controller.findOne(_user.id.toString());
-    expect(_foundUser).toBeDefined();
-    expect(_foundUser).toMatchObject(_user);
+  it("should return a user by id @GET /users/:id", async () => {
+    await controller.create(_mockUser);
+    const _user = await controller.findOne("1");
+    expect(_user).toEqual({ id: 1, ..._mockUser });
   });
 
-  it("should update user @PATCH /users/:id", async () => {
-    const _user = await controller.create(_mockUser);
-    const _updatedUser = await controller.update(_user.id.toString(), {
+  it("should update a user by id @PATCH /users/:id", async () => {
+    await controller.create(_mockUser);
+    const _user = await controller.update("1", {
       name: "Jane Doe",
     });
-    expect(_updatedUser).toBeDefined();
-    expect(_updatedUser).toMatchObject({ ..._user, name: "Jane Doe" });
+    expect(_user).toEqual({ id: 1, ..._mockUser, name: "Jane Doe" });
   });
 
-  it("should delete user @DELETE /users/:id", async () => {
-    const _user = await controller.create(_mockUser);
-    await controller.remove(_user.id.toString());
+  it("should delete a user by id @DELETE /users/:id", async () => {
+    await controller.create(_mockUser);
+    await controller.remove("1");
     const _users = await controller.findAll();
-    expect(_users).toBeDefined();
-    expect(_users).toHaveLength(0);
+    expect(_users).toEqual([]);
   });
 });

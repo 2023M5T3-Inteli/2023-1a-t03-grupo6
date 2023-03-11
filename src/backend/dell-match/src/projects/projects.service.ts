@@ -20,6 +20,10 @@ export class ProjectsService {
   ) {}
 
   async create(createProjectDto: CreateProjectDto): Promise<Project> {
+    const [_projectExists] = await this.findAll(createProjectDto.name);
+    if (_projectExists)
+      throwError("BadRequestException", "Project already exists");
+
     const _project = this.projectsRepository.create(createProjectDto);
     return await this.projectsRepository.save(_project);
   }
@@ -36,8 +40,6 @@ export class ProjectsService {
 
   async update(id: number, updateProjectDto: UpdateProjectDto) {
     const _project = await this.findOne(id);
-    if (!_project) throwError("NotFoundException", "User not found");
-
     return await this.projectsRepository.save(
       Object.assign(_project, updateProjectDto)
     );
@@ -45,8 +47,6 @@ export class ProjectsService {
 
   async remove(id: number) {
     const _project = await this.findOne(id);
-    if (!_project) throwError("NotFoundException", "User not found");
-
     await this.projectsRepository.remove(_project);
     return;
   }

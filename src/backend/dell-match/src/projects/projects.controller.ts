@@ -4,6 +4,7 @@ import {
   Body,
   Param,
   Patch,
+  Query,
   Delete,
   Controller,
 } from "@nestjs/common";
@@ -26,8 +27,8 @@ export class ProjectsController {
   }
 
   @Get()
-  findAll(): Promise<Project[]> {
-    return this.projectsService.findAll();
+  findAll(@Query("name") name?: string): Promise<Project[]> {
+    return this.projectsService.findAll(name);
   }
 
   @Get(":id")

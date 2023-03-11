@@ -20,6 +20,7 @@ export class Project {
   @Column({
     enum: ["it", "commercial", "marketing", "hr", "finance", "legal", "other"],
   })
+  @Column()
   area: string;
 
   @Column()
