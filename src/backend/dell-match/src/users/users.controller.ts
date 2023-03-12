@@ -1,5 +1,6 @@
 import {
   Get,
+  Req,
   Post,
   Body,
   Patch,
@@ -11,6 +12,7 @@ import {
 
 import { User } from "./entities/user.entity";
 import { AuthService } from "./auth.service";
+import { SigninDto } from "./dto/signin.dto";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -64,12 +66,17 @@ export class UsersController {
 
   /** @dev auth */
   @Post("signup")
-  signup(@Body() createUserDto: CreateUserDto): any {
-    // signup(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.authService.create(createUserDto);
+  signup(@Req() req: any, @Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.authService.signup(req, createUserDto);
   }
 
-  signin() {}
+  @Post("signin")
+  signin(@Req() req: any, @Body() signinDto: SigninDto): Promise<any> {
+    return this.authService.signin(req, signinDto);
+  }
 
-  signout() {}
+  @Get("signout")
+  signout(@Req() req: any): Promise<any> {
+    return this.authService.signout(req);
+  }
 }
