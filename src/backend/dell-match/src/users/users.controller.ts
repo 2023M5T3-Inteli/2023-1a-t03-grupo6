@@ -40,7 +40,6 @@ export class UsersController {
   @Get("signout")
   // signout(): any {
   signout(@Req() req: any): any {
-    // return "hi there";
     return this.authService.signout(req);
   }
 

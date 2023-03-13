@@ -7,6 +7,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
 import { User } from "./entities/user.entity";
+import { AuthService } from "./auth.service";
 import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -16,6 +17,7 @@ describe("UsersController", () => {
   /** dependency instances */
   let controller: UsersController;
   let _usersService: Partial<UsersService>;
+  let _authService: Partial<AuthService>;
 
   /** mock variables */
   const _mockUser = {
@@ -59,54 +61,95 @@ describe("UsersController", () => {
       },
     };
 
+    _authService = {
+      signup: (req: any, _user: CreateUserDto) => {
+        const user = Object.assign({ id: 1 }, _user) as User;
+        _users.push(user);
+        return Promise.resolve(user);
+      },
+
+      signin: (req: any, _user: CreateUserDto) => {
+        const user = Object.assign({ id: 1 }, _user) as User;
+        _users.push(user);
+        return Promise.resolve(user);
+      },
+
+      signout: (req: any) => {
+        return Promise.resolve();
+      },
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [{ provide: UsersService, useValue: _usersService }],
+      providers: [
+        { provide: UsersService, useValue: _usersService },
+        { provide: AuthService, useValue: _authService },
+      ],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
   });
 
   /** test suite */
-  it("can create an instance of UsersController", () => {
-    expect(controller).toBeDefined();
+  it("can create an instance of UsersController", () =>
+    expect(controller).toBeDefined());
+
+  describe("Authentication resources", () => {
+    it("should signup new user @POST /users/signup", async () =>
+      expect(await controller.signup(null, _mockUser)).toEqual({
+        id: 1,
+        ..._mockUser,
+      }));
+
+    it("should signin user @POST /users/signin", async () =>
+      expect(await controller.signin(null, _mockUser)).toEqual({
+        id: 1,
+        ..._mockUser,
+      }));
+
+    it("should signout user @POST /users/signout", async () =>
+      expect(await controller.signout(null)).toBeUndefined());
   });
 
-  it("should create new user @POST /users", async () => {
-    const _user = await controller.create(_mockUser);
-    expect(_user).toEqual({ id: 1, ..._mockUser });
-  });
+  describe("User resources", () => {
+    it("should create new user @POST /users", async () =>
+      expect(await controller.create(_mockUser)).toEqual({
+        id: 1,
+        ..._mockUser,
+      }));
 
-  it("should return all users @GET /users", async () => {
-    await controller.create(_mockUser);
-    const _users = await controller.findAll();
-    expect(_users).toEqual([{ id: 1, ..._mockUser }]);
-  });
-
-  it("should return all users by email @GET /users?email=john.doe@example.com", async () => {
-    await controller.create(_mockUser);
-    const _user = await controller.findAll("john.doe@example.com");
-    expect(_user).toEqual([{ id: 1, ..._mockUser }]);
-  });
-
-  it("should return a user by id @GET /users/:id", async () => {
-    await controller.create(_mockUser);
-    const _user = await controller.findOne("1");
-    expect(_user).toEqual({ id: 1, ..._mockUser });
-  });
-
-  it("should update a user by id @PATCH /users/:id", async () => {
-    await controller.create(_mockUser);
-    const _user = await controller.update("1", {
-      name: "Jane Doe",
+    it("should return all users @GET /users", async () => {
+      await controller.create(_mockUser);
+      const _users = await controller.findAll();
+      console.log(_users);
+      expect(_users).toEqual([{ id: 1, ..._mockUser }]);
     });
-    expect(_user).toEqual({ id: 1, ..._mockUser, name: "Jane Doe" });
-  });
 
-  it("should delete a user by id @DELETE /users/:id", async () => {
-    await controller.create(_mockUser);
-    await controller.remove("1");
-    const _users = await controller.findAll();
-    expect(_users).toEqual([]);
+    it("should return all users by email @GET /users?email=john.doe@example.com", async () => {
+      await controller.create(_mockUser);
+      const _user = await controller.findAll("john.doe@example.com");
+      expect(_user).toEqual([{ id: 1, ..._mockUser }]);
+    });
+
+    it("should return a user by id @GET /users/:id", async () => {
+      await controller.create(_mockUser);
+      const _user = await controller.findOne("1");
+      expect(_user).toEqual({ id: 1, ..._mockUser });
+    });
+
+    it("should update a user by id @PATCH /users/:id", async () => {
+      await controller.create(_mockUser);
+      const _user = await controller.update("1", {
+        name: "Jane Doe",
+      });
+      expect(_user).toEqual({ id: 1, ..._mockUser, name: "Jane Doe" });
+    });
+
+    it("should delete a user by id @DELETE /users/:id", async () => {
+      await controller.create(_mockUser);
+      await controller.remove("1");
+      const _users = await controller.findAll();
+      expect(_users).toEqual([]);
+    });
   });
 });
