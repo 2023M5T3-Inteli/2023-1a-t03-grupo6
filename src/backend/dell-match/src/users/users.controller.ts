@@ -26,6 +26,24 @@ export class UsersController {
     private readonly usersService: UsersService
   ) {}
 
+  /** @dev auth */
+  @Post("signup")
+  signup(@Req() req: any, @Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.authService.signup(req, createUserDto);
+  }
+
+  @Post("signin")
+  signin(@Req() req: any, @Body() signinDto: SigninDto): Promise<any> {
+    return this.authService.signin(req, signinDto);
+  }
+
+  @Get("signout")
+  // signout(): any {
+  signout(@Req() req: any): any {
+    // return "hi there";
+    return this.authService.signout(req);
+  }
+
   /** @dev basic CRUD - should be restricted by IP  */
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
@@ -62,21 +80,5 @@ export class UsersController {
       throwError("BadRequestException", "User id is not a number");
 
     return this.usersService.remove(+id);
-  }
-
-  /** @dev auth */
-  @Post("signup")
-  signup(@Req() req: any, @Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.authService.signup(req, createUserDto);
-  }
-
-  @Post("signin")
-  signin(@Req() req: any, @Body() signinDto: SigninDto): Promise<any> {
-    return this.authService.signin(req, signinDto);
-  }
-
-  @Get("signout")
-  signout(@Req() req: any): Promise<any> {
-    return this.authService.signout(req);
   }
 }

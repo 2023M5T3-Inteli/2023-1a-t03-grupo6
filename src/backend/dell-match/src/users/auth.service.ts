@@ -34,10 +34,17 @@ export class AuthService {
     return _user;
   }
 
-  async signout(req: any): Promise<string> {
-    return "hi there";
+  async signout(req: any): Promise<any> {
+    // TODO : implement guard to prevent user from signing out if not signed in
+    if (!req.currentUser) throwError("NotFoundException", "User not found");
+
+    // global middleware decode jwt and attach currentUser to req
+    const _user = await this.usersService.findOne(req.currentUser.id);
+    req.session.token = null;
+    return req.session.token;
   }
 
+  /** non-standard methods */
   private generateToken(userId: number): string {
     return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES,

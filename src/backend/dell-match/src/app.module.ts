@@ -5,11 +5,12 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 
-const cookieSession = require("cookie-session");
-// import * as cookieSession from "cookie-session";
+import * as cookieParser from "cookie-parser";
+import * as cookieSession from "cookie-session";
 
 import { UsersModule } from "./users/users.module";
 import { ProjectsModule } from "./projects/projects.module";
+import { CurrentUserMiddleware } from "./users/middleware/current-user.middleware";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Module({
@@ -26,15 +27,6 @@ import { ProjectsModule } from "./projects/projects.module";
       autoLoadEntities: true,
       synchronize: true /** @dev DO NOT use synchronize:true in production */,
     }),
-    // cookieSession({
-    //   secret: process.env.SESSION_SECRET,
-    //   resave: false,
-    //   saveUninitialized: false,
-    //   cookie: {
-    //     secure: false,
-    //     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-    //   },
-    // }),
   ],
 })
 export class AppModule {
@@ -46,12 +38,16 @@ export class AppModule {
 
     consumer
       .apply(
-        cookieSession({
-          secret: process.env.SESSION_SECRET,
-          resave: false,
-          saveUninitialized: false,
-          cookie: _cookieOptions,
-        })
+        ...[
+          cookieSession({
+            secret: process.env.SESSION_SECRET,
+            resave: false,
+            saveUninitialized: false,
+            cookie: _cookieOptions,
+          }),
+          cookieParser(),
+          CurrentUserMiddleware,
+        ]
       )
       .forRoutes("*");
   }
