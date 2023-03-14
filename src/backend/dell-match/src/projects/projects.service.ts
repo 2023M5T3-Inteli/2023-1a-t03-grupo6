@@ -24,9 +24,6 @@ export class ProjectsService {
     createProjectDto: CreateProjectDto,
     user: User
   ): Promise<Project> {
-    console.log("createProjectDto: ", createProjectDto);
-    console.log("user: ", user);
-
     const [_projectExists] = await this.findAll(createProjectDto.name);
     if (_projectExists)
       throwError("BadRequestException", "Project already exists");
@@ -36,19 +33,26 @@ export class ProjectsService {
     return await this.projectsRepository.save(_project);
   }
 
-  // async create(body: CreateReportDto, user: User) {
-  //   const _report = this.repository.create(body);
-  //   _report.user = user;
-  //   return await this.repository.save(_report);
-  // }
+  async findAll(projectName?: string): Promise<Project[]> {
+    const _query = this.projectsRepository.createQueryBuilder("Project");
+    _query.leftJoinAndSelect("Project.manager", "manager");
+    _query.select(["Project", "manager.name", "manager.email"]);
 
-  findAll(name?: string): Promise<Project[]> {
-    return this.projectsRepository.find({ where: { name } });
+    if (projectName)
+      _query.andWhere("Project.name = :projectName", { projectName });
+
+    return await _query.getMany();
   }
 
   async findOne(id: number): Promise<Project> {
-    const _project = await this.projectsRepository.findOne({ where: { id } });
+    const _query = this.projectsRepository.createQueryBuilder("Project");
+    _query.leftJoinAndSelect("Project.manager", "manager");
+    _query.select(["Project", "manager.name", "manager.email"]);
+    _query.andWhere("Project.id = :id", { id });
+
+    const _project = await _query.getOne();
     if (!_project) throwError("NotFoundException", "Project not found");
+
     return _project;
   }
 

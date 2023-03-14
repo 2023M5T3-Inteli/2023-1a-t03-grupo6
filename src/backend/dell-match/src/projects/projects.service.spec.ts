@@ -5,6 +5,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
 
 import { Project } from "./entities/project.entity";
+import { User } from "../users/entities/user.entity";
 import { ProjectsService } from "./projects.service";
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,6 +28,15 @@ describe("ProjectsService", () => {
     endDate: new Date("2023-04-30"),
   };
 
+  const _mockUser = {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    jobTitle: "Software Engineer",
+    city: "New York",
+    country: "USA",
+  };
+
   /** mock dependency instances and module */
   beforeAll(() => {
     rmSync(path.join(__dirname, "../../db/test.sqlite"), {
@@ -41,10 +51,10 @@ describe("ProjectsService", () => {
         TypeOrmModule.forRoot({
           type: "sqlite",
           database: path.join(__dirname, "../../db/test.sqlite"),
-          entities: [Project],
+          entities: [Project, User],
           synchronize: true,
         }),
-        TypeOrmModule.forFeature([Project]),
+        TypeOrmModule.forFeature([Project, User]),
       ],
       providers: [ProjectsService],
     }).compile();
@@ -58,7 +68,7 @@ describe("ProjectsService", () => {
   });
 
   it("should create a new project", async () => {
-    const _project = await service.create(_mockProject);
+    const _project = await service.create(_mockProject, _mockUser as User);
     expect(_project).toBeDefined();
     expect(_project).toHaveProperty("id");
     expect(_project).toHaveProperty("name", _mockProject.name);
@@ -72,9 +82,9 @@ describe("ProjectsService", () => {
   });
 
   it("should throw a BadRequestException if the project already exists", async () => {
-    await expect(service.create(_mockProject)).rejects.toThrow(
-      new BadRequestException("Project already exists")
-    );
+    await expect(
+      service.create(_mockProject, _mockUser as User)
+    ).rejects.toThrow(new BadRequestException("Project already exists"));
   });
 
   it("should throw a NotFoundException if the project does not exist", async () => {
