@@ -37,12 +37,6 @@ export class CreateProjectDto {
   @IsString({ each: true })
   keywords: string[];
 
-  @IsString()
-  @Length(3, 50, {
-    message: "Manager must be between 3 and 50 characters",
-  })
-  manager: string;
-
   @IsNumber()
   teamSize: number;
 
