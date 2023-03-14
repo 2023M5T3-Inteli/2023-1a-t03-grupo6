@@ -5,10 +5,12 @@ import InfoModalCtx from "../../../context/info-modal-ctx";
 
 import styles from "./Card.module.scss";
 
-const Card = () => {
+const Card = (props) => {
   const [liked, setLiked] = useState(false);
-  const moreInfoModalCtx = useContext(InfoModalCtx)
-  const applyModalCtx = useContext(ApplyModalCtx)
+  const moreInfoModalCtx = useContext(InfoModalCtx);
+  const applyModalCtx = useContext(ApplyModalCtx);
+
+  const projectData = props.projectData;
 
   const likeHandler = () => {
     setLiked((prevState) => !prevState);
@@ -39,11 +41,24 @@ const Card = () => {
               size={20}
             />
           )}
-          <button onClick={moreInfoModalCtx.showModalHandler} className={styles.moreInfo}>More info</button>
-          <button onClick={applyModalCtx.showModalHandler} className={styles.apply}>Apply</button>
+          <button
+            onClick={moreInfoModalCtx.showModalHandler.bind(
+              null,
+              projectData.id
+            )}
+            className={styles.moreInfo}
+          >
+            More info
+          </button>
+          <button
+            onClick={applyModalCtx.showModalHandler}
+            className={styles.apply}
+          >
+            Apply
+          </button>
         </div>
       </div>
-      <h1 className={styles.cardTitle}>Front-end website developer required</h1>
+      <h1 className={styles.cardTitle}>{projectData.name}</h1>
       <div className={styles.cardContent}>
         <div className={styles.cardImg}>
           <img
@@ -54,24 +69,26 @@ const Card = () => {
         <div className={styles.projectInfos}>
           <ul>
             <li>
-              Status: <span>In progress</span>
+              Status: <span>{projectData.status}</span>
             </li>
             <li>
-              Recruiting until: <span>March, 21</span>
+              Application Deadline: <span>{projectData.applicationDeadline}</span>
             </li>
             <li>
-              Deadline: <span>December, 31</span>
+              Project starts: <span>{projectData.startDate}</span>
             </li>
             <li>
-              Avaliable jobs: <span>05</span>
+              Project ends: <span>{projectData.endDate}</span>
+            </li>
+            <li>
+              Avaliable jobs: <span>{projectData.teamSize}</span>
             </li>
             <li className={styles.keyWords}>
               Key-words:
               <div>
-                <p>Python</p>
-                <p>JavaScript</p>
-                <p>C++</p>
-                <p>Backend</p>
+                {projectData.keywords.map((keyword) => (
+                  <p key={keyword}>{keyword}</p>
+                ))}
               </div>
             </li>
           </ul>

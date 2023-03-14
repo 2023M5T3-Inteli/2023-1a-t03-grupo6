@@ -1,4 +1,5 @@
-import { useContext } from "react";import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { GrClose } from "react-icons/gr";
 import { BsFileEarmarkArrowUp } from "react-icons/bs";
 
@@ -22,10 +23,63 @@ const teamOptions = [
 
 const OfferProject = () => {
   const modalCtx = useContext(ProjectModalCtx);
+  const [teamSize, setTeamSize] = useState(1);
 
-  const submitHandler = (event) => {
+  const projectNameInputRef = useRef();
+  const projectAreaInputRef = useRef();
+  const projectDescriptionInputRef = useRef();
+  const projectKeywordsInputRef = useRef();
+  const projectManagerInputRef = useRef();
+  const projectTeamMembersInputRef = useRef();
+  const projectStatusInputRef = useRef();
+  const projectApplicationDeadlineInputRef = useRef();
+  const projectEndDateInputRef = useRef();
+  const projectStartDateInputRef = useRef();
+
+  const submitHandler = async(event) => {
     event.preventDefault();
+
+    const enteredProjectName = projectNameInputRef.current.value;
+    const enteredProjectArea = projectAreaInputRef.current.value;
+    const enteredProjectDescription = projectDescriptionInputRef.current.value;
+    const enteredProjectApplicationDeadline =
+      projectApplicationDeadlineInputRef.current.value;
+    const enteredProjectEndDate = projectEndDateInputRef.current.value;
+    const enteredProjectStartDate = projectStartDateInputRef.current.value;
+
+    const projectData = {
+      name: enteredProjectName,
+      area: enteredProjectArea,
+      description: enteredProjectDescription,
+      keywords: [],
+      manager: "John Doe",
+      teamSize: +teamSize,
+      teamMembers: [],
+      status: "Open",
+      applicationDeadline: enteredProjectApplicationDeadline,
+      endDate: enteredProjectEndDate,
+      startDate: enteredProjectStartDate,
+    };
+
+    const response = await fetch("http://localhost:3000/projects", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(projectData)
+    })
+
+    const responseData = await response.json();
+
+    console.log(responseData)
   };
+
+  let teamSizeCounter = [];
+
+  for (let index = 0; index < teamSize; index++) {
+    teamSizeCounter.push(index);
+  }
 
   return (
     <AnimatePresence>
@@ -96,20 +150,29 @@ const OfferProject = () => {
                 </header>
                 <div className={styles.formWrapper}>
                   <form
-                    className={styles.formContainer}
                     onSubmit={submitHandler}
+                    className={styles.formContainer}
                   >
                     <div className={styles.field}>
                       <label>Project title:</label>
-                      <input placeholder="Tell us a title that defines the project" />
+                      <input
+                        ref={projectNameInputRef}
+                        placeholder="Tell us a title that defines the project"
+                      />
                     </div>
                     <div className={styles.field}>
                       <label>Project area:</label>
-                      <input placeholder="Tell us what the project area is" />
+                      <input
+                        ref={projectAreaInputRef}
+                        placeholder="Tell us what the project area is"
+                      />
                     </div>
                     <div className={styles.field}>
                       <label>Project description:</label>
-                      <textarea placeholder="Tell us more about the project" />
+                      <textarea
+                        ref={projectDescriptionInputRef}
+                        placeholder="Tell us more about the project"
+                      />
                     </div>
                     <label htmlFor="inputTag" className={styles.field}>
                       <label>Existing documentation:</label>
@@ -151,52 +214,49 @@ const OfferProject = () => {
                     <div className={styles.dateContainer}>
                       <div className={styles.field}>
                         <label>Application Deadline:</label>
-                        <input type="date" />
-                      </div>
-                      <div className={styles.field}>
-                        <label>End date:</label>
-                        <input type="date" />
+                        <input
+                          ref={projectApplicationDeadlineInputRef}
+                          type="date"
+                        />
                       </div>
                       <div className={styles.field}>
                         <label>Start date:</label>
-                        <input type="date" />
+                        <input ref={projectStartDateInputRef} type="date" />
+                      </div>
+                      <div className={styles.field}>
+                        <label>End date:</label>
+                        <input ref={projectEndDateInputRef} type="date" />
                       </div>
                     </div>
                     <div className={styles.field}>
                       <label>People needed for the project: </label>
-                      <input type="number" className={styles.numberInput} />
+                      <input
+                        onChange={(event) => setTeamSize(event.target.value)}
+                        value={teamSize}
+                        type="number"
+                        className={styles.numberInput}
+                        min="1"
+                      />
                     </div>
                     <div className={styles.occupationContainer}>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>1st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>1st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
-                      </div>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>2st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>2st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
-                      </div>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>3st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>3st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
-                      </div>
+                      {teamSizeCounter.map((index) => {
+                        return (
+                          <div key={index} className={styles.occupationBx}>
+                            <div className={styles.field}>
+                              <label>{index + 1}st Occupation</label>
+                              <input placeholder="Occupation" />
+                            </div>
+                            <div className={styles.field}>
+                              <label>{index + 1}st Role</label>
+                              <input placeholder="Role" />
+                            </div>
+                            <div className={styles.field}>
+                              <label>{index + 1}st Area</label>
+                              <input placeholder="Area" />
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                     <div className={styles.submtiContainer}>
                       <button

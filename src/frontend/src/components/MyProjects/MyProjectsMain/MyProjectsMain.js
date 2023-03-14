@@ -23,7 +23,9 @@ const MyProjectsMain = (props) => {
             </button>
           </div>
         </div>
-        {props.showLikedProjects ? <LikedProject /> : <YourProjects />}
+        <div className={styles.feed}>
+          {props.showLikedProjects ? <LikedProject /> : <YourProjects />}
+        </div>
       </div>
     </div>
   );

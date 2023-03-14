@@ -3,16 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { Profile } from "./pages/profile";
-import { Projects } from './pages/projects';
-import { FAQ } from './pages/faq';
-import { MyProjects } from './pages/myProjects';
+import { Projects } from "./pages/projects";
+import { FAQ } from "./pages/faq";
+import { MyProjects } from "./pages/myProjects";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ProjectModalCtxProvider } from "./context/project-modal-ctx";
-import { InfoModalCtxProvider } from "./context/info-modal-ctx";
-import { ApplyModalCtxProvider } from "./context/apply-modal-ctx";
 
 import "./styles/global.scss";
+import ContextsProviders from "./components/ContextsProviders/ContextsProviders";
 
 const router = createBrowserRouter([
   {
@@ -40,12 +38,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <InfoModalCtxProvider>
-    <ApplyModalCtxProvider>
-    <ProjectModalCtxProvider>
+    <ContextsProviders>
       <RouterProvider router={router} />
-    </ProjectModalCtxProvider>
-    </ApplyModalCtxProvider>
-    </InfoModalCtxProvider>
+    </ContextsProviders>
   </React.StrictMode>
 );

@@ -119,3 +119,26 @@
     }
   }
 }
+
+
+.feed {
+  overflow-y: scroll;
+  height: calc(100vh - 115px);
+
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--light-gray);
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--light-gray);
+  }
+}
