@@ -1,20 +1,21 @@
 import {
   IsIn,
+  Length,
   IsArray,
   IsNumber,
   IsString,
   IsOptional,
   IsDateString,
-  ValidateNested,
 } from "class-validator";
-import { Transform, plainToClass, Type } from "class-transformer";
-
-import { throwError } from "src/utils/throwError.util";
+import { Transform } from "class-transformer";
 //////////////////////////////////////////////////////////////////////////////////////
 
 /** data transfer object [Dto] : describe and validate properties of request body */
 export class CreateProjectDto {
   @IsString()
+  @Length(3, 50, {
+    message: "Name must be between 3 and 50 characters",
+  })
   name: string;
 
   @IsString()
@@ -26,15 +27,15 @@ export class CreateProjectDto {
   area: string;
 
   @IsString()
+  @Length(3, 500, {
+    message: "Description must be between 3 and 500 characters",
+  })
   description: string;
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
   keywords: string[];
-
-  @IsString()
-  manager: string;
 
   @IsNumber()
   teamSize: number;

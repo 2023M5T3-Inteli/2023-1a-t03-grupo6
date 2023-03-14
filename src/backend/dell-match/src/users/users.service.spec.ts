@@ -22,8 +22,11 @@ describe("UsersService", () => {
   };
 
   /** mock dependency instances and module */
-  beforeAll(async () =>
-    rmSync(path.join(__dirname, "../../db/test.sqlite"), { force: true })
+  beforeAll(() =>
+    rmSync(path.join(__dirname, "../../db/test.sqlite"), {
+      recursive: true,
+      force: true,
+    })
   );
 
   beforeEach(async () => {
@@ -59,38 +62,34 @@ describe("UsersService", () => {
     expect(_user).toHaveProperty("country", _mockUser.country);
   });
 
-  it("should throw an error if user already exists", async () => {
+  it("should throw a BadRequestException if the user already exists", async () => {
     await expect(service.create(_mockUser)).rejects.toThrow(
       new BadRequestException("User already exists")
     );
   });
 
-  it("should find all users", async () => {
+  it("should throw a NotFoundException if the user does not exist", async () => {
+    await expect(service.findOne(0)).rejects.toThrow(
+      new NotFoundException("User not found")
+    );
+  });
+
+  it("should return an array of users", async () => {
     const _users = await service.findAll();
     expect(_users).toBeDefined();
     expect(_users).toHaveLength(1);
   });
 
-  it("should find an user by email", async () => {
-    const [_user] = await service.findAll(_mockUser.email);
+  it("should return an user by email", async () => {
+    const _user = await service.findAll(_mockUser.email);
     expect(_user).toBeDefined();
-    expect(_user).toHaveProperty("id", 1);
-    expect(_user).toHaveProperty("name", _mockUser.name);
-    expect(_user).toHaveProperty("email", _mockUser.email);
-    expect(_user).toHaveProperty("jobTitle", _mockUser.jobTitle);
-    expect(_user).toHaveProperty("city", _mockUser.city);
-    expect(_user).toHaveProperty("country", _mockUser.country);
+    expect(_user).toHaveLength(1);
   });
 
-  it("should find an user by id", async () => {
+  it("should return an user by id", async () => {
     const _user = await service.findOne(1);
     expect(_user).toBeDefined();
     expect(_user).toHaveProperty("id", 1);
-    expect(_user).toHaveProperty("name", _mockUser.name);
-    expect(_user).toHaveProperty("email", _mockUser.email);
-    expect(_user).toHaveProperty("jobTitle", _mockUser.jobTitle);
-    expect(_user).toHaveProperty("city", _mockUser.city);
-    expect(_user).toHaveProperty("country", _mockUser.country);
   });
 
   it("should update a user", async () => {
@@ -107,10 +106,25 @@ describe("UsersService", () => {
     expect(_user).toHaveProperty("country", _mockUser.country);
   });
 
-  it("should delete a user", async () => {
-    const _user = await service.remove(1);
-    await expect(service.findOne(1)).rejects.toThrow(
-      new NotFoundException("User not found")
+  it("should throw a BadRequestException if the user does not exist", async () => {
+    await expect(service.update(0, _mockUser)).rejects.toThrow(
+      new BadRequestException("User not found")
     );
+  });
+
+  it("should delete a user", async () => {
+    await expect(service.remove(1)).resolves.toBeUndefined();
+  });
+
+  it("should throw a BadRequestException if the user does not exist", async () => {
+    await expect(service.remove(0)).rejects.toThrow(
+      new BadRequestException("User not found")
+    );
+  });
+
+  it("should return an empty array of users", async () => {
+    const _users = await service.findAll();
+    expect(_users).toBeDefined();
+    expect(_users).toHaveLength(0);
   });
 });

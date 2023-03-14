@@ -1,4 +1,8 @@
-import { NotFoundException, BadRequestException } from "@nestjs/common";
+import {
+  UnauthorizedException,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common";
 //////////////////////////////////////////////////////////////////////////////////////
 
 export const throwError = function (exception: string, msg: string): void {
@@ -9,6 +13,10 @@ export const throwError = function (exception: string, msg: string): void {
 
     case "NotFoundException":
       throw new NotFoundException(msg);
+      break;
+
+    case "UnauthorizedException":
+      throw new UnauthorizedException(msg);
       break;
 
     default:

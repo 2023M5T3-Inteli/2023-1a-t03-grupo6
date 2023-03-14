@@ -5,7 +5,9 @@
  * insert(), update(), delete() : hooks will NOT be executed
  * @AfterInsert, @AfterUpdate, ...: executed ONLY upon entity instances, NOT upon plain objects
  */
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
+import { User } from "../../users/entities/user.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 /** this entity describes a Project as commomly organized in a tech company (e.g. Dell) */
@@ -20,6 +22,7 @@ export class Project {
   @Column({
     enum: ["it", "commercial", "marketing", "hr", "finance", "legal", "other"],
   })
+  @Column()
   area: string;
 
   @Column()
@@ -27,9 +30,6 @@ export class Project {
 
   @Column("simple-array", { nullable: true, default: null })
   keywords: string[];
-
-  @Column()
-  manager: string;
 
   @Column()
   teamSize: number;
@@ -48,4 +48,11 @@ export class Project {
 
   @Column()
   endDate: Date;
+
+  /**
+   * () => User : solves circular dependency issue
+   * user => user.reports : critical to multiple relationships scenarios eg Reports, Users, Approvers
+   */
+  @ManyToOne(() => User, (user) => user.projects)
+  manager: User;
 }

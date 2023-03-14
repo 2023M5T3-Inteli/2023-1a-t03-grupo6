@@ -6,5 +6,8 @@ import { join } from "path";
 
 /** Delete the test database */
 global.beforeAll(() => {
-  rmSync(join(__dirname, "../db/test.sqlite"), { force: true });
+  rmSync(join(__dirname, "../db/test.sqlite"), {
+    recursive: true,
+    force: true,
+  });
 });

@@ -29,55 +29,91 @@ describe("Users component (e2e)", () => {
   });
 
   /** test suite */
-  it("should create a new user @POST /users", async () => {
-    await request(app.getHttpServer())
-      .post("/users")
-      .send(_mockUser)
-      .expect(201)
-      .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual(_mockUser.name);
-        expect(email).toEqual(_mockUser.email);
-      });
+  describe("Authentication (e2e)", () => {
+    it("should signup a new user @POST /auth/signup", async () => {
+      await request(app.getHttpServer())
+        .post("/users/signup")
+        .send(_mockUser)
+        .expect(201)
+        .then((res) => {
+          const { id, name, email } = res.body;
+          expect([id, name, email]).toBeDefined();
+          expect(name).toEqual(_mockUser.name);
+          expect(email).toEqual(_mockUser.email);
+        });
+    });
+
+    it("should signin a user @POST /auth/signin", async () => {
+      await request(app.getHttpServer())
+        .post("/users/signin")
+        .send({ email: _mockUser.email }) // password is not required
+        .expect(201)
+        .then((res) => {
+          const { id, name, email } = res.body;
+          expect([id, name, email]).toBeDefined();
+          expect(name).toEqual(_mockUser.name);
+          expect(email).toEqual(_mockUser.email);
+        });
+    });
+
+    it("should signout a user @POST /auth/signout", async () => {
+      // TODO : implement this test
+    });
   });
 
-  it("should return a user @GET /users/:id", async () => {
-    await request(app.getHttpServer())
-      .get("/users/1")
-      .expect(200)
-      .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual(_mockUser.name);
-        expect(email).toEqual(_mockUser.email);
-      });
-  });
+  describe("Token management (e2e)", () => {});
 
-  it("should return all users @GET /users", async () => {
-    await request(app.getHttpServer())
-      .get("/users")
-      .expect(200)
-      .then((res) => {
-        expect(res.body.length).toBeGreaterThan(0);
-      });
-  });
+  describe("Users (e2e)", () => {
+    it("should delete a user @DELETE /users/:id", async () => {
+      await request(app.getHttpServer()).delete("/users/1").expect(200);
+    });
 
-  it("should update a user @PATCH /users/:id", async () => {
-    await request(app.getHttpServer())
-      .patch("/users/1")
-      .send({ name: "Jane Doe" })
-      .expect(200)
-      .then((res) => {
-        const { id, name, email } = res.body;
-        expect([id, name, email]).toBeDefined();
-        expect(name).toEqual("Jane Doe");
-        expect(email).toEqual(_mockUser.email);
-      });
-  });
+    it("should create a new user @POST /users", async () => {
+      await request(app.getHttpServer())
+        .post("/users")
+        .send(_mockUser)
+        .expect(201)
+        .then((res) => {
+          const { id, name, email } = res.body;
+          expect([id, name, email]).toBeDefined();
+          expect(name).toEqual(_mockUser.name);
+          expect(email).toEqual(_mockUser.email);
+        });
+    });
 
-  it("should delete a user @DELETE /users/:id", async () => {
-    await request(app.getHttpServer()).delete("/users/1").expect(200);
+    it("should return a user @GET /users/:id", async () => {
+      await request(app.getHttpServer())
+        .get("/users/2")
+        .expect(200)
+        .then((res) => {
+          const { id, name, email } = res.body;
+          expect([id, name, email]).toBeDefined();
+          expect(name).toEqual(_mockUser.name);
+          expect(email).toEqual(_mockUser.email);
+        });
+    });
+
+    it("should return all users @GET /users", async () => {
+      await request(app.getHttpServer())
+        .get("/users")
+        .expect(200)
+        .then((res) => {
+          expect(res.body.length).toBeGreaterThan(0);
+        });
+    });
+
+    it("should update a user @PATCH /users/:id", async () => {
+      await request(app.getHttpServer())
+        .patch("/users/2")
+        .send({ name: "Jane Doe" })
+        .expect(200)
+        .then((res) => {
+          const { id, name, email } = res.body;
+          expect([id, name, email]).toBeDefined();
+          expect(name).toEqual("Jane Doe");
+          expect(email).toEqual(_mockUser.email);
+        });
+    });
   });
 
   it("should return a 404 if user is not found @GET /users/:id", async () => {
@@ -104,7 +140,8 @@ describe("Users component (e2e)", () => {
     await request(app.getHttpServer()).delete("/users/abc").expect(400);
   });
 
-  it("should validate incoming data using data transfer object @POST /users", async () => {
+  it("should validate incoming data using data transfer objects @POST /users", async () => {
+    await request(app.getHttpServer()).delete("/users/2").expect(200);
     await request(app.getHttpServer())
       .post("/users")
       .send({ ..._mockUser, age: 30 })
@@ -114,7 +151,7 @@ describe("Users component (e2e)", () => {
       });
   });
 
-  it("should revert if body does not contain all required information @POST /users", async () => {
+  it("should revert if body does not contain all required fields @POST /users", async () => {
     await request(app.getHttpServer())
       .post("/users")
       .send({ ..._mockUser, name: undefined })
