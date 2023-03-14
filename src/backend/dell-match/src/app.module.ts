@@ -6,7 +6,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 
 import * as cookieParser from "cookie-parser";
-import * as cookieSession from "cookie-session";
+// import * as cookieSession from "cookie-session";
 
 import { UsersModule } from "./users/users.module";
 import { ProjectsModule } from "./projects/projects.module";
@@ -36,19 +36,19 @@ export class AppModule {
       secure: false, // cookie will only be sent on an encrypted connection
     };
 
-    consumer
-      .apply(
-        ...[
-          cookieSession({
-            secret: process.env.SESSION_SECRET,
-            resave: false,
-            saveUninitialized: false,
-            cookie: _cookieOptions,
-          }),
-          cookieParser(),
-          CurrentUserMiddleware,
-        ]
-      )
-      .forRoutes("*");
+    // consumer
+    //   .apply(
+    //     ...[
+    //       cookieSession({
+    //         secret: process.env.SESSION_SECRET,
+    //         resave: false,
+    //         saveUninitialized: false,
+    //         cookie: _cookieOptions,
+    //       }),
+    //       cookieParser(),
+    //       CurrentUserMiddleware,
+    //     ]
+    //   )
+    //   .forRoutes("*");
   }
 }

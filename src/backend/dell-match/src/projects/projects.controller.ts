@@ -17,7 +17,11 @@ import { UpdateProjectDto } from "./dto/update-project.dto";
 import { CurrentUser } from "src/users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
+
+import { ApiTags } from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
+
+@ApiTags('project')
 
 @Controller("projects")
 export class ProjectsController {
