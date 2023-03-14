@@ -34,6 +34,6 @@ export class User {
    * () => Project : solves circular dependency issue
    * project => project.user : critical to multiple relationships scenarios eg Reports, Users, Approvers
    */
-  @OneToMany(() => Project, (project) => project.manager)
+  @OneToMany((type) => Project, (project) => project.manager)
   projects: Project[];
 }
