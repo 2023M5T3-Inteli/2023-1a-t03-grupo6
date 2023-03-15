@@ -17,7 +17,7 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { throwError } from "./../utils/throwError.util";
-import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse} from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse, ApiOperation} from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @ApiTags('user')
@@ -31,6 +31,7 @@ export class UsersController {
 
   /** @dev auth */
   @Post("signup")
+  @ApiOperation({ summary: 'create a new login' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   signup(@Req() req: any, @Body() createUserDto: CreateUserDto): Promise<User> {
@@ -38,6 +39,7 @@ export class UsersController {
   }
 
   @Post("signin")
+  @ApiOperation({ summary: 'log into an existing account' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   signin(@Req() req: any, @Body() signinDto: SigninDto): Promise<any> {
@@ -45,6 +47,7 @@ export class UsersController {
   }
 
   @Get("signout")
+  @ApiOperation({ summary: 'sign out of an account' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   signout(@Req() req: any): any {
@@ -53,6 +56,7 @@ export class UsersController {
 
   /** @dev basic CRUD - should be restricted by IP  */
   @Post()
+  @ApiOperation({ summary: 'create a new user' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
@@ -60,6 +64,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'find all users' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   findAll(@Query("email") email?: string): Promise<User[]> {
@@ -67,6 +72,7 @@ export class UsersController {
   }
 
   @Get(":id")
+  @ApiOperation({ summary: 'find user by id' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})
@@ -78,6 +84,7 @@ export class UsersController {
   }
 
   @Patch(":id")
+  @ApiOperation({ summary: 'update an existing user' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})
@@ -92,6 +99,7 @@ export class UsersController {
   }
 
   @Delete(":id")
+  @ApiOperation({ summary: 'delete an existing user' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})

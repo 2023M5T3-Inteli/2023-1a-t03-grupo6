@@ -18,7 +18,7 @@ import { CurrentUser } from "src/users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
 
-import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse, ApiOperation } from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @ApiTags('project')
@@ -28,6 +28,7 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'create a new project' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   create(
@@ -38,6 +39,7 @@ export class ProjectsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'find all projects' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   findAll(@Query("name") name?: string): Promise<Project[]> {
@@ -45,6 +47,7 @@ export class ProjectsController {
   }
 
   @Get(":id")
+  @ApiOperation({ summary: 'find project by id' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})
@@ -56,6 +59,7 @@ export class ProjectsController {
   }
 
   @Patch(":id")
+  @ApiOperation({ summary: 'update an existing project' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})
@@ -70,6 +74,7 @@ export class ProjectsController {
   }
 
   @Delete(":id")
+  @ApiOperation({ summary: 'delete an existing project' })
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiBadRequestResponse({ description: 'User id is not a number.'})
