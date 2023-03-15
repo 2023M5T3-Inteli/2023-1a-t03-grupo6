@@ -45,7 +45,9 @@ export class CreateProjectDto {
   @IsString({ each: true })
   keywords: string[];
 
-  @ApiProperty()
+  @ApiProperty({
+    type: Number,
+  })
   @IsNumber()
   teamSize: number;
 

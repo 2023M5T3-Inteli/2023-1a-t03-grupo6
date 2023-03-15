@@ -18,7 +18,7 @@ import { CurrentUser } from "src/users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse } from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @ApiTags('project')
@@ -28,6 +28,8 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   create(
     @Body() createProjectDto: CreateProjectDto,
     @CurrentUser() user: User
@@ -36,11 +38,15 @@ export class ProjectsController {
   }
 
   @Get()
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   findAll(@Query("name") name?: string): Promise<Project[]> {
     return this.projectsService.findAll(name);
   }
 
   @Get(":id")
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   findOne(@Param("id") id: string): Promise<Project> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");
@@ -49,6 +55,8 @@ export class ProjectsController {
   }
 
   @Patch(":id")
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   update(
     @Param("id") id: string,
     @Body() updateProjectDto: UpdateProjectDto
@@ -60,6 +68,8 @@ export class ProjectsController {
   }
 
   @Delete(":id")
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   remove(@Param("id") id: string): Promise<void> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");
