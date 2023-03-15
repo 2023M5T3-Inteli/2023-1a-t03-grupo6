@@ -17,7 +17,7 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { throwError } from "./../utils/throwError.util";
-import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse} from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse} from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @ApiTags('user')
@@ -69,6 +69,7 @@ export class UsersController {
   @Get(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   findOne(@Param("id") id: string): Promise<User> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "User id is not a number");
@@ -79,12 +80,13 @@ export class UsersController {
   @Patch(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   update(
     @Param("id") id: string,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<User> {
     if (Number.isNaN(+id))
-      throwError("BadRequestException", "User id is not a number");
+      throwError("BadRequestException", "User id is not a number.");
 
     return this.usersService.update(+id, updateUserDto);
   }
@@ -92,6 +94,7 @@ export class UsersController {
   @Delete(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   remove(@Param("id") id: string): Promise<void> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "User id is not a number");

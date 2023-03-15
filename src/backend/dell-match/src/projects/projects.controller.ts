@@ -18,7 +18,7 @@ import { CurrentUser } from "src/users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
 
-import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse } from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @ApiTags('project')
@@ -47,6 +47,7 @@ export class ProjectsController {
   @Get(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   findOne(@Param("id") id: string): Promise<Project> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");
@@ -57,6 +58,7 @@ export class ProjectsController {
   @Patch(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   update(
     @Param("id") id: string,
     @Body() updateProjectDto: UpdateProjectDto
@@ -70,6 +72,7 @@ export class ProjectsController {
   @Delete(":id")
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   remove(@Param("id") id: string): Promise<void> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");
