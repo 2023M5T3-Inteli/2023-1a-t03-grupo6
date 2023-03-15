@@ -1,17 +1,54 @@
-import { memo, useEffect } from "react";
-import useProjectData from "../../../hooks/use-project-data";
+import { memo, useEffect, useState } from "react";
+import useHttp from "../../../hooks/use-http";
 import Card from "../Card/Card";
 
 import styles from "./CardList.module.scss";
 
 const CardList = (props) => {
-  const {loading, httpError, fetchProjects, projects } = useProjectData()
+  const [projects, setProjects] = useState([]);
+
+  const { isLoading, error, sendRequest: fetchProjects } = useHttp();
 
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    const applyProjects = (projectObject) => {
+      const loadedProjects = [];
 
-  if (loading) {
+      for (const projectKey in projectObject) {
+        loadedProjects.push({
+          ...projectObject[projectKey],
+          applicationDeadline: new Date(
+            projectObject[projectKey].applicationDeadline
+          ).toLocaleDateString("en", {
+            year: "numeric",
+            month: "long",
+          }),
+          startDate: new Date(
+            projectObject[projectKey].startDate
+          ).toLocaleDateString("en", {
+            year: "numeric",
+            month: "long",
+          }),
+          endDate: new Date(
+            projectObject[projectKey].endDate
+          ).toLocaleDateString("en", {
+            year: "numeric",
+            month: "long",
+          }),
+        });
+      }
+
+      setProjects(loadedProjects);
+    };
+
+    fetchProjects(
+      {
+        url: "http://localhost:3000/projects",
+      },
+      applyProjects
+    );
+  }, [fetchProjects]);
+
+  if (isLoading) {
     return (
       <section className={styles.projectsLoading}>
         <p>Loading...</p>
@@ -19,10 +56,10 @@ const CardList = (props) => {
     );
   }
 
-  if (httpError) {
+  if (error) {
     return (
       <section className={styles.projectsError}>
-        <p>{httpError}</p>
+        <p>{error}</p>
       </section>
     );
   }

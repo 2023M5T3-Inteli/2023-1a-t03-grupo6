@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import ApplyModalCtx from "../../../context/apply-modal-ctx";
 import InfoModalCtx from "../../../context/info-modal-ctx";
+import useHttp from "../../../hooks/use-http";
 
 import styles from "./Card.module.scss";
 
@@ -9,11 +10,50 @@ const Card = (props) => {
   const [liked, setLiked] = useState(false);
   const moreInfoModalCtx = useContext(InfoModalCtx);
   const applyModalCtx = useContext(ApplyModalCtx);
+  const { isLoading, error, sendRequest: fetchProjects } = useHttp();
 
   const projectData = props.projectData;
 
   const likeHandler = () => {
     setLiked((prevState) => !prevState);
+  };
+
+  const applyProject = (projectObject) => {
+    const loadedProject = {
+      ...projectObject,
+      applicationDeadline: new Date(
+        projectObject.applicationDeadline
+      ).toLocaleDateString("en", {
+        day: "numeric",
+        year: "numeric",
+        month: "long",
+      }),
+      startDate: new Date(projectObject.startDate).toLocaleDateString("en", {
+        day: "numeric",
+        year: "numeric",
+        month: "long",
+      }),
+      endDate: new Date(projectObject.endDate).toLocaleDateString("en", {
+        day: "numeric",
+        year: "numeric",
+        month: "long",
+      }),
+    };
+
+    // console.log(loadedProject);
+    
+    moreInfoModalCtx.projectDataHandler(loadedProject)
+  };
+
+  const moreInfoHandler = () => {
+    moreInfoModalCtx.showModalHandler()
+    
+    fetchProjects(
+      {
+        url: `http://localhost:3000/projects/${projectData.id}`,
+      },
+      applyProject
+    );
   };
 
   return (
@@ -41,17 +81,11 @@ const Card = (props) => {
               size={20}
             />
           )}
-          <button
-            onClick={moreInfoModalCtx.showModalHandler.bind(
-              null,
-              projectData.id
-            )}
-            className={styles.moreInfo}
-          >
+          <button onClick={moreInfoHandler} className={styles.moreInfo}>
             More info
           </button>
           <button
-            onClick={applyModalCtx.showModalHandler}
+            onClick={moreInfoHandler}
             className={styles.apply}
           >
             Apply
@@ -72,7 +106,8 @@ const Card = (props) => {
               Status: <span>{projectData.status}</span>
             </li>
             <li>
-              Application Deadline: <span>{projectData.applicationDeadline}</span>
+              Application Deadline:{" "}
+              <span>{projectData.applicationDeadline}</span>
             </li>
             <li>
               Project starts: <span>{projectData.startDate}</span>

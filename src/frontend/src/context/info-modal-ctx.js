@@ -1,27 +1,31 @@
 import { createContext, useState } from "react";
 
 const InfoModalCtx = createContext({
-  projectId: null,
   showModal: false,
+  projectData: {},
   showModalHandler: () => {},
+  projectDataHandler: () => {},
 });
 
 export const InfoModalCtxProvider = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [projectId, setProjectId] = useState();
-  
+  const [projectData, setProjectData] = useState();
 
-  const showModalHandler = (id) => {
+  const showModalHandler = () => {
     setShowModal(!showModal);
-    setProjectId(id)
+  };
+
+  const projectDataHandler = (data) => {
+    setProjectData(data);
   };
 
   return (
     <InfoModalCtx.Provider
       value={{
-        projectId: projectId,
         showModal: showModal,
         showModalHandler: showModalHandler,
+        projectDataHandler: projectDataHandler,
+        projectData: projectData,
       }}
     >
       {props.children}
