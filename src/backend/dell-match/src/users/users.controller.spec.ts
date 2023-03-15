@@ -121,7 +121,6 @@ describe("UsersController", () => {
     it("should return all users @GET /users", async () => {
       await controller.create(_mockUser);
       const _users = await controller.findAll();
-      console.log(_users);
       expect(_users).toEqual([{ id: 1, ..._mockUser }]);
     });
 

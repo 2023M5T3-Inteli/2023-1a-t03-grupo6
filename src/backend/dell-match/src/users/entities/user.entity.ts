@@ -5,7 +5,9 @@
  * insert(), update(), delete() : hooks will NOT be executed
  * @AfterInsert, @AfterUpdate, ...: executed ONLY upon entity instances, NOT upon plain objects
  */
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+
+import { Project } from "src/projects/entities/project.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Entity()
@@ -27,4 +29,11 @@ export class User {
 
   @Column()
   country: string;
+
+  /**
+   * () => Project : solves circular dependency issue
+   * project => project.user : critical to multiple relationships scenarios eg Reports, Users, Approvers
+   */
+  @OneToMany(() => Project, (project) => project.manager)
+  projects: Project[];
 }

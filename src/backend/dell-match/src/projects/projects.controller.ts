@@ -11,8 +11,10 @@ import {
 
 import { Project } from "./entities/project.entity";
 import { ProjectsService } from "./projects.service";
+import { User } from "src/users/entities/user.entity";
 import { CreateProjectDto } from "./dto/create-project.dto";
 import { UpdateProjectDto } from "./dto/update-project.dto";
+import { CurrentUser } from "src/users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
 //////////////////////////////////////////////////////////////////////////////////////
@@ -22,8 +24,11 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
-  create(@Body() createProjectDto: CreateProjectDto): Promise<Project> {
-    return this.projectsService.create(createProjectDto);
+  create(
+    @Body() createProjectDto: CreateProjectDto,
+    @CurrentUser() user: User
+  ): Promise<Project> {
+    return this.projectsService.create(createProjectDto, user);
   }
 
   @Get()
