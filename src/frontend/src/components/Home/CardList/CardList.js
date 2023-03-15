@@ -37,6 +37,8 @@ const CardList = (props) => {
         });
       }
 
+      loadedProjects.reverse()
+
       setProjects(loadedProjects);
     };
 

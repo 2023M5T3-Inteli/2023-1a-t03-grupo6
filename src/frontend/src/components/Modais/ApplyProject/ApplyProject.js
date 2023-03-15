@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { GrClose } from "react-icons/gr";
+import ReactSelect from "../../ReactSelect/ReactSelect";
 
 import ApplyModalCtx from "../../../context/apply-modal-ctx";
 
 import styles from "./ApplyProject.module.scss";
-import ReactSelect from "../../ReactSelect/ReactSelect";
 
 const keyWordsOptions = [
   { value: "frontend_developer", label: "Front-end developer" },

@@ -228,3 +228,17 @@
   border: 1px solid var(--blue);
   margin: 1rem;
 }
+
+.projectsLoading {
+  padding: 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  color: white;
+}
+
+.projectsError {
+  padding: 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  color: red;
+}

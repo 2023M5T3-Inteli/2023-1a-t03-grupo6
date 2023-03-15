@@ -10,7 +10,7 @@ const Card = (props) => {
   const [liked, setLiked] = useState(false);
   const moreInfoModalCtx = useContext(InfoModalCtx);
   const applyModalCtx = useContext(ApplyModalCtx);
-  const { isLoading, error, sendRequest: fetchProjects } = useHttp();
+  const { isLoading, error, sendRequest: fetchProject } = useHttp();
 
   const projectData = props.projectData;
 
@@ -40,15 +40,13 @@ const Card = (props) => {
       }),
     };
 
-    // console.log(loadedProject);
-    
     moreInfoModalCtx.projectDataHandler(loadedProject)
   };
 
   const moreInfoHandler = () => {
     moreInfoModalCtx.showModalHandler()
     
-    fetchProjects(
+    fetchProject(
       {
         url: `http://localhost:3000/projects/${projectData.id}`,
       },
@@ -122,7 +120,7 @@ const Card = (props) => {
               Key-words:
               <div>
                 {projectData.keywords.map((keyword) => (
-                  <p key={keyword}>{keyword}</p>
+                  <p key={Math.random()}>{keyword}</p>
                 ))}
               </div>
             </li>
