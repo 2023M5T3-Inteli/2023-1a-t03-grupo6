@@ -6,6 +6,7 @@ import { BadRequestException, NotFoundException } from "@nestjs/common";
 
 import { User } from "./entities/user.entity";
 import { UsersService } from "./users.service";
+import { Project } from "../projects/entities/project.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 describe("UsersService", () => {
@@ -35,10 +36,10 @@ describe("UsersService", () => {
         TypeOrmModule.forRoot({
           type: "sqlite",
           database: path.join(__dirname, "../../db/test.sqlite"),
-          entities: [User],
+          entities: [User, Project],
           synchronize: true,
         }),
-        TypeOrmModule.forFeature([User]),
+        TypeOrmModule.forFeature([User, Project]),
       ],
       providers: [UsersService],
     }).compile();

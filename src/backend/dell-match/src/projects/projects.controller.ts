@@ -11,10 +11,10 @@ import {
 
 import { Project } from "./entities/project.entity";
 import { ProjectsService } from "./projects.service";
-import { User } from "src/users/entities/user.entity";
+import { User } from "./../users/entities/user.entity";
 import { CreateProjectDto } from "./dto/create-project.dto";
 import { UpdateProjectDto } from "./dto/update-project.dto";
-import { CurrentUser } from "src/users/decorators/current-user.decorator";
+import { CurrentUser } from "./../users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
 //////////////////////////////////////////////////////////////////////////////////////
