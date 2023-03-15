@@ -14,7 +14,7 @@ import { AppModule } from "./app.module";
 
   const config = new DocumentBuilder()
     .setTitle('Dell Match API Doc')
-    .setDescription('This is Dell Match API Documentation')
+    .setDescription('This is the Dell Match API Documentation, and it contains all of the application endpoints.')
     .setVersion('1.0')
     //.addTag('user')
     .build();
