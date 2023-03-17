@@ -2,7 +2,6 @@ import { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { GrClose } from "react-icons/gr";
 import { BsFileEarmarkArrowUp } from "react-icons/bs";
-import { toast, Toaster } from "react-hot-toast";
 
 import ProjectModalCtx from "../../../context/project-modal-ctx";
 import ReactSelect from "../../ReactSelect/ReactSelect";
@@ -27,7 +26,12 @@ const OfferProject = () => {
   const modalCtx = useContext(ProjectModalCtx);
   const { isLoading, error, sendRequest: postProject } = useHttp();
   const [teamSize, setTeamSize] = useState(1);
-  const [postResponse, setPostResponse] = useState();
+  const [didSubmit, setDidSubmit] = useState(false);
+  const [selectedRadioBtn, setSelectedRadioBtn] = useState("radio1");
+
+  const isRadioSelected = (value) => selectedRadioBtn === value;
+  const handleRadioClick = (event) =>
+    setSelectedRadioBtn(event.target.defaultValue);
 
   const projectNameInputRef = useRef();
   const projectAreaInputRef = useRef();
@@ -35,10 +39,18 @@ const OfferProject = () => {
   const projectKeywordsInputRef = useRef();
   const projectManagerInputRef = useRef();
   const projectTeamMembersInputRef = useRef();
-  const projectStatusInputRef = useRef();
   const projectApplicationDeadlineInputRef = useRef();
   const projectEndDateInputRef = useRef();
   const projectStartDateInputRef = useRef();
+  let enteredStatus;
+
+  if (selectedRadioBtn === "radio1") {
+    enteredStatus = "Not Started";
+  } else if (selectedRadioBtn === "radio2") {
+    enteredStatus = "In progress";
+  } else if (selectedRadioBtn === "radio3") {
+    enteredStatus = "To be Done";
+  }
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -50,15 +62,29 @@ const OfferProject = () => {
       projectApplicationDeadlineInputRef.current.value;
     const enteredProjectEndDate = projectEndDateInputRef.current.value;
     const enteredProjectStartDate = projectStartDateInputRef.current.value;
+    const enteredProjectKeywords = [];
+    const enteredProjectTeamMembers = [];
+    
+    const selectedKeywords = projectKeywordsInputRef.current.state.selectValue;
+    const selectedMembers =
+      projectTeamMembersInputRef.current.state.selectValue;
+
+    for (const key in selectedKeywords) {
+      enteredProjectKeywords.push(selectedKeywords[key].value);
+    }
+
+    for (const key in selectedMembers) {
+      enteredProjectTeamMembers.push(selectedMembers[key].value);
+    }
 
     const projectData = {
       name: enteredProjectName,
       area: enteredProjectArea,
       description: enteredProjectDescription,
-      keywords: ["test", "test", "test"],
+      keywords: enteredProjectKeywords,
       manager: "John Doe",
       teamSize: +teamSize,
-      teamMembers: ["Mary Doe", "zé", "Mary Doe"],
+      teamMembers: enteredProjectTeamMembers,
       status: "Open",
       applicationDeadline: enteredProjectApplicationDeadline,
       endDate: enteredProjectEndDate,
@@ -76,11 +102,14 @@ const OfferProject = () => {
         body: projectData,
       },
       () => {
-        if (!isLoading) {
-          modalCtx.showModalHandler();
-        }
+        setDidSubmit(true);
       }
     );
+  };
+
+  const closeModalHandler = () => {
+    setDidSubmit(false);
+    modalCtx.showModalHandler();
   };
 
   let teamSizeCounter = [];
@@ -109,7 +138,7 @@ const OfferProject = () => {
                 delay: 0.3,
               },
             }}
-            onClick={() => modalCtx.showModalHandler()}
+            onClick={closeModalHandler}
             className={styles.modalBackdrop}
           ></motion.div>
           <motion.div
@@ -152,13 +181,14 @@ const OfferProject = () => {
               className={styles.modalContent}
             >
               <div className={styles.modalWrapper}>
-                <Toaster position="top-center" reverseOrder={false} />
                 <header className={styles.header}>
-                  <h1>Offer a Project</h1>
-                  <GrClose onClick={modalCtx.showModalHandler} size={15} />
+                  <h1 onClick={() => console.log(enteredStatus)}>
+                    Offer a Project
+                  </h1>
+                  <GrClose onClick={closeModalHandler} size={15} />
                 </header>
                 <div className={styles.formWrapper}>
-                  {!isLoading && !error && (
+                  {!isLoading && !error && !didSubmit && (
                     <form
                       onSubmit={submitHandler}
                       className={styles.formContainer}
@@ -198,26 +228,50 @@ const OfferProject = () => {
                       </label>
                       <div className={styles.field}>
                         <label>Key words:</label>
-                        <ReactSelect options={keyWordsOptions} />
+                        <ReactSelect
+                          ref={projectKeywordsInputRef}
+                          options={keyWordsOptions}
+                        />
                       </div>
                       <div className={styles.field}>
                         <label>Team:</label>
-                        <ReactSelect options={teamOptions} />
+                        <ReactSelect
+                          ref={projectTeamMembersInputRef}
+                          options={teamOptions}
+                        />
                       </div>
                       <div className={styles.statusField}>
                         <label>Status:</label>
                         <div className={styles.radioInputContainer}>
                           <div className={styles.radioInput}>
-                            <input type="radio" />
-                            <p>Not started</p>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio1"
+                              checked={isRadioSelected("radio1")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>Not started</label>
                           </div>
                           <div className={styles.radioInput}>
-                            <input type="radio" />
-                            <p>In progress</p>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio2"
+                              checked={isRadioSelected("radio2")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>In progress</label>
                           </div>
                           <div className={styles.radioInput}>
-                            <input type="radio" />
-                            <p>To be done</p>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio3"
+                              checked={isRadioSelected("radio3")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>To be done</label>
                           </div>
                         </div>
                       </div>
@@ -289,6 +343,11 @@ const OfferProject = () => {
                   {error && (
                     <section className={styles.projectsError}>
                       <p>{error}</p>
+                    </section>
+                  )}
+                  {!isLoading && !error && didSubmit && (
+                    <section>
+                      <p>Project created!</p>
                     </section>
                   )}
                 </div>

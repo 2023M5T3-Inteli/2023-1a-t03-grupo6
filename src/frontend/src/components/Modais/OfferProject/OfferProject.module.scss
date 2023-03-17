@@ -167,15 +167,16 @@
 .radioInput {
   display: flex;
   flex-direction: row;
-  align-items: center;
-
+  align-items: flex-start;
+  
   input {
     accent-color: var(--light-gray);
     margin-right: 1rem;
     scale: 1.2;
+    cursor: pointer;
   }
 
-  p {
+  label {
     font-size: 1.2rem;
     margin-right: 4rem;
   }

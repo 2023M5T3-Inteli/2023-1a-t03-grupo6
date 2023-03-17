@@ -1,4 +1,5 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
+import ProjectModalCtx from "../../../context/project-modal-ctx";
 import useHttp from "../../../hooks/use-http";
 import Card from "../Card/Card";
 
@@ -6,49 +7,52 @@ import styles from "./CardList.module.scss";
 
 const CardList = (props) => {
   const [projects, setProjects] = useState([]);
+  const offerProjectModalCtx = useContext(ProjectModalCtx);
 
   const { isLoading, error, sendRequest: fetchProjects } = useHttp();
 
   useEffect(() => {
-    const applyProjects = (projectObject) => {
-      const loadedProjects = [];
+    if (offerProjectModalCtx.showModal == false) {
+      const applyProjects = (projectObject) => {
+        const loadedProjects = [];
 
-      for (const projectKey in projectObject) {
-        loadedProjects.push({
-          ...projectObject[projectKey],
-          applicationDeadline: new Date(
-            projectObject[projectKey].applicationDeadline
-          ).toLocaleDateString("en", {
-            year: "numeric",
-            month: "long",
-          }),
-          startDate: new Date(
-            projectObject[projectKey].startDate
-          ).toLocaleDateString("en", {
-            year: "numeric",
-            month: "long",
-          }),
-          endDate: new Date(
-            projectObject[projectKey].endDate
-          ).toLocaleDateString("en", {
-            year: "numeric",
-            month: "long",
-          }),
-        });
-      }
+        for (const projectKey in projectObject) {
+          loadedProjects.push({
+            ...projectObject[projectKey],
+            applicationDeadline: new Date(
+              projectObject[projectKey].applicationDeadline
+            ).toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+            }),
+            startDate: new Date(
+              projectObject[projectKey].startDate
+            ).toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+            }),
+            endDate: new Date(
+              projectObject[projectKey].endDate
+            ).toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+            }),
+          });
+        }
 
-      loadedProjects.reverse()
+        loadedProjects.reverse();
 
-      setProjects(loadedProjects);
-    };
+        setProjects(loadedProjects);
+      };
 
-    fetchProjects(
-      {
-        url: "http://localhost:3000/projects",
-      },
-      applyProjects
-    );
-  }, [fetchProjects]);
+      fetchProjects(
+        {
+          url: "http://localhost:3000/projects",
+        },
+        applyProjects
+      );
+    }
+  }, [fetchProjects, offerProjectModalCtx.showModal]);
 
   if (isLoading) {
     return (

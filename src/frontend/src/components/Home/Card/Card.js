@@ -18,7 +18,7 @@ const Card = (props) => {
     setLiked((prevState) => !prevState);
   };
 
-  const applyProject = (projectObject) => {
+  const getProject = (projectObject) => {
     const loadedProject = {
       ...projectObject,
       applicationDeadline: new Date(
@@ -50,7 +50,7 @@ const Card = (props) => {
       {
         url: `http://localhost:3000/projects/${projectData.id}`,
       },
-      applyProject
+      getProject
     );
   };
 
@@ -83,7 +83,7 @@ const Card = (props) => {
             More info
           </button>
           <button
-            onClick={moreInfoHandler}
+            onClick={applyModalCtx.showModalHandler}
             className={styles.apply}
           >
             Apply
