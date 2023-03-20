@@ -11,10 +11,12 @@ import * as cookieSession from "cookie-session";
 import { UsersModule } from "./users/users.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { CurrentUserMiddleware } from "./users/middleware/current-user.middleware";
+import { TagsModule } from './tags/tags.module';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Module({
   imports: [
+    TagsModule,
     UsersModule,
     ProjectsModule,
     ConfigModule.forRoot({
@@ -27,6 +29,7 @@ import { CurrentUserMiddleware } from "./users/middleware/current-user.middlewar
       autoLoadEntities: true,
       synchronize: true /** @dev DO NOT use synchronize:true in production */,
     }),
+    TagsModule,
   ],
 })
 export class AppModule {
