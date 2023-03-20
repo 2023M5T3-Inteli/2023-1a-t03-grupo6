@@ -14,7 +14,7 @@ const ReactSelect = forwardRef((props, ref) => {
         ref={ref}
         closeMenuOnSelect={false}
         components={animatedComponents}
-        isMulti
+        isMulti={props.isMulti}
         options={props.options}
         className={styles.reactSelect}
         styles={{
@@ -57,6 +57,10 @@ const ReactSelect = forwardRef((props, ref) => {
             ...baseStyles,
             color: "red",
             cursor: "pointer",
+          }),
+          singleValue: (baseStyles, state) => ({
+            ...baseStyles,
+            color: "white",
           }),
         }}
       />

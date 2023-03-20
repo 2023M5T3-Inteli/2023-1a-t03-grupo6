@@ -15,11 +15,13 @@ const keyWordsOptions = [
   { value: "react", label: "React" },
 ];
 
-const teamOptions = [
-  { value: "joão", label: "João" },
-  { value: "maria", label: "Maria" },
-  { value: "josé", label: "Jose" },
-  { value: "carla", label: "Carla" },
+const areaOptions = [
+  { value: "IT", label: "IT" },
+  { value: "Commercial", label: "Commercial" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "HR", label: "HR" },
+  { value: "Finance", label: "Finance" },
+  { value: "Legal", label: "Legal" },
 ];
 
 const OfferProject = () => {
@@ -38,43 +40,35 @@ const OfferProject = () => {
   const projectDescriptionInputRef = useRef();
   const projectKeywordsInputRef = useRef();
   const projectManagerInputRef = useRef();
-  const projectTeamMembersInputRef = useRef();
   const projectApplicationDeadlineInputRef = useRef();
   const projectEndDateInputRef = useRef();
   const projectStartDateInputRef = useRef();
   let enteredStatus;
 
   if (selectedRadioBtn === "radio1") {
-    enteredStatus = "Not Started";
+    enteredStatus = "Open";
   } else if (selectedRadioBtn === "radio2") {
     enteredStatus = "In progress";
   } else if (selectedRadioBtn === "radio3") {
-    enteredStatus = "To be Done";
+    enteredStatus = "Cancelled";
   }
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
     const enteredProjectName = projectNameInputRef.current.value;
-    const enteredProjectArea = projectAreaInputRef.current.value;
+    const enteredProjectArea = projectAreaInputRef.current.state.selectValue[0].value;
     const enteredProjectDescription = projectDescriptionInputRef.current.value;
     const enteredProjectApplicationDeadline =
       projectApplicationDeadlineInputRef.current.value;
     const enteredProjectEndDate = projectEndDateInputRef.current.value;
     const enteredProjectStartDate = projectStartDateInputRef.current.value;
     const enteredProjectKeywords = [];
-    const enteredProjectTeamMembers = [];
     
     const selectedKeywords = projectKeywordsInputRef.current.state.selectValue;
-    const selectedMembers =
-      projectTeamMembersInputRef.current.state.selectValue;
-
+    
     for (const key in selectedKeywords) {
       enteredProjectKeywords.push(selectedKeywords[key].value);
-    }
-
-    for (const key in selectedMembers) {
-      enteredProjectTeamMembers.push(selectedMembers[key].value);
     }
 
     const projectData = {
@@ -84,8 +78,8 @@ const OfferProject = () => {
       keywords: enteredProjectKeywords,
       manager: "John Doe",
       teamSize: +teamSize,
-      teamMembers: enteredProjectTeamMembers,
-      status: "Open",
+      teamMembers: [],
+      status: enteredStatus,
       applicationDeadline: enteredProjectApplicationDeadline,
       endDate: enteredProjectEndDate,
       startDate: enteredProjectStartDate,
@@ -182,7 +176,7 @@ const OfferProject = () => {
             >
               <div className={styles.modalWrapper}>
                 <header className={styles.header}>
-                  <h1 onClick={() => console.log(enteredStatus)}>
+                  <h1 onClick={() => console.log(projectAreaInputRef.current.state.selectValue[0].value)}>
                     Offer a Project
                   </h1>
                   <GrClose onClick={closeModalHandler} size={15} />
@@ -202,9 +196,10 @@ const OfferProject = () => {
                       </div>
                       <div className={styles.field}>
                         <label>Project area:</label>
-                        <input
+                        <ReactSelect
                           ref={projectAreaInputRef}
-                          placeholder="Tell us what the project area is"
+                          options={areaOptions}
+                          isMulti={false}
                         />
                       </div>
                       <div className={styles.field}>
@@ -231,15 +226,10 @@ const OfferProject = () => {
                         <ReactSelect
                           ref={projectKeywordsInputRef}
                           options={keyWordsOptions}
+                          isMulti={true}
                         />
                       </div>
-                      <div className={styles.field}>
-                        <label>Team:</label>
-                        <ReactSelect
-                          ref={projectTeamMembersInputRef}
-                          options={teamOptions}
-                        />
-                      </div>
+                      
                       <div className={styles.statusField}>
                         <label>Status:</label>
                         <div className={styles.radioInputContainer}>
@@ -251,7 +241,7 @@ const OfferProject = () => {
                               checked={isRadioSelected("radio1")}
                               onChange={handleRadioClick}
                             />
-                            <label>Not started</label>
+                            <label>Open</label>
                           </div>
                           <div className={styles.radioInput}>
                             <input
@@ -271,7 +261,7 @@ const OfferProject = () => {
                               checked={isRadioSelected("radio3")}
                               onChange={handleRadioClick}
                             />
-                            <label>To be done</label>
+                            <label>Cancelled</label>
                           </div>
                         </div>
                       </div>
