@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: "https://52.207.254.113:3000/projects",
+        url: "https://52.207.254.113:3008/projects",
         method: "POST",
         headers: {
           "content-type": "application/json",
