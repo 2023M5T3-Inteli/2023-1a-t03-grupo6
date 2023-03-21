@@ -47,7 +47,7 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: "https://52.207.254.113:3000/projects",
+          url: "http://52.207.254.113:3000/projects",
         },
         applyProjects
       );
