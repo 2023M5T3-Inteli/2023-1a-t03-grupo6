@@ -8,6 +8,7 @@ import { AppModule } from "./app.module";
 (async function () {
   /** instantiate new project */
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   /** set empty global validation pipe; configured at handler level */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
