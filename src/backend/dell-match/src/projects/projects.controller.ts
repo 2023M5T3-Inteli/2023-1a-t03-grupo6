@@ -17,13 +17,20 @@ import { UpdateProjectDto } from "./dto/update-project.dto";
 import { CurrentUser } from "./../users/decorators/current-user.decorator";
 
 import { throwError } from "./../utils/throwError.util";
+
+import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiBadRequestResponse, ApiOperation } from '@nestjs/swagger';
 //////////////////////////////////////////////////////////////////////////////////////
+
+@ApiTags('project')
 
 @Controller("projects")
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'create a new project' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   create(
     @Body() createProjectDto: CreateProjectDto,
     @CurrentUser() user: User
@@ -32,11 +39,18 @@ export class ProjectsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'find all projects' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
   findAll(@Query("name") name?: string): Promise<Project[]> {
     return this.projectsService.findAll(name);
   }
 
   @Get(":id")
+  @ApiOperation({ summary: 'find project by id' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   findOne(@Param("id") id: string): Promise<Project> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");
@@ -45,6 +59,10 @@ export class ProjectsController {
   }
 
   @Patch(":id")
+  @ApiOperation({ summary: 'update an existing project' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   update(
     @Param("id") id: string,
     @Body() updateProjectDto: UpdateProjectDto
@@ -56,6 +74,10 @@ export class ProjectsController {
   }
 
   @Delete(":id")
+  @ApiOperation({ summary: 'delete an existing project' })
+  @ApiCreatedResponse({ description: 'The record has been successfully created.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.'})
+  @ApiBadRequestResponse({ description: 'User id is not a number.'})
   remove(@Param("id") id: string): Promise<void> {
     if (Number.isNaN(+id))
       throwError("BadRequestException", "Project id is not a number");

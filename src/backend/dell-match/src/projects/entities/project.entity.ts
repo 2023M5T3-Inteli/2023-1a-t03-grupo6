@@ -43,8 +43,8 @@ export class Project {
   @Column("simple-array")
   teamMembers: string[];
 
-  @Column({ enum: ["open", "in progress", "cancelled"] })
-  status: string;
+  // @Column({ enum: ["open", "in progress", "cancelled"] })
+  // status: string;
 
   @Column()
   applicationDeadline: Date;
