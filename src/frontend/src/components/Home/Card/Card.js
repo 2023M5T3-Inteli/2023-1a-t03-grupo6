@@ -48,7 +48,7 @@ const Card = (props) => {
     
     fetchProject(
       {
-        url: `http://52.207.254.113:3000/projects/${projectData.id}`,
+        url: `http://44.202.40.149:3000/projects/${projectData.id}`,
       },
       getProject
     );
