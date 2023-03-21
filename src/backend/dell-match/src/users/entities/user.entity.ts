@@ -7,7 +7,7 @@
  */
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-import { Project } from "src/projects/entities/project.entity";
+import { Project } from "./../../projects/entities/project.entity";
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Entity()
@@ -34,6 +34,6 @@ export class User {
    * () => Project : solves circular dependency issue
    * project => project.user : critical to multiple relationships scenarios eg Reports, Users, Approvers
    */
-  @OneToMany(() => Project, (project) => project.manager)
+  @OneToMany((type) => Project, (project) => project.manager)
   projects: Project[];
 }

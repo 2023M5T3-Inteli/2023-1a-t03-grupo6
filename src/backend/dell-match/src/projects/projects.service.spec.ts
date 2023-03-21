@@ -5,12 +5,15 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
 
 import { Project } from "./entities/project.entity";
+import { User } from "../users/entities/user.entity";
 import { ProjectsService } from "./projects.service";
+import { UsersService } from "./../users/users.service";
 ////////////////////////////////////////////////////////////////////////////////////////
 
 describe("ProjectsService", () => {
   /** dependency instances */
   let service: ProjectsService;
+  let _usersService: UsersService;
 
   /** mock variables and objects */
   const _mockProject = {
@@ -27,6 +30,14 @@ describe("ProjectsService", () => {
     endDate: new Date("2023-04-30"),
   };
 
+  const _mockUser = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    jobTitle: "Software Engineer",
+    city: "New York",
+    country: "USA",
+  };
+
   /** mock dependency instances and module */
   beforeAll(() => {
     rmSync(path.join(__dirname, "../../db/test.sqlite"), {
@@ -41,15 +52,16 @@ describe("ProjectsService", () => {
         TypeOrmModule.forRoot({
           type: "sqlite",
           database: path.join(__dirname, "../../db/test.sqlite"),
-          entities: [Project],
+          entities: [Project, User],
           synchronize: true,
         }),
-        TypeOrmModule.forFeature([Project]),
+        TypeOrmModule.forFeature([Project, User]),
       ],
-      providers: [ProjectsService],
+      providers: [ProjectsService, UsersService],
     }).compile();
 
     service = module.get<ProjectsService>(ProjectsService);
+    _usersService = module.get<UsersService>(UsersService);
   });
 
   /** test suite */
@@ -58,23 +70,25 @@ describe("ProjectsService", () => {
   });
 
   it("should create a new project", async () => {
-    const _project = await service.create(_mockProject);
+    const _user = await _usersService.create(_mockUser);
+
+    const _project = await service.create(_mockProject, _user);
     expect(_project).toBeDefined();
     expect(_project).toHaveProperty("id");
     expect(_project).toHaveProperty("name", _mockProject.name);
     expect(_project).toHaveProperty("area", _mockProject.area);
     expect(_project).toHaveProperty("description", _mockProject.description);
     expect(_project).toHaveProperty("keywords", _mockProject.keywords);
-    expect(_project).toHaveProperty("manager", _mockProject.manager);
+    expect(_project).toHaveProperty("manager", _user);
     expect(_project).toHaveProperty("teamSize", _mockProject.teamSize);
     expect(_project).toHaveProperty("teamMembers", _mockProject.teamMembers);
     expect(_project).toHaveProperty("status", _mockProject.status);
   });
 
   it("should throw a BadRequestException if the project already exists", async () => {
-    await expect(service.create(_mockProject)).rejects.toThrow(
-      new BadRequestException("Project already exists")
-    );
+    await expect(
+      service.create(_mockProject, _mockUser as User)
+    ).rejects.toThrow(new BadRequestException("Project already exists"));
   });
 
   it("should throw a NotFoundException if the project does not exist", async () => {
@@ -112,7 +126,6 @@ describe("ProjectsService", () => {
     expect(_project).toHaveProperty("area", _mockProject.area);
     expect(_project).toHaveProperty("description", "Project 2 description");
     expect(_project).toHaveProperty("keywords", _mockProject.keywords);
-    expect(_project).toHaveProperty("manager", _mockProject.manager);
     expect(_project).toHaveProperty("teamSize", _mockProject.teamSize);
     expect(_project).toHaveProperty("teamMembers", _mockProject.teamMembers);
     expect(_project).toHaveProperty("status", _mockProject.status);

@@ -8,6 +8,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 
 import { Project } from "./entities/project.entity";
 import { ProjectsService } from "./projects.service";
+import { User } from "src/users/entities/user.entity";
 import { ProjectsController } from "./projects.controller";
 import { CreateProjectDto } from "./dto/create-project.dto";
 //////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +31,15 @@ describe("ProjectsController", () => {
     applicationDeadline: new Date("2023-03-31"),
     startDate: new Date("2023-04-01"),
     endDate: new Date("2023-04-30"),
+  };
+
+  const _mockUser = {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    jobTitle: "Software Engineer",
+    city: "New York",
+    country: "USA",
   };
 
   /** mock dependency instances and module */
@@ -81,30 +91,30 @@ describe("ProjectsController", () => {
   });
 
   it("should create new project @POST /projects", async () => {
-    const _project = await controller.create(_mockProject);
+    const _project = await controller.create(_mockProject, _mockUser as User);
     expect(_project).toEqual({ id: 1, ..._mockProject });
   });
 
   it("should return all projects @GET /projects", async () => {
-    await controller.create(_mockProject);
+    await controller.create(_mockProject, _mockUser as User);
     const _projects = await controller.findAll();
     expect(_projects).toEqual([{ id: 1, ..._mockProject }]);
   });
 
   it("should return all projects by name @GET /projects?name=Project 1", async () => {
-    await controller.create(_mockProject);
+    await controller.create(_mockProject, _mockUser as User);
     const _projects = await controller.findAll("Project 1");
     expect(_projects).toEqual([{ id: 1, ..._mockProject }]);
   });
 
   it("should return a project by id @GET /projects/:id", async () => {
-    await controller.create(_mockProject);
+    await controller.create(_mockProject, _mockUser as User);
     const _project = await controller.findOne("1");
     expect(_project).toEqual({ id: 1, ..._mockProject });
   });
 
   it("should update a project by id @PUT /projects/:id", async () => {
-    await controller.create(_mockProject);
+    await controller.create(_mockProject, _mockUser as User);
     const _project = await controller.update("1", {
       name: "Project 2",
     });
@@ -112,7 +122,7 @@ describe("ProjectsController", () => {
   });
 
   it("should delete a project by id @DELETE /projects/:id", async () => {
-    await controller.create(_mockProject);
+    await controller.create(_mockProject, _mockUser as User);
     await controller.remove("1");
     const _projects = await controller.findAll();
     expect(_projects).toEqual([]);

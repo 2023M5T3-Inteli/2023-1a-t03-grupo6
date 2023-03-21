@@ -5,7 +5,13 @@
  * insert(), update(), delete() : hooks will NOT be executed
  * @AfterInsert, @AfterUpdate, ...: executed ONLY upon entity instances, NOT upon plain objects
  */
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+} from "typeorm";
 
 import { User } from "../../users/entities/user.entity";
 //////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +59,6 @@ export class Project {
    * () => User : solves circular dependency issue
    * user => user.reports : critical to multiple relationships scenarios eg Reports, Users, Approvers
    */
-  @ManyToOne(() => User, (user) => user.projects)
+  @ManyToOne((type) => User, (user) => user.projects)
   manager: User;
 }
