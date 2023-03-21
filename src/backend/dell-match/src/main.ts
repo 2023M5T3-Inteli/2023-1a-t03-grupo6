@@ -22,5 +22,5 @@ import { AppModule } from "./app.module";
   SwaggerModule.setup('api', app, document);
 
   /** start server listener */
-  await app.listen(3000, () => console.log("Server running on port 3000."));
+  await app.listen(3006, () => console.log("Server running on port 3006."));
 })();
