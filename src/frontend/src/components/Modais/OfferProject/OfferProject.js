@@ -1,4 +1,5 @@
-import { useContext } from "react";import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { GrClose } from "react-icons/gr";
 import { BsFileEarmarkArrowUp } from "react-icons/bs";
 
@@ -6,6 +7,7 @@ import ProjectModalCtx from "../../../context/project-modal-ctx";
 import ReactSelect from "../../ReactSelect/ReactSelect";
 
 import styles from "./OfferProject.module.scss";
+import useHttp from "../../../hooks/use-http";
 
 const keyWordsOptions = [
   { value: "javascript", label: "Java Script" },
@@ -13,19 +15,102 @@ const keyWordsOptions = [
   { value: "react", label: "React" },
 ];
 
-const teamOptions = [
-  { value: "joão", label: "João" },
-  { value: "maria", label: "Maria" },
-  { value: "josé", label: "Jose" },
-  { value: "carla", label: "Carla" },
+const areaOptions = [
+  { value: "IT", label: "IT" },
+  { value: "Commercial", label: "Commercial" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "HR", label: "HR" },
+  { value: "Finance", label: "Finance" },
+  { value: "Legal", label: "Legal" },
 ];
 
 const OfferProject = () => {
   const modalCtx = useContext(ProjectModalCtx);
+  const { isLoading, error, sendRequest: postProject } = useHttp();
+  const [teamSize, setTeamSize] = useState(1);
+  const [didSubmit, setDidSubmit] = useState(false);
+  const [selectedRadioBtn, setSelectedRadioBtn] = useState("radio1");
 
-  const submitHandler = (event) => {
+  const isRadioSelected = (value) => selectedRadioBtn === value;
+  const handleRadioClick = (event) =>
+    setSelectedRadioBtn(event.target.defaultValue);
+
+  const projectNameInputRef = useRef();
+  const projectAreaInputRef = useRef();
+  const projectDescriptionInputRef = useRef();
+  const projectKeywordsInputRef = useRef();
+  const projectManagerInputRef = useRef();
+  const projectApplicationDeadlineInputRef = useRef();
+  const projectEndDateInputRef = useRef();
+  const projectStartDateInputRef = useRef();
+  let enteredStatus;
+
+  if (selectedRadioBtn === "radio1") {
+    enteredStatus = "Open";
+  } else if (selectedRadioBtn === "radio2") {
+    enteredStatus = "In progress";
+  } else if (selectedRadioBtn === "radio3") {
+    enteredStatus = "Cancelled";
+  }
+
+  const submitHandler = async (event) => {
     event.preventDefault();
+
+    const enteredProjectName = projectNameInputRef.current.value;
+    const enteredProjectArea = projectAreaInputRef.current.state.selectValue[0].value;
+    const enteredProjectDescription = projectDescriptionInputRef.current.value;
+    const enteredProjectApplicationDeadline =
+      projectApplicationDeadlineInputRef.current.value;
+    const enteredProjectEndDate = projectEndDateInputRef.current.value;
+    const enteredProjectStartDate = projectStartDateInputRef.current.value;
+    const enteredProjectKeywords = [];
+    
+    const selectedKeywords = projectKeywordsInputRef.current.state.selectValue;
+    
+    for (const key in selectedKeywords) {
+      enteredProjectKeywords.push(selectedKeywords[key].value);
+    }
+
+    const projectData = {
+      name: enteredProjectName,
+      area: enteredProjectArea,
+      description: enteredProjectDescription,
+      keywords: enteredProjectKeywords,
+      manager: "John Doe",
+      teamSize: +teamSize,
+      teamMembers: [],
+      status: enteredStatus,
+      applicationDeadline: enteredProjectApplicationDeadline,
+      endDate: enteredProjectEndDate,
+      startDate: enteredProjectStartDate,
+    };
+
+    postProject(
+      {
+        url: "http://localhost:3000/projects",
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: projectData,
+      },
+      () => {
+        setDidSubmit(true);
+      }
+    );
   };
+
+  const closeModalHandler = () => {
+    setDidSubmit(false);
+    modalCtx.showModalHandler();
+  };
+
+  let teamSizeCounter = [];
+
+  for (let index = 0; index < teamSize; index++) {
+    teamSizeCounter.push(index);
+  }
 
   return (
     <AnimatePresence>
@@ -47,7 +132,7 @@ const OfferProject = () => {
                 delay: 0.3,
               },
             }}
-            onClick={() => modalCtx.showModalHandler()}
+            onClick={closeModalHandler}
             className={styles.modalBackdrop}
           ></motion.div>
           <motion.div
@@ -91,125 +176,170 @@ const OfferProject = () => {
             >
               <div className={styles.modalWrapper}>
                 <header className={styles.header}>
-                  <h1>Offer a Project</h1>
-                  <GrClose onClick={modalCtx.showModalHandler} size={15} />
+                  <h1 onClick={() => console.log(projectAreaInputRef.current.state.selectValue[0].value)}>
+                    Offer a Project
+                  </h1>
+                  <GrClose onClick={closeModalHandler} size={15} />
                 </header>
                 <div className={styles.formWrapper}>
-                  <form
-                    className={styles.formContainer}
-                    onSubmit={submitHandler}
-                  >
-                    <div className={styles.field}>
-                      <label>Project title:</label>
-                      <input placeholder="Tell us a title that defines the project" />
-                    </div>
-                    <div className={styles.field}>
-                      <label>Project area:</label>
-                      <input placeholder="Tell us what the project area is" />
-                    </div>
-                    <div className={styles.field}>
-                      <label>Project description:</label>
-                      <textarea placeholder="Tell us more about the project" />
-                    </div>
-                    <label htmlFor="inputTag" className={styles.field}>
-                      <label>Existing documentation:</label>
-                      <div className={styles.embedFile}>
-                        <BsFileEarmarkArrowUp size={25} />
-                        <p>Embed a file</p>
+                  {!isLoading && !error && !didSubmit && (
+                    <form
+                      onSubmit={submitHandler}
+                      className={styles.formContainer}
+                    >
+                      <div className={styles.field}>
+                        <label>Project title:</label>
                         <input
-                          id="inputTag"
-                          type="file"
+                          ref={projectNameInputRef}
+                          placeholder="Tell us a title that defines the project"
+                        />
+                      </div>
+                      <div className={styles.field}>
+                        <label>Project area:</label>
+                        <ReactSelect
+                          ref={projectAreaInputRef}
+                          options={areaOptions}
+                          isMulti={false}
+                        />
+                      </div>
+                      <div className={styles.field}>
+                        <label>Project description:</label>
+                        <textarea
+                          ref={projectDescriptionInputRef}
                           placeholder="Tell us more about the project"
                         />
                       </div>
-                    </label>
-                    <div className={styles.field}>
-                      <label>Key words:</label>
-                      <ReactSelect options={keyWordsOptions} />
-                    </div>
-                    <div className={styles.field}>
-                      <label>Team:</label>
-                      <ReactSelect options={teamOptions} />
-                    </div>
-                    <div className={styles.statusField}>
-                      <label>Status:</label>
-                      <div className={styles.radioInputContainer}>
-                        <div className={styles.radioInput}>
-                          <input type="radio" />
-                          <p>Not started</p>
+                      <label htmlFor="inputTag" className={styles.field}>
+                        <label>Existing documentation:</label>
+                        <div className={styles.embedFile}>
+                          <BsFileEarmarkArrowUp size={25} />
+                          <p>Embed a file</p>
+                          <input
+                            id="inputTag"
+                            type="file"
+                            placeholder="Tell us more about the project"
+                          />
                         </div>
-                        <div className={styles.radioInput}>
-                          <input type="radio" />
-                          <p>In progress</p>
-                        </div>
-                        <div className={styles.radioInput}>
-                          <input type="radio" />
-                          <p>To be done</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.dateContainer}>
+                      </label>
                       <div className={styles.field}>
-                        <label>Application Deadline:</label>
-                        <input type="date" />
+                        <label>Key words:</label>
+                        <ReactSelect
+                          ref={projectKeywordsInputRef}
+                          options={keyWordsOptions}
+                          isMulti={true}
+                        />
+                      </div>
+                      
+                      <div className={styles.statusField}>
+                        <label>Status:</label>
+                        <div className={styles.radioInputContainer}>
+                          <div className={styles.radioInput}>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio1"
+                              checked={isRadioSelected("radio1")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>Open</label>
+                          </div>
+                          <div className={styles.radioInput}>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio2"
+                              checked={isRadioSelected("radio2")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>In progress</label>
+                          </div>
+                          <div className={styles.radioInput}>
+                            <input
+                              type="radio"
+                              name="react-radio-btn"
+                              value="radio3"
+                              checked={isRadioSelected("radio3")}
+                              onChange={handleRadioClick}
+                            />
+                            <label>Cancelled</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={styles.dateContainer}>
+                        <div className={styles.field}>
+                          <label>Application Deadline:</label>
+                          <input
+                            ref={projectApplicationDeadlineInputRef}
+                            type="date"
+                          />
+                        </div>
+                        <div className={styles.field}>
+                          <label>Start date:</label>
+                          <input ref={projectStartDateInputRef} type="date" />
+                        </div>
+                        <div className={styles.field}>
+                          <label>End date:</label>
+                          <input ref={projectEndDateInputRef} type="date" />
+                        </div>
                       </div>
                       <div className={styles.field}>
-                        <label>End date:</label>
-                        <input type="date" />
+                        <label>People needed for the project: </label>
+                        <input
+                          onChange={(event) => setTeamSize(event.target.value)}
+                          value={teamSize}
+                          type="number"
+                          className={styles.numberInput}
+                          min="1"
+                        />
                       </div>
-                      <div className={styles.field}>
-                        <label>Start date:</label>
-                        <input type="date" />
+                      <div className={styles.occupationContainer}>
+                        {teamSizeCounter.map((index) => {
+                          return (
+                            <div key={index} className={styles.occupationBx}>
+                              <div className={styles.field}>
+                                <label>{index + 1}st Occupation</label>
+                                <input placeholder="Occupation" />
+                              </div>
+                              <div className={styles.field}>
+                                <label>{index + 1}st Role</label>
+                                <input placeholder="Role" />
+                              </div>
+                              <div className={styles.field}>
+                                <label>{index + 1}st Area</label>
+                                <input placeholder="Area" />
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
-                    </div>
-                    <div className={styles.field}>
-                      <label>People needed for the project: </label>
-                      <input type="number" className={styles.numberInput} />
-                    </div>
-                    <div className={styles.occupationContainer}>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>1st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>1st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
+                      <div className={styles.submtiContainer}>
+                        <button
+                          className={styles.cancelBtn}
+                          onClick={modalCtx.showModalHandler}
+                        >
+                          Cancel post
+                        </button>
+                        <button className={styles.submitBtn} type="submit">
+                          Post Project
+                        </button>
                       </div>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>2st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>2st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
-                      </div>
-                      <div className={styles.occupationBx}>
-                        <div className={styles.field}>
-                          <label>3st Occupation Type</label>
-                          <input placeholder="Occupation Type" />
-                        </div>
-                        <div className={styles.field}>
-                          <label>3st Occupation</label>
-                          <input placeholder="Occupation" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.submtiContainer}>
-                      <button
-                        className={styles.cancelBtn}
-                        onClick={modalCtx.showModalHandler}
-                      >
-                        Cancel post
-                      </button>
-                      <button className={styles.submitBtn} type="submit">
-                        Post Project
-                      </button>
-                    </div>
-                  </form>
+                    </form>
+                  )}
+                  {isLoading && (
+                    <section className={styles.projectsLoading}>
+                      <p>Loading...</p>
+                    </section>
+                  )}
+                  {error && (
+                    <section className={styles.projectsError}>
+                      <p>{error}</p>
+                    </section>
+                  )}
+                  {!isLoading && !error && didSubmit && (
+                    <section>
+                      <p>Project created!</p>
+                    </section>
+                  )}
                 </div>
               </div>
             </motion.div>

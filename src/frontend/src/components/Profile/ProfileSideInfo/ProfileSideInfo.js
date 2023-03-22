@@ -1,8 +1,33 @@
 // import { BsFiletypePdf } from "react-icons/bs";
 
 import styles from "./ProfileSideInfo.module.scss";
+import { useState, useEffect } from "react";
+
 
 const ProfileSideInfo = () => {
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [jobTitle, setJobTitle] = useState("")
+  const [email, setEmail] = useState("")
+  const [country, setCountry] = useState("")
+  const [age, setAge] = useState(0)
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('http://44.202.40.149:3000/users/1')
+      const data = await response.json()
+      setName(data['name'])
+      setCity(data['city'])
+      setJobTitle(data['jobTitle'])
+      setAge(data['age'])
+      setCountry(data['country'])
+
+    }
+    fetchData()
+
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.infosContainer}>
@@ -13,10 +38,10 @@ const ProfileSideInfo = () => {
           />
         </div>
         <div className={styles.personalInfos}>
-          <h3>ANDREIA CARMO</h3>
-          <p>Frontend developer</p>
+          <h3>{name}</h3>
+          <p>{jobTitle}</p>
           <div className={styles.address}>
-            <p>São Paulo - Brasil</p>
+            <p>{city} - {country} </p>
           </div>
         </div>
         <div className={styles.favoriteTags}>
@@ -38,7 +63,7 @@ const ProfileSideInfo = () => {
             target="_blank"
             href="https://drive.google.com/file/d/1_UCDJRZZ0mmDDCLH4o_DbTcucD97OMsm/view?usp=share_link"
           >
-            Andreia Carmo Curriculum
+            {name} Curriculum
           </a>
         </div>
       </div>

@@ -2,14 +2,21 @@ import { createContext, useState } from "react";
 
 const InfoModalCtx = createContext({
   showModal: false,
+  projectData: {},
   showModalHandler: () => {},
+  projectDataHandler: () => {},
 });
 
 export const InfoModalCtxProvider = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [projectData, setProjectData] = useState();
 
   const showModalHandler = () => {
     setShowModal(!showModal);
+  };
+
+  const projectDataHandler = (data) => {
+    setProjectData(data);
   };
 
   return (
@@ -17,6 +24,8 @@ export const InfoModalCtxProvider = (props) => {
       value={{
         showModal: showModal,
         showModalHandler: showModalHandler,
+        projectDataHandler: projectDataHandler,
+        projectData: projectData,
       }}
     >
       {props.children}
@@ -24,4 +33,4 @@ export const InfoModalCtxProvider = (props) => {
   );
 };
 
-export default InfoModalCtx
+export default InfoModalCtx;
