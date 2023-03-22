@@ -6,6 +6,7 @@ import { Profile } from "./pages/profile";
 import { Projects } from "./pages/projects";
 import { FAQ } from "./pages/faq";
 import { MyProjects } from "./pages/myProjects";
+import { Login } from "./pages/login";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
