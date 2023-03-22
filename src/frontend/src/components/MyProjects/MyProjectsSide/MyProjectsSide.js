@@ -9,7 +9,7 @@ const MyProjectsSide = (props) => {
   return (
     <div className={styles.SideContent}>
       <SearchBox />
-      {!props.showLikedProjects && (
+      {props.myProjectState.showYourProjects && (
         <>
           <div className={styles.IntKeyWords}>
             <p>Filters that can help you</p>
