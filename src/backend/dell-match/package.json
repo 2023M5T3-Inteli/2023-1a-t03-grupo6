@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "start": "nest start",
-    "start:dev": "NODE_ENV=dev nest start --watch",
+    "start:dev": "nest start --watch",
     "start:prod": "node dist/main",
     "test": "NODE_ENV=test jest --maxWorkers=1",
     "test:watch": "NODE_ENV=test jest --watch --maxWorkers=1",

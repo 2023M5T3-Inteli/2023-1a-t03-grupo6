@@ -26,6 +26,8 @@ import { AppModule } from "./app.module";
   /** set empty global validation pipe; configured at handler level */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
+  app.enableCors()
+
   /** start server listener */
   await app.listen(3000, () => console.log("Server running on port 3000."));
 })();

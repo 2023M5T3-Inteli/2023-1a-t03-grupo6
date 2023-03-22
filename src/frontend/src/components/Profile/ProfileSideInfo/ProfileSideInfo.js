@@ -15,7 +15,7 @@ const ProfileSideInfo = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://44.202.40.149:3000/users/3')
+      const response = await fetch('http://44.202.40.149:3000/users/1')
       const data = await response.json()
       setName(data['name'])
       setCity(data['city'])
