@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: "http://localhost:3000/projects",
+        url: "http://44.202.40.149:3000/projects",
         method: "POST",
         headers: {
           "content-type": "application/json",
