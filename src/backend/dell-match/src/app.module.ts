@@ -11,6 +11,7 @@ import * as cookieSession from "cookie-session";
 import { UsersModule } from "./users/users.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { CurrentUserMiddleware } from "./users/middleware/current-user.middleware";
+import { HealthModule } from './health/health.module';
 //////////////////////////////////////////////////////////////////////////////////////
 
 @Module({
@@ -31,6 +32,7 @@ import { CurrentUserMiddleware } from "./users/middleware/current-user.middlewar
       autoLoadEntities: true,
       synchronize: true /** @dev DO NOT use synchronize:true in production */,
     }),
+    HealthModule,
   ],
 })
 export class AppModule {

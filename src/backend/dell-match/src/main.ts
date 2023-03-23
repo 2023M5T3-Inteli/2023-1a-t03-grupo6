@@ -23,6 +23,7 @@ import { AppModule } from "./app.module";
     credentials: true,
   });
 
+  
   /** set empty global validation pipe; configured at handler level */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
