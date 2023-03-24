@@ -1,8 +1,10 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
+  const navigate = useNavigate();
   const emailInputRef = useRef();
 
   const submitHandler = async (event) => {
@@ -11,25 +13,25 @@ const LoginForm = (props) => {
     const enteredEmail = emailInputRef.current.value;
 
     const fetchData = {
-        email: enteredEmail
-    }
+      email: enteredEmail,
+    };
 
-    const response = await fetch("http://44.202.40.149:3000/users/signin", {
+    const response = await fetch("http://localhost:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fetchData),
     });
 
-    console.log(response);
-
     const responseData = await response.json();
 
-    console.log(responseData);
+    localStorage.setItem("userData", JSON.stringify(responseData));
+
+    navigate("/");
   };
 
   return (
     <div className={styles.container}>
-      <h1>Login</h1>
+      <h1 onClick={()=> console.log(localStorage)}>Login</h1>
       <form onSubmit={submitHandler}>
         <div className={styles.field}>
           <input placeholder="Email Address" type="email" ref={emailInputRef} />

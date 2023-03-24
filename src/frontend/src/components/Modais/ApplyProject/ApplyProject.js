@@ -12,6 +12,10 @@ const keyWordsOptions = [
   { value: "backend_developer", label: "Back-end developer" },
   { value: "ux_designer", label: "UX Designer" },
 ];
+const RoleOptions = [
+  { value: "shadow", label: "Shadow" },
+  { value: "technical", label: "Technical" },
+];
 
 const ApplyProject = () => {
   const modalCtx = useContext(ApplyModalCtx);
@@ -87,21 +91,36 @@ const ApplyProject = () => {
                   <div className={styles.applyContainer}>
                     <div className={styles.field}>
                       <label>Project:</label>
-                      <p>
-                        Web Application for Sales Ocupation
-                      </p>
+                      <p>Web Application for Sales Ocupation</p>
                     </div>
-                    <div className={styles.field}>
-                      <label>Occupation</label>
-                      <ReactSelect options={keyWordsOptions}/>
+                    <div className={styles.fieldsBx}>
+                      <div className={styles.field}>
+                        <label>Occupation</label>
+                        <ReactSelect options={keyWordsOptions} />
+                      </div>
+                      <div className={styles.field}>
+                        <label>Role</label>
+                        <ReactSelect options={RoleOptions} />
+                      </div>
                     </div>
                     <div className={styles.essayField}>
                       <label>Why would you like to apply for this job?</label>
                       <textarea placeholder="Tell us why you'd like to apply" />
                     </div>
+                    <div className={styles.awareBx}>
+                          <input type={"checkbox"} />
+                          <p>My manager is aware of what I am doing.</p>
+                        </div>
                     <div className={styles.btnContainer}>
                       <button onClick={modalCtx.showModalHandler} type="submit">
                         Close post
+                      </button>
+                      <button
+                        className={styles.submitBtn}
+                        onClick={modalCtx.showModalHandler}
+                        type="submit"
+                      >
+                        Apply
                       </button>
                     </div>
                   </div>

@@ -159,14 +159,44 @@
     font-size: 1.6rem;
     font-weight: 600;
     transition: 200ms;
-    background-color: var(--blue);
+    background-color: var(--dark-gray);
     color: var(--white);
-    border: 1px solid var(--blue);
+    border: 1px solid var(--light-gray);
     margin: 1rem;
 
     &:hover {
       scale: 1.04;
       opacity: 0.95;
+    }
+  }
+}
+
+.submitBtn {
+  background-color: var(--blue)!important;
+  color: var(--white);
+  border: 1px solid var(--blue)!important;
+  margin: 1rem;
+}
+
+.fieldsBx{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.awareBx{
+  display: flex;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+
+  input{
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: 200ms;
+
+    &:hover{
+      scale: 1.1;
     }
   }
 }

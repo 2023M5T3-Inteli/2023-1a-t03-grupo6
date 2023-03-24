@@ -3,29 +3,23 @@
 import styles from "./ProfileSideInfo.module.scss";
 import { useState, useEffect } from "react";
 
-
 const ProfileSideInfo = () => {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
-  const [jobTitle, setJobTitle] = useState("")
-  const [email, setEmail] = useState("")
-  const [country, setCountry] = useState("")
-  const [age, setAge] = useState(0)
-
+  const [jobTitle, setJobTitle] = useState("");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('http://44.202.40.149:3000/users/1')
-      const data = await response.json()
-      setName(data['name'])
-      setCity(data['city'])
-      setJobTitle(data['jobTitle'])
-      setAge(data['age'])
-      setCountry(data['country'])
+    function fetchData() {
+      const userData = JSON.parse(localStorage.getItem("userData"));
 
+      setName(userData.name);
+      setCity(userData.city);
+      setJobTitle(userData.jobTitle);
+      setCountry(userData.country);
     }
-    fetchData()
-
+    fetchData();
   }, []);
 
   return (
@@ -41,7 +35,9 @@ const ProfileSideInfo = () => {
           <h3>{name}</h3>
           <p>{jobTitle}</p>
           <div className={styles.address}>
-            <p>{city} - {country} </p>
+            <p>
+              {city} - {country}{" "}
+            </p>
           </div>
         </div>
         <div className={styles.favoriteTags}>

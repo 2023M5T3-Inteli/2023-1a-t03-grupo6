@@ -12,7 +12,7 @@ const ReactSelect = forwardRef((props, ref) => {
     <>
       <Select
         ref={ref}
-        closeMenuOnSelect={false}
+        closeMenuOnSelect={true}
         components={animatedComponents}
         isMulti={props.isMulti}
         options={props.options}

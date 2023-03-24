@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import ApplyModalCtx from "../../../context/apply-modal-ctx";
 import InfoModalCtx from "../../../context/info-modal-ctx";
@@ -8,11 +8,33 @@ import styles from "./Card.module.scss";
 
 const Card = (props) => {
   const [liked, setLiked] = useState(false);
+  const [userData, setUserData] = useState("");
   const moreInfoModalCtx = useContext(InfoModalCtx);
   const applyModalCtx = useContext(ApplyModalCtx);
   const { isLoading, error, sendRequest: fetchProject } = useHttp();
 
   const projectData = props.projectData;
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (projectData.manager) {
+  //       const fetchData = {
+  //         email: projectData.manager,
+  //       };
+
+  //       const response = await fetch("http://localhost:3000/users/signin", {
+  //         method: "POST",
+  //         headers: { "content-type": "application/json" },
+  //         body: JSON.stringify(fetchData),
+  //       });
+
+  //       const responseData = await response.json();
+
+  //       setUserData(responseData);
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, []);
 
   const likeHandler = () => {
     setLiked((prevState) => !prevState);
@@ -40,12 +62,12 @@ const Card = (props) => {
       }),
     };
 
-    moreInfoModalCtx.projectDataHandler(loadedProject)
+    moreInfoModalCtx.projectDataHandler(loadedProject);
   };
 
   const moreInfoHandler = () => {
-    moreInfoModalCtx.showModalHandler()
-    
+    moreInfoModalCtx.showModalHandler();
+
     fetchProject(
       {
         url: `http://44.202.40.149:3000/projects/${projectData.id}`,
@@ -65,8 +87,8 @@ const Card = (props) => {
             />
           </div>
           <div className={styles.profileInfoContent}>
-            <h4>Joyce Batista</h4>
-            <p>Web developer</p>
+            <h4>{userData.name ? userData.name : "Usuário antes da integração"}</h4>
+            <p>{userData.jobTitle ? userData.jobTitle : "Usuário antes da integração"}</p>
           </div>
         </div>
         <div className={styles.actionContainer}>

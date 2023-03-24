@@ -93,6 +93,10 @@ const ImportantInfo = () => {
                         <label>Project description:</label>
                         <p>{projectData.description}</p>
                       </div>
+                      <div className={styles.descriptionField}>
+                        <label>Avaiable link:</label>
+                        <p>No link provided</p>
+                      </div>
                       <div className={styles.field}>
                         <label>Existing documentation:</label>
                         <a
@@ -112,7 +116,7 @@ const ImportantInfo = () => {
                           ))}
                         </ul>
                       </div>
-                      <div className={styles.field}>
+                      {/* <div className={styles.field}>
                         <label>Team:</label>
                         <ul>
                           {projectData.teamMembers.map((teamMember) => (
@@ -122,10 +126,10 @@ const ImportantInfo = () => {
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </div> */}
                       <div className={styles.field}>
                         <label>Status:</label>
-                        <p className={styles.statusP}>{projectData.status}</p>
+                        <p className={styles.statusP}>Open</p>
                       </div>
                       <div className={styles.field}>
                         <label>Application Deadline:</label>
@@ -152,30 +156,44 @@ const ImportantInfo = () => {
                       <div className={styles.occupationContainer}>
                         <div className={styles.occupationType}>
                           <div className={styles.field}>
-                            <label>1st occupation type:</label>
+                            <label>1 - Occupation:</label>
+                            <p>Frontend Developer</p>
+                          </div>
+                          <div className={styles.field}>
+                            <label>2 - Occupation:</label>
+                            <p>Backend Developer</p>
+                          </div>
+                          <div className={styles.field}>
+                            <label>3 - Occupation:</label>
+                            <p>Fullstack Developer</p>
+                          </div>
+                        </div>
+                        <div className={styles.occupationName}>
+                          <div className={styles.field}>
+                            <label>1 - Role:</label>
+                            <p>Technical</p>
+                          </div>
+                          <div className={styles.field}>
+                            <label>2 - Role:</label>
                             <p>Shadow</p>
                           </div>
                           <div className={styles.field}>
-                            <label>2st occupation type:</label>
-                            <p>Shadow</p>
-                          </div>
-                          <div className={styles.field}>
-                            <label>3st occupation type:</label>
+                            <label>3 - Role:</label>
                             <p>Shadow</p>
                           </div>
                         </div>
                         <div className={styles.occupationName}>
                           <div className={styles.field}>
-                            <label>1st occupation:</label>
-                            <p>Front-end developer</p>
+                            <label>1 - Area:</label>
+                            <p>Marketing</p>
                           </div>
                           <div className={styles.field}>
-                            <label>2st occupation:</label>
-                            <p>Back-end developer</p>
+                            <label>2 - Area:</label>
+                            <p>Finance</p>
                           </div>
                           <div className={styles.field}>
-                            <label>3st occupation:</label>
-                            <p>UX Designer</p>
+                            <label>3 - Area:</label>
+                            <p>Marketing</p>
                           </div>
                         </div>
                       </div>

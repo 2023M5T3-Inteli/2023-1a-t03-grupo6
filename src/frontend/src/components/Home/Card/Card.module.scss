@@ -95,7 +95,8 @@
 .projectInfos{
     ul{
         li{
-            font-size: 1.4rem;
+            margin-left: 1rem;
+            font-size: 1.7rem;
             font-weight: bold;
             letter-spacing: 0.8px;
 
@@ -114,16 +115,15 @@
         margin-top: 1.5rem;
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
 
         p{
-            font-size: 0.8rem;
+            font-size: 1.5rem;
             font-weight: lighter;
             color: var(--white);
             border: 1px solid var(--white);
             border-radius: 1rem;
-            padding: 0.3rem 0.5rem;
-            margin-right: 1rem;
+            padding: 0.3rem 1rem;
+            margin-right: 2rem;
             
         }
     }

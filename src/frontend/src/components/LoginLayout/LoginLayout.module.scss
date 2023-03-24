@@ -21,7 +21,7 @@
   }
 
   p {
-    font-size: 1.1rem;
+    font-size: 1.7rem;
     font-weight: lighter;
   }
 }
@@ -30,4 +30,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-left: 2px solid var(--dell-border);
 }

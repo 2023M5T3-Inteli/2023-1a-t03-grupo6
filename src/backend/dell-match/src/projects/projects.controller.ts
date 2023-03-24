@@ -7,6 +7,7 @@ import {
   Query,
   Delete,
   Controller,
+  Headers,
 } from "@nestjs/common";
 
 import { Project } from "./entities/project.entity";
@@ -32,9 +33,11 @@ export class ProjectsController {
   @ApiCreatedResponse({ description: 'The record has been successfully created.'})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   create(
+    @Headers() headers: Headers,
     @Body() createProjectDto: CreateProjectDto,
     @CurrentUser() user: User
   ): Promise<Project> {
+    console.log(headers)
     return this.projectsService.create(createProjectDto, user);
   }
 

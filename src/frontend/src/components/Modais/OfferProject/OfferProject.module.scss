@@ -26,7 +26,7 @@
   justify-content: center;
   color: var(--white);
 }
-  
+
 .modalWrapper {
   overflow-y: scroll;
   height: calc(100vh - 10rem);
@@ -106,14 +106,17 @@
     margin-bottom: 0.4rem;
   }
 
-  input,
-  textarea {
+  input {
     background: var(--dark-gray);
     border: 1px solid var(--light-gray);
     border-radius: 0.6rem;
     width: 100%;
     padding: 0.5rem 1rem;
     color: var(--white);
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
   }
 
   textarea {
@@ -168,7 +171,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  
+
   input {
     accent-color: var(--light-gray);
     margin-right: 1rem;
@@ -242,4 +245,20 @@
   font-size: 1.6rem;
   text-align: center;
   color: red;
+}
+
+.awareBx{
+  display: flex;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+
+  input{
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: 200ms;
+
+    &:hover{
+      scale: 1.1;
+    }
+  }
 }

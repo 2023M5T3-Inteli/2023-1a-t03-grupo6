@@ -31,6 +31,8 @@ const OfferProject = () => {
   const [didSubmit, setDidSubmit] = useState(false);
   const [selectedRadioBtn, setSelectedRadioBtn] = useState("radio1");
 
+  // const userData = JSON.parse(localStorage.getItem("userData"));
+
   const isRadioSelected = (value) => selectedRadioBtn === value;
   const handleRadioClick = (event) =>
     setSelectedRadioBtn(event.target.defaultValue);
@@ -39,7 +41,6 @@ const OfferProject = () => {
   const projectAreaInputRef = useRef();
   const projectDescriptionInputRef = useRef();
   const projectKeywordsInputRef = useRef();
-  const projectManagerInputRef = useRef();
   const projectApplicationDeadlineInputRef = useRef();
   const projectEndDateInputRef = useRef();
   const projectStartDateInputRef = useRef();
@@ -57,16 +58,16 @@ const OfferProject = () => {
     event.preventDefault();
 
     const enteredProjectName = projectNameInputRef.current.value;
-    const enteredProjectArea = projectAreaInputRef.current.state.selectValue[0].value;
+    const enteredProjectArea =
+      projectAreaInputRef.current.state.selectValue[0].value;
     const enteredProjectDescription = projectDescriptionInputRef.current.value;
     const enteredProjectApplicationDeadline =
       projectApplicationDeadlineInputRef.current.value;
     const enteredProjectEndDate = projectEndDateInputRef.current.value;
     const enteredProjectStartDate = projectStartDateInputRef.current.value;
     const enteredProjectKeywords = [];
-    
     const selectedKeywords = projectKeywordsInputRef.current.state.selectValue;
-    
+
     for (const key in selectedKeywords) {
       enteredProjectKeywords.push(selectedKeywords[key].value);
     }
@@ -76,7 +77,6 @@ const OfferProject = () => {
       area: enteredProjectArea,
       description: enteredProjectDescription,
       keywords: enteredProjectKeywords,
-      manager: "John Doe",
       teamSize: +teamSize,
       teamMembers: [],
       status: enteredStatus,
@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: "http://44.202.40.149:3000/projects",
+        url: "http://localhost:3000/projects",
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -176,7 +176,7 @@ const OfferProject = () => {
             >
               <div className={styles.modalWrapper}>
                 <header className={styles.header}>
-                  <h1 onClick={() => console.log(projectAreaInputRef.current.state.selectValue[0].value)}>
+                  <h1 onClick={() => console.log(localStorage)}>
                     Offer a Project
                   </h1>
                   <GrClose onClick={closeModalHandler} size={15} />
@@ -204,10 +204,14 @@ const OfferProject = () => {
                       </div>
                       <div className={styles.field}>
                         <label>Project description:</label>
-                        <textarea
+                        <input
                           ref={projectDescriptionInputRef}
                           placeholder="Tell us more about the project"
                         />
+                      </div>
+                      <div className={styles.field}>
+                        <label>Avaiable link:</label>
+                        <input placeholder="List any link avaiable" />
                       </div>
                       <label htmlFor="inputTag" className={styles.field}>
                         <label>Existing documentation:</label>
@@ -229,7 +233,7 @@ const OfferProject = () => {
                           isMulti={true}
                         />
                       </div>
-                      
+
                       <div className={styles.statusField}>
                         <label>Status:</label>
                         <div className={styles.radioInputContainer}>
@@ -253,7 +257,7 @@ const OfferProject = () => {
                             />
                             <label>In progress</label>
                           </div>
-                          <div className={styles.radioInput}>
+                          {/* <div className={styles.radioInput}>
                             <input
                               type="radio"
                               name="react-radio-btn"
@@ -262,7 +266,7 @@ const OfferProject = () => {
                               onChange={handleRadioClick}
                             />
                             <label>Cancelled</label>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className={styles.dateContainer}>
@@ -297,20 +301,24 @@ const OfferProject = () => {
                           return (
                             <div key={index} className={styles.occupationBx}>
                               <div className={styles.field}>
-                                <label>{index + 1}st Occupation</label>
-                                <input placeholder="Occupation" />
+                                <label>{index + 1} - Occupation</label>
+                                <input placeholder="Frontend developer" />
                               </div>
                               <div className={styles.field}>
-                                <label>{index + 1}st Role</label>
-                                <input placeholder="Role" />
+                                <label>{index + 1} - Role</label>
+                                <input placeholder="Technical or Shadow" />
                               </div>
                               <div className={styles.field}>
-                                <label>{index + 1}st Area</label>
-                                <input placeholder="Area" />
+                                <label>{index + 1} - Area</label>
+                                <input placeholder="Marketing" />
                               </div>
                             </div>
                           );
                         })}
+                        <div className={styles.awareBx}>
+                          <input type={"checkbox"} />
+                          <p>My manager is aware of what I am doing.</p>
+                        </div>
                       </div>
                       <div className={styles.submtiContainer}>
                         <button

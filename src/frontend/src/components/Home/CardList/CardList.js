@@ -24,16 +24,19 @@ const CardList = (props) => {
             ).toLocaleDateString("en", {
               year: "numeric",
               month: "long",
+              day: "numeric",
             }),
             startDate: new Date(
               projectObject[projectKey].startDate
             ).toLocaleDateString("en", {
+              day: "numeric",
               year: "numeric",
               month: "long",
             }),
             endDate: new Date(
               projectObject[projectKey].endDate
             ).toLocaleDateString("en", {
+              day: "numeric",
               year: "numeric",
               month: "long",
             }),
