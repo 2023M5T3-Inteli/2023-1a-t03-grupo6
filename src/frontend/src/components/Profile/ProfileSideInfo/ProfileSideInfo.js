@@ -39,19 +39,8 @@ const ProfileSideInfo = () => {
         </div>
         <div className={styles.personalInfos}>
           <h3>{name}</h3>
-          <p>{jobTitle}</p>
           <div className={styles.address}>
             <p>{city} - {country} </p>
-          </div>
-        </div>
-        <div className={styles.favoriteTags}>
-          <h1>Favorite Tags</h1>
-          <div className={styles.favoriteTagsBx}>
-            <ul>
-              <li>Java Script</li>
-              <li>Frontend</li>
-              <li>UX Design</li>
-            </ul>
           </div>
         </div>
       </div>

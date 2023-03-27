@@ -18,7 +18,7 @@ const ProfileMain = () => {
             Email: <span>andreia.carmo@dell.com</span>
           </p>
           <p>
-            Current area: <span>IT</span>
+            Job Title: <span>Software Engeneering</span>
           </p>
           <p>
             Job type: <span>Remote</span>
@@ -27,10 +27,9 @@ const ProfileMain = () => {
             <SiMicrosoftteams size={20} />
             Teams
           </button>
+  
         </div>
-        <div className={styles.editBtnBx}>
-          <button>Edit</button>
-        </div>
+      
       </div>
       <div className={styles.profileStats}>
         <div className={styles.technologies}>

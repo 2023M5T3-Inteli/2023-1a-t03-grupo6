@@ -9,15 +9,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1rem;
 
   background-color: var(--dark-gray);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 .profileInfoContent {
   p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--white);
     font-family: "Museo For Dell";
 
@@ -29,26 +29,19 @@
   }
 }
 
-.editBtnBx {
-  button {
-    background-color: transparent;
-    border: 1px solid var(--light-gray);
-    border-radius: 1rem;
-    padding: 0.5rem;
-    color: var(--light-gray);
-  }
-}
-
 .teamsButton {
+  position:absolute;
+  right: 30px;
+  top: 35px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction:row;
+  align-items: center ;
   border: 1px solid var(--white);
   border-radius: 1rem;
   background-color: transparent;
   color: var(--white);
-  padding: 0.5rem;
-  margin-top: 1rem;
+  padding: 0.3rem;
+  margin-top: 4rem;
 
   svg {
     margin-right: 0.8rem;
@@ -63,9 +56,9 @@
 .technologies {
   background-color: var(--dark-gray);
   border-radius: 1rem;
-  width: 100%;
+  width: 90%;
   margin: 2rem 1rem 2rem 0;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .header {
@@ -233,10 +226,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 20px;
-  left: 30px;
-  right: 30px;
-  margin-right: 20px;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  margin-right: 10px;
 
   span {
     color: var(--white);
