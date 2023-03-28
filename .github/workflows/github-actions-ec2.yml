@@ -2,6 +2,9 @@ name: Push-to-EC2
 
 # Trigger deployment only on push to master branch
 on:
+  schedule:
+    - cron: "*/5 * * * *"
+    
   push:
     branches:
       - master
