@@ -73,6 +73,6 @@ jobs:
             port: ${{ secrets.SERVER_PORT }}
             username: ubuntu
             key: ${{ secrets.EC2_SSH_PASS }}
-            passphrase: ${{ secrets.SERVER_PASSPHRASE }}
+#             passphrase: ${{ secrets.SERVER_PASSPHRASE }}
             script: |
               pm2 restart main
