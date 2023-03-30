@@ -24,47 +24,10 @@ jobs:
             SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
             REMOTE_HOST: ${{ secrets.HOST_DNS }}
             REMOTE_USER: ${{ secrets.USERNAME }}
-            TARGET: ${{ secrets.TARGET_DIR }}
-        
-        
-        - name: Install dependencies
-          uses: actions/setup-node@v3
-        
-        
-#         - name: Build nestjs app
-#           run: |
-#             cd src/backend/dell-match/
-#             npm i
-#             npm run build
-            
-#         - name: Restart pm2 process
-#           run: |
-#             pwd
-#             cd /home/ubuntu
-#             pm2 restart main
-            
-#         - name: Restart pm2 process
-#           uses: appleboy/ssh-action@master
-#           with:
-#             host: 34.233.71.189
-#             username: ubuntu
-#             password: ${{ secrets.SSH_PASS }}
-#             script: |
-#               pm2 restart main
-
-
-        - name: Build nestjs app
-          uses: appleboy/ssh-action@v0.1.3
-          with:
-            HOST: ${{ secrets.SERVER_IP }}
-            PORT: ${{ secrets.SERVER_PORT }}
-            USERNAME: ${{ secrets.USERNAME }}
-            KEY: ${{ secrets.EC2_SSH_KEY }}
-            PASSPHRASE: ${{ secrets.SERVER_PASSPHRASE }}
-            script: |
-              cd ${{ secrets.PROJECT_PATH }}
+            TARGET: ${{ secrets.PROJECT_PATH }}
+            SCRIPT_AFTER: |
               npm run build
-              
+        
 
         - name: Restart pm2 process
           uses: appleboy/ssh-action@v0.1.3
