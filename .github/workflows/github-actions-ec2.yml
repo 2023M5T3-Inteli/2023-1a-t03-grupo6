@@ -37,8 +37,17 @@ jobs:
             npm i
             npm run build
             
+#         - name: Restart pm2 process
+#           run: |
+#             pwd
+#             cd /home/ubuntu
+#             pm2 restart main
+            
         - name: Restart pm2 process
-          run: |
-            pwd
-            cd /home/ubuntu
-            pm2 restart main
+          uses: appleboy/ssh-action@master
+          with:
+            host: 34.233.71.189
+            username: ubuntu
+            password: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              pm2 restart main
