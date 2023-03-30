@@ -28,15 +28,4 @@ jobs:
               cd src/backend/dell-match
               npm i
               npm run build
-        
-
-        - name: Restart pm2 process
-          uses: appleboy/ssh-action@v0.1.3
-          with:
-            host: ${{ secrets.SERVER_IP }}
-            port: ${{ secrets.SERVER_PORT }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.EC2_SSH_PASS }}
-#             passphrase: ${{ secrets.SERVER_PASSPHRASE }}
-            script: |
               pm2 restart main
