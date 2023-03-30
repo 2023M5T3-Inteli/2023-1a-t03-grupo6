@@ -71,7 +71,7 @@ jobs:
           with:
             host: ${{ secrets.SERVER_IP }}
             port: ${{ secrets.SERVER_PORT }}
-            username: ubuntu
+            username: ${{ secrets.USERNAME }}
             key: ${{ secrets.EC2_SSH_PASS }}
 #             passphrase: ${{ secrets.SERVER_PASSPHRASE }}
             script: |
