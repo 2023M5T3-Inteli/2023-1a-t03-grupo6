@@ -39,5 +39,4 @@ jobs:
             
         - name: Restart pm2 process
           run: |
-            sudo ln -s "/home/ubuntu/.nvm/versions/node/v19.8.1/bin/pm2" "/usr/local/bin/pm2"
             pm2 restart main
