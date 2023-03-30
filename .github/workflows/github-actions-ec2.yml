@@ -58,7 +58,7 @@ jobs:
             host: ${{ secrets.SERVER_IP }}
             port: ${{ secrets.SERVER_PORT }}
             username: ubuntu
-            key: ${{ secrets.SSH_PASS }}
-            passphrase: ${{ secrets.SERVER_PASSPHRASE }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+#             passphrase: ${{ secrets.SERVER_PASSPHRASE }}
             script: |
               pm2 restart main
