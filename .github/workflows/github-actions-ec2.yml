@@ -26,6 +26,7 @@ jobs:
             REMOTE_USER: ${{ secrets.USERNAME }}
             SCRIPT_AFTER: |
               cd src/backend/dell-match
+              npm i
               npm run build
         
 
