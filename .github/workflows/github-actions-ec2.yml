@@ -28,13 +28,13 @@ jobs:
         
         
         - name: Install dependencies
-          uses: actions/setup-node@v1
+          uses: actions/setup-node@v3
         
         
         - name: Build nestjs app
           run: |
             cd src/backend/dell-match/
-            pwd
+            npm i
             npm run build
             
         - name: Restart pm2 process
