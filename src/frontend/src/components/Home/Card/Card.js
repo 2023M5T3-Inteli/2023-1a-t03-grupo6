@@ -70,7 +70,7 @@ const Card = (props) => {
 
     fetchProject(
       {
-        url: `http://44.202.40.149:3000/projects/${projectData.id}`,
+        url: `http://${process.env.FRONT_URL}:3000/projects/${projectData.id}`,
       },
       getProject
     );
