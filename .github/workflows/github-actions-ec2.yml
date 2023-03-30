@@ -27,7 +27,7 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
           
       - name: Go to backend directory
-        run: cd ~/2023-1a-t03-grupo6/src/backend/dell-match/
+        run: pwd
         
       - name: Build nestjs app
         run: npm run build
