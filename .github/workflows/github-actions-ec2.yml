@@ -48,6 +48,6 @@ jobs:
           with:
             host: 34.233.71.189
             username: ubuntu
-            password: ${{ secrets.EC2_SSH_KEY }}
+            password: ${{ secrets.SSH_PASS }}
             script: |
               pm2 restart main
