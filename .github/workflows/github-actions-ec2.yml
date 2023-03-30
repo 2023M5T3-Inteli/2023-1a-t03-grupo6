@@ -39,4 +39,6 @@ jobs:
             
         - name: Restart pm2 process
           run: |
+            pwd
+            cd /home/ubuntu
             pm2 restart main
