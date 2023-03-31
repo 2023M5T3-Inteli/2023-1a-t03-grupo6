@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: `http://${process.env.FRONT_URL}:3000/projects`,
+        url: `http://18.213.246.108:3000/projects`,
         method: "POST",
         headers: {
           "content-type": "application/json",

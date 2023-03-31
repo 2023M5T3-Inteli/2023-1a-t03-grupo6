@@ -50,7 +50,7 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: `http://${process.env.FRONT_URL}:3000/projects`,
+          url: `http://18.213.246.108:3000/projects`,
         },
         applyProjects
       );
