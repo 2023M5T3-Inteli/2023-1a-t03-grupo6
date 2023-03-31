@@ -5,6 +5,7 @@ import ImportantInfo from "./components/Modais/ImportantInfo/ImportantInfo";
 import ApplyProject from "./components/Modais/ApplyProject/ApplyProject";
 import ApprovedProject from './components/ApprovedProject/ApprovedProject';
 import RejectedProject from './components/RejectedProject/RejectedProject';
+import EditProject from "./components/Modais/EditProject/EditProject";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Navbar />
       <HomeLayout />
       <OfferProject />
+      <EditProject />
       <ImportantInfo />
       <ApplyProject />
       <ApprovedProject />

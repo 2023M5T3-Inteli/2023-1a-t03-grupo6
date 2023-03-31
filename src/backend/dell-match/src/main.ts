@@ -19,11 +19,10 @@ import { AppModule } from "./app.module";
       "https://www.example.com",
       "https://app.example.com",
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE", "PATCH"],
     credentials: true,
   });
 
-  
   /** set empty global validation pipe; configured at handler level */
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 

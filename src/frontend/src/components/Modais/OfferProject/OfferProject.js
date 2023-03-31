@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: `http://${process.env.FRONT_URL}:3000/projects`,
+        url: `${process.env.REACT_APP_BASE_URL}/projects`,
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -176,7 +176,7 @@ const OfferProject = () => {
             >
               <div className={styles.modalWrapper}>
                 <header className={styles.header}>
-                  <h1 onClick={() => console.log(localStorage)}>
+                  <h1>
                     Offer a Project
                   </h1>
                   <GrClose onClick={closeModalHandler} size={15} />

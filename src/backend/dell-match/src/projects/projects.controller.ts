@@ -37,7 +37,6 @@ export class ProjectsController {
     @Body() createProjectDto: CreateProjectDto,
     @CurrentUser() user: User
   ): Promise<Project> {
-    console.log(headers)
     return this.projectsService.create(createProjectDto, user);
   }
 

@@ -31,7 +31,7 @@ const LoginForm = (props) => {
 
   return (
     <div className={styles.container}>
-      <h1 onClick={()=> console.log(localStorage)}>Login</h1>
+      <h1>Login</h1>
       <form onSubmit={submitHandler}>
         <div className={styles.field}>
           <input placeholder="Email Address" type="email" ref={emailInputRef} />

@@ -4,10 +4,13 @@ import useHttp from "../../../hooks/use-http";
 import Card from "../Card/Card";
 
 import styles from "./CardList.module.scss";
+import EditModalCtx from "../../../context/edit-modal-ctx";
 
 const CardList = (props) => {
   const [projects, setProjects] = useState([]);
   const offerProjectModalCtx = useContext(ProjectModalCtx);
+  const editProjectModalCtx = useContext(EditModalCtx);
+  const [updateProjectList, setUpdateProjectList] = useState(0);
 
   const { isLoading, error, sendRequest: fetchProjects } = useHttp();
 
@@ -50,12 +53,21 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: `http://${process.env.FRONT_URL}:3000/projects`,
+          url: `${process.env.REACT_APP_BASE_URL}/projects`,
+          headers: {
+            "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
         },
         applyProjects
       );
     }
-  }, [fetchProjects, offerProjectModalCtx.showModal]);
+  }, [
+    fetchProjects,
+    offerProjectModalCtx.showModal,
+    updateProjectList,
+    editProjectModalCtx.showModal,
+  ]);
 
   if (isLoading) {
     return (
@@ -76,7 +88,13 @@ const CardList = (props) => {
   return (
     <div className={styles.cardlist}>
       {projects.map((project) => {
-        return <Card key={project.id} projectData={project} />;
+        return (
+          <Card
+            onDelete={setUpdateProjectList}
+            key={project.id}
+            projectData={project}
+          />
+        );
       })}
     </div>
   );

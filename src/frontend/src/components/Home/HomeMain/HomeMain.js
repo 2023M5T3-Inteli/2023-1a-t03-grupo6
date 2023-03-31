@@ -12,7 +12,7 @@ const HomeMain = () => {
         <div className={styles.contentHeader}>
           <div>
             <h1>What's happening in Dell Technologies?</h1>
-            <span>Checkout the latest projects</span>
+            <span>Checkout the latest oi</span>
           </div>
 
           <button onClick={modalCtx.showModalHandler}>Offer a project</button>

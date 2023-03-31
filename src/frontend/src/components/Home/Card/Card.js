@@ -1,44 +1,30 @@
 import { useContext, useEffect, useState } from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiOutlineEdit } from "react-icons/ai";
 import ApplyModalCtx from "../../../context/apply-modal-ctx";
 import InfoModalCtx from "../../../context/info-modal-ctx";
 import useHttp from "../../../hooks/use-http";
 
 import styles from "./Card.module.scss";
+import EditModalCtx from "../../../context/edit-modal-ctx";
 
 const Card = (props) => {
   const [liked, setLiked] = useState(false);
   const [userData, setUserData] = useState("");
   const moreInfoModalCtx = useContext(InfoModalCtx);
+  const editModalCtx = useContext(EditModalCtx);
   const applyModalCtx = useContext(ApplyModalCtx);
-  const { isLoading, error, sendRequest: fetchProject } = useHttp();
+  const { sendRequest: fetchProject } = useHttp();
+  const { sendRequest: deleteProject } = useHttp();
 
   const projectData = props.projectData;
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     if (projectData.manager) {
-  //       const fetchData = {
-  //         email: projectData.manager,
-  //       };
-
-  //       const response = await fetch("http://localhost:3000/users/signin", {
-  //         method: "POST",
-  //         headers: { "content-type": "application/json" },
-  //         body: JSON.stringify(fetchData),
-  //       });
-
-  //       const responseData = await response.json();
-
-  //       setUserData(responseData);
-  //     }
-  //   };
-  //   fetchUserData();
-  // }, []);
 
   const likeHandler = () => {
     setLiked((prevState) => !prevState);
   };
+
+  const editHandler = () => {
+    editModalCtx.showModalHandler(projectData.id)
+  }
 
   const getProject = (projectObject) => {
     const loadedProject = {
@@ -70,10 +56,25 @@ const Card = (props) => {
 
     fetchProject(
       {
-        url: `http://${process.env.FRONT_URL}:3000/projects/${projectData.id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
       },
       getProject
     );
+  };
+
+  const deleteProjectHandler = async () => {
+    await deleteProject(
+      {
+        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+      () => {}
+    );
+    props.onDelete((prevState) => prevState + 1);
   };
 
   return (
@@ -87,12 +88,18 @@ const Card = (props) => {
             />
           </div>
           <div className={styles.profileInfoContent}>
-            <h4>{userData.name ? userData.name : "Usuário antes da integração"}</h4>
-            <p>{userData.jobTitle ? userData.jobTitle : "Usuário antes da integração"}</p>
+            <h4>
+              {userData.name ? userData.name : "Usuário antes da integração"}
+            </h4>
+            <p>
+              {userData.jobTitle
+                ? userData.jobTitle
+                : "Usuário antes da integração"}
+            </p>
           </div>
         </div>
         <div className={styles.actionContainer}>
-          {liked ? (
+          {/* {liked ? (
             <AiFillHeart color={"var(--red)"} onClick={likeHandler} size={20} />
           ) : (
             <AiOutlineHeart
@@ -100,15 +107,21 @@ const Card = (props) => {
               onClick={likeHandler}
               size={20}
             />
-          )}
+          )} */}
+
+          <AiOutlineEdit onClick={editHandler} size={20}/>
+
           <button onClick={moreInfoHandler} className={styles.moreInfo}>
             More info
           </button>
-          <button
+          {/* <button
             onClick={applyModalCtx.showModalHandler}
             className={styles.apply}
           >
             Apply
+          </button> */}
+          <button onClick={deleteProjectHandler} className={styles.apply}>
+            Delete
           </button>
         </div>
       </div>
@@ -123,7 +136,7 @@ const Card = (props) => {
         <div className={styles.projectInfos}>
           <ul>
             <li>
-              Status: <span>{projectData.status}</span>
+              Status: <span>Open</span>
             </li>
             <li>
               Application Deadline:{" "}
