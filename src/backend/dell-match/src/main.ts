@@ -38,7 +38,6 @@ import { AppModule } from "./app.module";
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
-  app.enableCors();
 
   /** start server listener */
   await app.listen(3000, () => console.log("Server running on port 3000."));
