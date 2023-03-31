@@ -10,8 +10,8 @@ import { AppModule } from "./app.module";
   const app = await NestFactory.create(AppModule, { cors: true });
 
   app.enableCors({
-    origin: "*",
-    methods: "*",
+    origin: true,
+    methods: 'GET,POST',
     credentials: true,
   });
 
