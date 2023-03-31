@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: `http://localhost:8080/mockDB`,
+        url: `http://18.213.246.108:3000/projects`,
         method: "POST",
         headers: {
           "content-type": "application/json",
