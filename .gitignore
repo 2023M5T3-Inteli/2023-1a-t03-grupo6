@@ -13,10 +13,6 @@ db/
 # compiled output
 /build
 
-# env
-.env
-*.env.*
-
 # logs
 logs
 *.log
