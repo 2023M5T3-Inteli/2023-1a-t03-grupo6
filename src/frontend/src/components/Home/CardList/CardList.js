@@ -50,7 +50,7 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: `http://18.213.246.108:3000/projects`,
+          url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects`,
         },
         applyProjects
       );
