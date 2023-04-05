@@ -1,49 +1,9 @@
 {
-  "mockDB": [
+  "projects": [],
+  "users": [
     {
-      "name": "brjhdbgfvi",
-      "area": "Marketing",
-      "description": "xftbtdxf",
-      "keywords": [
-        "python"
-      ],
-      "teamSize": 1,
-      "teamMembers": [],
-      "status": "Open",
-      "applicationDeadline": "2023-03-22",
-      "endDate": "2023-04-07",
-      "startDate": "2023-04-05",
+      "email": "luizkama28@gmail.com",
       "id": 1
-    },
-    {
-      "name": "test 2",
-      "area": "Marketing",
-      "description": "dfbdfx",
-      "keywords": [
-        "python"
-      ],
-      "teamSize": 1,
-      "teamMembers": [],
-      "status": "Open",
-      "applicationDeadline": "2023-03-22",
-      "endDate": "2023-04-04",
-      "startDate": "2023-03-27",
-      "id": 2
-    },
-    {
-      "name": "rzdvarzdx",
-      "area": "Marketing",
-      "description": "zdvzdrbf",
-      "keywords": [
-        "javascript"
-      ],
-      "teamSize": 1,
-      "teamMembers": [],
-      "status": "Open",
-      "applicationDeadline": "2023-03-23",
-      "endDate": "2023-04-07",
-      "startDate": "2023-04-05",
-      "id": 3
     }
   ]
 }

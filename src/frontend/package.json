@@ -24,7 +24,7 @@
     "build": "env-cmd -f .env.frontend react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --host 10.0.129.166 server.json -w -p 8080"
+    "server": "json-server server.json -w -p 8080"
   },
   "eslintConfig": {
     "extends": [

@@ -15,11 +15,11 @@ import ContextsProviders from "./components/ContextsProviders/ContextsProviders"
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
   },
   {
-    path: "/",
+    path: "/home",
     element: <App />,
   },
   {

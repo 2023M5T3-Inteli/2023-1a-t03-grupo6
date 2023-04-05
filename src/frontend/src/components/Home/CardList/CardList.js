@@ -53,7 +53,7 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: `http://localhost:8080/mockDB`,
+          url: `${process.env.REACT_APP_BASE_URL}/projects`,
           headers: {
             "content-type": "application/json",
             "Access-Control-Allow-Origin": "*",

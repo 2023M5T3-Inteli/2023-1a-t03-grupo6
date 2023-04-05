@@ -56,7 +56,7 @@ const Card = (props) => {
 
     fetchProject(
       {
-        url: `http://localhost:8080/mockDB/${projectData.id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
       },
       getProject
     );
@@ -65,7 +65,7 @@ const Card = (props) => {
   const deleteProjectHandler = async () => {
     await deleteProject(
       {
-        url: `http://localhost:8080/mockDB/${projectData.id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
         method: "DELETE",
         headers: {
           "content-type": "application/json",

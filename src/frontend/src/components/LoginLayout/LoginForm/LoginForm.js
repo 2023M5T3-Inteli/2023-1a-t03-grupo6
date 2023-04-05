@@ -16,7 +16,7 @@ const LoginForm = (props) => {
       email: enteredEmail,
     };
 
-    const response = await fetch("http://localhost:3000/users/signin", {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fetchData),
@@ -26,7 +26,7 @@ const LoginForm = (props) => {
 
     localStorage.setItem("userData", JSON.stringify(responseData));
 
-    navigate("/");
+    navigate("/home");
   };
 
   return (

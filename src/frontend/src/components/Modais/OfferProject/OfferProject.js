@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: `http://localhost:8080/mockDB`,
+        url: `${process.env.REACT_APP_BASE_URL}/projects`,
         method: "POST",
         headers: {
           "content-type": "application/json",
