@@ -11,7 +11,7 @@ import { AppModule } from "./app.module";
 
   app.enableCors({
     origin: true,
-    methods: ["GET", "POST", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "DELETE", "PATCH", "OPTION"],
     credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204,
