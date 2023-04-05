@@ -16,7 +16,7 @@ const LoginForm = (props) => {
       email: enteredEmail,
     };
 
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users/signin`, {
+    const response = await fetch(`http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/users/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fetchData),

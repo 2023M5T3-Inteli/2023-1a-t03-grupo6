@@ -56,7 +56,7 @@ const Card = (props) => {
 
     fetchProject(
       {
-        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
+        url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects/${projectData.id}`,
       },
       getProject
     );
@@ -65,7 +65,7 @@ const Card = (props) => {
   const deleteProjectHandler = async () => {
     await deleteProject(
       {
-        url: `${process.env.REACT_APP_BASE_URL}/projects/${projectData.id}`,
+        url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects/${projectData.id}`,
         method: "DELETE",
         headers: {
           "content-type": "application/json",

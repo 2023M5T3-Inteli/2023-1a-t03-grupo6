@@ -53,7 +53,7 @@ const CardList = (props) => {
 
       fetchProjects(
         {
-          url: `${process.env.REACT_APP_BASE_URL}/projects`,
+          url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects`,
           headers: {
             "content-type": "application/json",
             "Access-Control-Allow-Origin": "*",

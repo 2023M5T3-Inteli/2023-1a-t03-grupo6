@@ -85,7 +85,7 @@ const EditProject = () => {
 
     editProject(
       {
-        url: `${process.env.REACT_APP_BASE_URL}/projects/${modalCtx.projectId}`,
+        url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects/${modalCtx.projectId}`,
         method: "PATCH",
         headers: {
           "content-type": "application/json",

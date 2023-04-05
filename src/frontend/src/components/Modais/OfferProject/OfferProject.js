@@ -87,7 +87,7 @@ const OfferProject = () => {
 
     postProject(
       {
-        url: `${process.env.REACT_APP_BASE_URL}/projects`,
+        url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects`,
         method: "POST",
         headers: {
           "content-type": "application/json",
