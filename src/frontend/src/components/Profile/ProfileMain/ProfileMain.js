@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import { SiMicrosoftteams } from "react-icons/si";
 
 import tempChart from "../../../assets/tempChart.png";
@@ -7,18 +8,37 @@ import exampleImgProject from "../../../assets/exampleImgProject.jpg";
 import styles from "./ProfileMain.module.scss";
 
 const ProfileMain = () => {
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
+
+  useEffect(() => {
+    function fetchData() {
+      const userData = JSON.parse(localStorage.getItem("userData"));
+
+      setName(userData.name);
+      setCity(userData.city);
+      setEmail(userData.email)
+      setJobTitle(userData.jobTitle);
+      setCountry(userData.country);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.profileMain}>
       <div className={styles.profileInfo}>
         <div className={styles.profileInfoContent}>
           <p>
-            Full Name: <span>Andreia Carmo de Andrade</span>
+            Full Name: <span>{name}</span>
           </p>
           <p>
-            Email: <span>andreia.carmo@dell.com</span>
+            Email: <span>{email}</span>
           </p>
           <p>
-            Current area: <span>IT</span>
+            Current area: <span>{jobTitle}</span>
           </p>
           <p>
             Job type: <span>Remote</span>

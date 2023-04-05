@@ -18,7 +18,7 @@ const Navbar = () => {
     [navigate]
   );
   const handleOnClickHome = useCallback(
-    () => navigate("/", { replace: true }),
+    () => navigate("/home", { replace: true }),
     [navigate]
   );
   const handleOnClickProjects = useCallback(
