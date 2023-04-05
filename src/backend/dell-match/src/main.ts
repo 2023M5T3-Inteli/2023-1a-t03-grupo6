@@ -13,6 +13,11 @@ import { AppModule } from "./app.module";
     origin: true,
     methods: ["GET", "POST", "DELETE", "PATCH"],
     credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Authorization"],
+    maxAge: 3600,
   });
 
   /** set empty global validation pipe; configured at handler level */
