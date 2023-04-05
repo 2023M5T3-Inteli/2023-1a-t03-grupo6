@@ -10,15 +10,7 @@ import { AppModule } from "./app.module";
   const app = await NestFactory.create(AppModule, { cors: true });
 
   app.enableCors({
-    origin: [
-      "http://localhost:3001",
-      "http://example.com",
-      "http://www.example.com",
-      "http://app.example.com",
-      "https://example.com",
-      "https://www.example.com",
-      "https://app.example.com",
-    ],
+    origin: true,
     methods: ["GET", "POST", "DELETE", "PATCH"],
     credentials: true,
   });
@@ -36,7 +28,6 @@ import { AppModule } from "./app.module";
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
-  app.enableCors();
 
   /** start server listener */
   await app.listen(3000, () => console.log("Server running on port 3000."));

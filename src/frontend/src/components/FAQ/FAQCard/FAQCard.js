@@ -2,16 +2,15 @@ import styles from '../style.module.scss'
 
 const FAQCard = ({ title, body, tags}) => {
     return (
-      <div className={styles.cardcontainer}>
-        <h2>{title}</h2>
-        <div className= {styles.tagscontainer}>
+      <div className={styles.cardfaq}>
+        <p>{title}</p>
+        <div>
         {tags.map(tag => (
-          <p className={styles.tag}>{tag}</p>
+          <span>{tag}</span>
         ))}
         </div>
-        <p>{body}</p>
+        <span><p>{body}</p></span>
       </div>
     );
   };
-  
 export default FAQCard;
