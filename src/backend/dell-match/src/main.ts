@@ -10,8 +10,7 @@ import { AppModule } from "./app.module";
   const app = await NestFactory.create(AppModule, { cors: true });
 
   app.enableCors({
-    origin: 'http://dellmatch-prod-bucket.s3-website-us-east-1.amazonaws.com',
-    // origin: true,
+    origin: true,
     methods: 'GET,POST,DELETE,PATCH,OPTIONS',
     credentials: true,
     preflightContinue: false,
