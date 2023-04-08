@@ -68,8 +68,10 @@ const Card = (props) => {
         url: `http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects/${projectData.id}`,
         method: "DELETE",
         headers: {
-          "content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+          'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'
         },
       },
       () => {}

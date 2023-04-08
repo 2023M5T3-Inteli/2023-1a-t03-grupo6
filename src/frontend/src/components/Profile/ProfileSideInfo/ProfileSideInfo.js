@@ -2,6 +2,7 @@
 
 import styles from "./ProfileSideInfo.module.scss";
 import { useState, useEffect } from "react";
+import Design from '../../../assets/koko.png';
 
 const ProfileSideInfo = () => {
   const [name, setName] = useState("");
@@ -27,7 +28,7 @@ const ProfileSideInfo = () => {
       <div className={styles.infosContainer}>
         <div className={styles.pictureBx}>
           <img
-            src="https://cdn-icons-png.flaticon.com/512/666/666201.png"
+            src={Design}
             alt="profile-picture"
           />
         </div>

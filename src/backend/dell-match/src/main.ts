@@ -8,9 +8,17 @@ import { AppModule } from "./app.module";
 (async function () {
   /** instantiate new project */
   const app = await NestFactory.create(AppModule, { cors: true });
+  var whitelist = ['example.com', 'api.example.com'];
 
   app.enableCors({
-    origin: true,
+    origin: function (origin, callback) {
+      if (!origin || whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    // origin: true,
     methods: 'GET,POST,DELETE,PATCH,OPTIONS',
     credentials: true,
     preflightContinue: false,

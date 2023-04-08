@@ -1,8 +1,8 @@
 async function test(){
-  console.log(await fetch("http://18.213.246.108:3000/projects", {
+  console.log(await fetch("http://dellmatch-prod-alb-1086496184.us-east-1.elb.amazonaws.com/projects", {
     "headers": {
       "content-type": "application/json",
-      "Referer": "http://deploy-dellmatch-app.s3-website-us-east-1.amazonaws.com/",
+      "Referer": "http://dellmatch-prod-bucket.s3-website-us-east-1.amazonaws.com/",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Access-Control-Allow-Origin": "*",
     },

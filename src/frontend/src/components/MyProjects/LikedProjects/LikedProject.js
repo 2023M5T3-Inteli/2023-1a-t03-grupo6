@@ -9,107 +9,12 @@ const LikedProject = () => {
     <div className={styles.ProjectsList}>
       <div>
         <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
+          Web app development<AiFillHeart size={26} />{" "}
         </p>
         <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
-        </div>
-        <span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            laoreet a lacus eget hendrerit. Cras non convallis quam, sit amet
-            congue risus. Pellentesque quis accumsan dolor. Donec volutpat
-            libero dui, vel accumsan nunc volutpat ut. Morbi id feugiat est, sed
-            aliquet ante.
-          </p>
-        </span>
-      </div>
-      <div>
-        <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
-        </p>
-        <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
-        </div>
-        <span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            laoreet a lacus eget hendrerit. Cras non convallis quam, sit amet
-            congue risus. Pellentesque quis accumsan dolor. Donec volutpat
-            libero dui, vel accumsan nunc volutpat ut. Morbi id feugiat est, sed
-            aliquet ante.
-          </p>
-        </span>
-      </div>
-      <div>
-        <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
-        </p>
-        <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
-        </div>
-        <span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            laoreet a lacus eget hendrerit. Cras non convallis quam, sit amet
-            congue risus. Pellentesque quis accumsan dolor. Donec volutpat
-            libero dui, vel accumsan nunc volutpat ut. Morbi id feugiat est, sed
-            aliquet ante.
-          </p>
-        </span>
-      </div>
-      <div>
-        <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
-        </p>
-        <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
-        </div>
-        <span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            laoreet a lacus eget hendrerit. Cras non convallis quam, sit amet
-            congue risus. Pellentesque quis accumsan dolor. Donec volutpat
-            libero dui, vel accumsan nunc volutpat ut. Morbi id feugiat est, sed
-            aliquet ante.
-          </p>
-        </span>
-      </div>
-      <div>
-        <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
-        </p>
-        <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
-        </div>
-        <span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            laoreet a lacus eget hendrerit. Cras non convallis quam, sit amet
-            congue risus. Pellentesque quis accumsan dolor. Donec volutpat
-            libero dui, vel accumsan nunc volutpat ut. Morbi id feugiat est, sed
-            aliquet ante.
-          </p>
-        </span>
-      </div>
-      <div>
-        <p>
-          Cloud computing service development <AiFillHeart size={26} />{" "}
-        </p>
-        <div>
-          <span>AWS</span>
-          <span>Nest.js</span>
-          <span>TypeScript</span>
+          <span>JS</span>
+          <span>Nodejs</span>
+          <span>MYsql</span>
         </div>
         <span>
           <p>
